@@ -43,7 +43,7 @@ form input {
 form button {
     padding:25px;
     border:none;
-    width:355px;
+    margin:10px;
+    width:150px;
     text-justify: center;
-    display:block;
 }
