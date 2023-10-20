@@ -8,20 +8,21 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.bundle.min.js"></script>
-    <title>Beauty Reviews for everyone</title>
+    <title>Login Form</title>
 </head>
 
-<body>
+<body class ="bgcolor">
+    
     <header>
         <img src="img/beautyicon.png" alt="Beautyicon" width="80px" height="80px">
         <h1 class="fw-bold">Beauty Reviews</h1>
     </header>
     <section>
+        <!-- <div class="color"></div>
         <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div>
+        <div class="color"></div> -->
 
-        <form action="post">
+        <form action="user_touch/login.php" method="post">
             <p class="title">LOGIN FORM</p>
             <div class="mb-2">
                 <label><i class="fas fa-envelope me-2"></i> Email</label>
@@ -35,7 +36,7 @@
             <button class="btn btn-primary">Login</button>
             <button class="btn btn-secondary">Cancel</button>
 
-            <p class="forget">Don't have an account?<a href="#">Sign Up</a></p>
+            <p class="forget">Don't have an account?<a href="register.php">Sign Up</a></p>
 
         </form>
     </section>
