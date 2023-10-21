@@ -61,76 +61,69 @@
      <br>
      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- Beauty Tips Card -->
-   <div id="Beauty Tips" class="container">
-    <p class ="text-center text-muted">Beauty Tips</p>
+   <div class="container" id="Beauty Tips">
+    <p class="text-center text-muted fs-3">------------------------------------ Beauty Tips
+        ------------------------------------
+    </p>
 
-    <div class="row my-5">
-    <div class="card row g-2" style="width: 15rem">
-        <h5 class="card-header lh-base text-Center"> နေ့တိုင်း Exfoliate လုပ်တဲ့အခါ ရလာမယ့် ဆိုးကျိုးများ</h5>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 mb-2">
+        <div class="card text-center">
         <img src="img/skinbreakout.jpg" class="card-img-top" alt="skin breakout">
-        <div class="card-title">Breakouts ဖြစ်ခြင်း</div>
         <div class="card-body">
-          <p class="card-text text-center text-muted">
-            အမည်းစက် နဲ့ ဝက်ခြံတွေကို တိုက်ဖျက်ဖို့ ၊ မျက်နှာကို ပွတ်တိုက်လေလေ ဝက်ခြံပေါက်တာ နည်းလေလေလို့ ယူဆပြီး Exfoliationကို နေ့တိုင်း လုပ်တတ်ကြပါတယ်။ 
-            တကယ်တော့ နေ့တိုင်း Exfoliationလုပ်တာက အသားအရေရဲ့ သဘာဝအဆီတွေကို ခြောက်စေပြီး 
-            Breakoutsဖြစ်စေကာ အသားအရေကို ပို၍ထိခိုက်စေနိုင်ပါတယ်။
-          </p>
-          
+            <h5 class="card-title text-center text-muted lh-base"> နေ့တိုင်း Exfoliate လုပ်သောအခါ <br>ရလာမည့် ဆိုးကျိုးများ</h5>
+            <a href="News/N1.html" class="btn btn-outline-danger" role="center">
+                အပြည့်အစုံဖတ်ရှုရန်</a>
+        </div>
         </div>
       </div>
 
-      <div class="card" style="width: 15rem ;">
-        <h5 class="card-header lh-base "> Skin Care လုပ်သောနေရာတွင်ချန်ထားလို့မရသော အဆင့်များ</h5>
+      <div class="col-12 col-md-6 col-lg-4 mb-2">
+        <div class="card text-center">
         <img src="img/cleaning.jpg" class="card-img-top" alt="cleaning">
         <div class="card-body">
-          <p class="card-text">
-           
-	    Skin Care တယ်ဆိုတာ ကိုယ့်မျက်နှာအသားအရေကို ဂရုစိုက်ရတဲ့ အလုပ်ပါ။ Skin Careရတဲ့ အဆင့်တွေဟာ 
-        ကိုယ်တတ်နိုင်ရင် တတ်နိုင်သလောက် အဆင့်တွေအများကြီးလုပ်လို့ရပါတယ်။ ...
-          </p>
-          <a href="full" class="btn btn-primary">အပြည့်အစုံဖတ်ရှုရန်</a>
+            <h5 class="card-title text-muted lh-base"> SkinCare လုပ်သောနေရာတွင် <br>ချန်ထားလို့မရသော အဆင့်များ</h5>
+            <a href="News/N2.html" class="btn btn-outline-danger" role="center">
+                အပြည့်အစုံဖတ်ရှုရန်</a>
+        </div>
         </div>
       </div>
 
-      <div class="card" style="width: 15rem ;">
-        <h5 class="card-header lh-base rounded-3">မျက်နှာပေါ်သို့ ဘယ်တော့မှမတင်သင့်သောအရာ (၆)ခု</h5>
-        <img src="img/bodylotion.jpg" class="card-img-top" alt="skin breakout">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card text-center">
+        <img src="img/face.jpg" class="card-img-top" alt="skin breakout">
         <div class="card-body">
-          <p class="card-text">
-            Face နဲ့ Body က အတူတူဘဲလို့ထင်ပြီး တချို့အလှကုန်တွေကိုအများစုက နှစ်ခုလုံးမှာ သုံးတက်ကြပါတယ်။ တကယ်တော့ တချို့အလှကုန်တွေက 
-            သူ့နေရာနဲ့သူတော့ အကျိုးရှိပေမဲ့ မျက်နှာကို 
-            ဘယ်တော့မှမလိမ်းသင့်တဲ့ ပစ္စည်းတွေလည်းရှိပါတယ်။
-          </p>
-          <a href="full" class="btn btn-primary">အပြည့်အစုံဖတ်ရှုရန်</a>
+            <h5 class="card-title text-center text-muted lh-base"> မျက်နှာပေါ်သို့ ဘယ်တော့မှမတင်သင့်သောအရာ (၆)ခု</h5>
+            <a href="News/N3.html" class="btn btn-outline-danger role="button">
+                အပြည့်အစုံဖတ်ရှုရန်</a>
+        </div>
         </div>
       </div>
 
-      <div class="card" style="width: 15rem ;">
-        <h5 class="card-header lh-base"> ညတွင်းချင်းတောက်ပသော အသားအရေကို ရရှိစေမည့်နည်းလမ်း (၆)ခု</h5>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card text-center">
         <img src="img/faceoil.jpg" class="card-img-top" alt="skin breakout">
         <div class="card-body">
-          <p class="card-text">
-            သဘာဝအတိုင်း ကြည်လင်းဝင်းပတဲ့ အသားအရေကို မကြိုက်တဲ့သူဆိုတာ မရှိပါဘူးနော်။ အသားအရေကြည်လင်ဝင်းပလာစေဖို့အတွက် 
-            ညအိပ်ခါနီးရင် ဒီအချက်လေးတွေကို လုပ်ပေးပါ။...
-          </p>
-          <a href="full" class="btn btn-primary">အပြည့်အစုံဖတ်ရှုရန်</a>
+            <h5 class="card-title text-center text-muted lh-base">ညတွင်းချင်းတောက်ပသော အသားအရေကို ရရှိစေမည့်နည်းလမ်း (၆)ခု</h5>
+            <a href="News/N4.html" class="btn btn-outline-danger" role="button">
+                အပြည့်အစုံဖတ်ရှုရန်</a>
+        </div>
         </div>
       </div>
 
-      <div class="card" style="width: 15rem ;">
-        <h5 class="card-header lh-base">ဝက်ခြံနဲ့ ဝက်ခြံကြောင့် နီမြန်းရောင်ရမ်းတာတွေကို သက်သာစေမည့်နည်းလမ်း (၅)ခု</h5>
-        <img src="img/serum.jpg" class="card-img-top" alt="skin breakout">
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card text-center">
+        <img src="img/dryskin.jpg" class="card-img-top" alt="skin breakout">
         <div class="card-body">
-          <p class="card-text">
-            ဝက်ခြံနဲ့ ဝက်ခြံကြောင့် နီမြန်းရောင်ရမ်းတာတွေကို သက်သာစေဖို့အတွက် နည်းလမ်း (၅)ခုကို မျှဝေပေးလိုက်ပါတယ်။  
-           ...
-          </p>
-        
+            <h5 class="card-title text-muted lh-base">ဝက်ခြံကြောင့်နီမြန်းရောင်ရမ်းတာတွေကိုသက်သာစေသောနည်းလမ်း(၅)ခု</h5>
+            <a href="News/N5.html" class="btn btn-outline-danger" role="button">
+                အပြည့်အစုံဖတ်ရှုရန်</a>
+        </div>
         </div>
       </div>
 
+    </div>
    </div>
-  </div>
     <script src="css/bootstrap.bundle.js"></script>
 </body>
 </html>

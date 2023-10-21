@@ -1,7 +1,28 @@
 <?php 
-  echo "<pre>";
-  print_r($_POST);
-  echo "</pre>";
+  
+  $first_name = "";
+  $last_name = "";
+  $gender = "";
+  $email ="";
+  include("classes/connect.php");
+  include("classes/signup.php");
+  if($_SERVER['REQUEST_METHOD'] == 'POST')
+ {
+        $signup = new Signup();
+        $result = $signup->evaluate($_POST);
+        
+         if($result != "")
+        {
+          echo "<div class=alert alert-warning>";
+           echo $result;
+          echo"</div>";
+         }
+
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $gender = $_POST['gender'];
+        $email =$_POST['email'];
+  }
 
 ?>
 
@@ -26,14 +47,15 @@
 </header>
 
   <form class="needs-validation" novalidate method="post">
-    <p class="title">REGISTER FORM</p>
-    
-    <input name = "first_name" type="text" class="form-control mb-4" placeholder="First Name" required>
   
-      <input name = "last_name" type="text" class="form-control mb-4" id="validationCustom02" placeholder="Last Name" required>
+    <p class="title">REGISTER FORM</p>
+
+    <input value ="<?php echo $first_name?>" name = "first_name" type="text" class="form-control mb-4" placeholder="First Name" required>
+    
+      <input value ="<?php echo $last_name?>" name = "last_name" type="text" class="form-control mb-4" id="validationCustom02" placeholder="Last Name" required>
   
       <select  name = "gender" class="form-select mb-4"required>
-        <option selected disabled value="">Gender</option>
+        <option selected disabled value="<?php echo $gender?>">Gender</option>
         <option>Male</option>
         <option>Female</option>
       </select>
@@ -41,7 +63,7 @@
         Please select a valid state.
       </div>
     
-  <input name = "email" type="text" class="form-control mb-4" placeholder="Email" required>
+  <input value ="<?php echo $email?>"name = "email" type="text" class="form-control mb-4" placeholder="Email" required>
     
   <input name = "password" type="password" class="form-control mb-4" placeholder="Password" required>
     
