@@ -1,7 +1,44 @@
 .main{
-    background-color: aqua;
+    background-color: #FFEAEC;
 
 }
-h3{
-    color:red;
+img{
+    width:13rem;
+   
+}
+.container{
+    display: grid;
+    align-items:left; 
+    grid-template-columns: 0.5fr 1fr;
+    column-gap: 0px;
+    /* border:solid;  */
+}
+
+h3 {
+    width: max-content;
+    background: linear-gradient(90deg,pink  50%, transparent 50%), linear-gradient(90deg, pink 50%, transparent 50%), linear-gradient(0deg,pink 50%, transparent 50%), linear-gradient(0deg,pink 50%, transparent 50%);
+    background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+    background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px;
+    padding: 10px;
+    animation: border-dance 4s infinite linear;
+  }
+  
+  @keyframes border-dance {
+    0% {
+      background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+    }
+    100% {
+      background-position: 100% 0, 0 100%, 0 0, 100% 100%;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .container {
+        display: inline-block;
+        text-align: center;
+        padding-left:10px;
+        padding-right:10px;
+        margin-right: 30px;
+    }
+   
 }

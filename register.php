@@ -1,30 +1,48 @@
-<?php 
+   <?php 
+   $servername = "localhost";
+   $username = "root";
+   $password = "";
+   $dbname = "beauty_reviews";
+   
+   if(isset($_POST['submit'])){
+     $first_name = $_POST["first_name"];
+     $last_name = $_POST["last_name"];
+     $gender = $_POST["gender"];
+     $email = $_POST["email"];
+     $password = $_POST["password"];
+     $password2 = $_POST["password2"];
+   
+   // Create connection
+   $conn = new mysqli($servername, $username, $password, $dbname);
+   // Check connection
+   if ($conn->connect_error) {
+     die("Connection failed: " . $conn->connect_error);
+   }
+   
+   $sql = "INSERT INTO users (first_name, last_name,gender,email,password,date)
+   VALUES ('$first_name', '$last_name','$gender','$email','$password',Now())";
+   
+   if ($conn->query($sql) === TRUE) {
+     echo "<script>alert('Registration Successfully');</script>";
+   } else {
+     echo "Error: " . $sql . "<br>" . $conn->error;
+   }
+   
+   $conn->close();
+   }
   
-  $first_name = "";
-  $last_name = "";
-  $gender = "";
-  $email ="";
-  include("classes/connect.php");
-  include("classes/signup.php");
-  if($_SERVER['REQUEST_METHOD'] == 'POST')
- {
-        $signup = new Signup();
-        $result = $signup->evaluate($_POST);
-        
-         if($result != "")
-        {
-          echo "<div class=alert alert-warning>";
-           echo $result;
-          echo"</div>";
-         }
+    
 
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $gender = $_POST['gender'];
-        $email =$_POST['email'];
-  }
+
+ 
 
 ?>
+
+
+        
+
+  
+
 
 
 <!DOCTYPE html>
@@ -36,6 +54,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
   <title>Registration Form</title>
+  
 
 </head>
 
@@ -46,24 +65,21 @@
   <h1 class="fw-bold my-8">Beauty Reviews</h1>
 </header>
 
-  <form class="needs-validation" novalidate method="post">
+  <form  method="post" action ="" autocomplete="off">
   
     <p class="title">REGISTER FORM</p>
 
-    <input value ="<?php echo $first_name?>" name = "first_name" type="text" class="form-control mb-4" placeholder="First Name" required>
-    
-      <input value ="<?php echo $last_name?>" name = "last_name" type="text" class="form-control mb-4" id="validationCustom02" placeholder="Last Name" required>
-  
-      <select  name = "gender" class="form-select mb-4"required>
-        <option selected disabled value="<?php echo $gender?>">Gender</option>
+    <input name = "first_name" type="text" class="form-control mb-4" placeholder="First Name" required>
+    <input name = "last_name" type="text" class="form-control mb-4" placeholder="Last Name" required>
+    <select  name = "gender" class="form-select mb-4"required>
+        <option >Gender</option>
         <option>Male</option>
         <option>Female</option>
       </select>
-      <div class="invalid-feedback">
-        Please select a valid state.
-      </div>
+      
     
-  <input value ="<?php echo $email?>"name = "email" type="text" class="form-control mb-4" placeholder="Email" required>
+  <input name = "email" type="text" class="form-control mb-4" placeholder="Email" required>
+   
     
   <input name = "password" type="password" class="form-control mb-4" placeholder="Password" required>
     
@@ -71,20 +87,21 @@
     
 
     <div class="form-check">
-      <input class="form-check-input-lg" type="checkbox" value="" id="invalidCheck" required>
+      <input name = "agree" class="form-check-input-lg" type="checkbox" value="" id="invalidCheck" required>
+      
       <label class="form-check-label" for="invalidCheck">
         Agree to terms and policy
-      </label>
-      <div class="invalid-feedback">
-        You must agree before submitting.
-      </div>
+      </label><br>  
     </div>
+  
 
       
 
-    <button class="btn btn-primary" type="submit">Submit form</button>
+    <button class="btn btn-primary" type="submit" name="submit">Submit Form</button>
     <button class="btn btn-secondary">Cancel</button>
+    <a href="index.php"><p class="text-end">Login</p></a>
   </form>
+  
 
 
 

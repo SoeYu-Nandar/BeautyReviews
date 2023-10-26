@@ -16,30 +16,13 @@ section {
     min-height: 100vh;
     /* background:linear-gradient(to bottom,#efefef,#fff); */
 }
-/* section .color {
-    position:absolute;
-    filter:blur(150px);
+@media only screen and (max-width: 600px) {
+    .small-title{
+      display: inline;
+    }
+   
 }
-section .color:nth-child(1)
-{   top:-350px;
-    width:500px;
-    height:800px;
-    background:coral;
-}
-section .color:nth-child(2)
-{   bottom:-150px;
-    left:0px;
-    width:700px;
-    height:500px;
-    background:hotpink;
-}
-section .color:nth-child(3)
-{   bottom:50px;
-    right:0px;
-    width:400px;
-    height:600px;
-    background:#00d2ff;
-} */
+
 .title {
     position:relative;
     color:navy;
@@ -70,7 +53,7 @@ form input {
     margin-bottom: 10px;
     border-radius:5px;
 }
-form button {
+form button  {
     padding:25px;
     border:none;
     margin:10px;
@@ -81,6 +64,7 @@ form button {
     background-color:#FFB7C5 0.5;
     
  }
+ 
 
  @media only screen and (max-width: 600px) {
     header{
@@ -93,3 +77,6 @@ form button {
         display:none;
     }
 }
+
+
+
