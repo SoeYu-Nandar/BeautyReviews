@@ -5,8 +5,7 @@
    $dbname = "beauty_reviews";
    
    if(isset($_POST['submit'])){
-     $first_name = $_POST["first_name"];
-     $last_name = $_POST["last_name"];
+     $username = $_POST["username"];
      $gender = $_POST["gender"];
      $email = $_POST["email"];
      $password = $_POST["password"];
@@ -19,8 +18,8 @@
      die("Connection failed: " . $conn->connect_error);
    }
    
-   $sql = "INSERT INTO users (first_name, last_name,gender,email,password,date)
-   VALUES ('$first_name', '$last_name','$gender','$email','$password',Now())";
+   $sql = "INSERT INTO users (username,gender,email,password,date)
+   VALUES ('$username','$gender','$email','$password',Now())";
    
    if ($conn->query($sql) === TRUE) {
      echo "<script>alert('Registration Successfully');</script>";
@@ -30,6 +29,10 @@
    
    $conn->close();
    }
+   if (isset($_POST['cancel'])) {
+    header('Location: register.php');
+    die;
+}
   
     
 
@@ -69,8 +72,7 @@
   
     <p class="title">REGISTER FORM</p>
 
-    <input name = "first_name" type="text" class="form-control mb-4" placeholder="First Name" required>
-    <input name = "last_name" type="text" class="form-control mb-4" placeholder="Last Name" required>
+    <input name = "username" type="text" class="form-control mb-4" placeholder="User Name" required>
     <select  name = "gender" class="form-select mb-4"required>
         <option >Gender</option>
         <option>Male</option>

@@ -9,6 +9,8 @@
     if(isset($_POST['submit'])) {
         $email = $_POST["email"];
         $inputPassword = $_POST["password"]; 
+       
+        
     
         $conn = new mysqli($servername, $username, $password, $dbname);
     
@@ -20,38 +22,28 @@
             $stmt->bind_param("s",$email);
             $stmt->execute();
             $stmt_result = $stmt->get_result();
-            if($stmt_result->num_rows > 0) {
+            if ($stmt_result->num_rows > 0) {
                 $data = $stmt_result->fetch_assoc();
-                if($data['password'] === $inputPassword) {
+            
+                if ($data['password'] === $inputPassword) {
                     echo "<script> alert ('Login Successfully');</script>";
-                    header("Location: profile.php"); 
-                    }else{
+                    header("Location: profile.php");
+                } else {
                     echo "<script> alert ('Invalid Email or Password');</script>";
-                        }
-            }else{
+                }
+            } else {
                 echo "<script> alert ('Invalid Email or Password');</script>";
             }
         }
-
-    
-    
+                    
         
-    //     $sql = "SELECT * FROM users WHERE email = ?";
-    //     $result = $conn->query($sql);
-    //     $row = mysqli_fetch_assoc($result);
-    //     if(mysqli_num_rows($result)>0){
-    //         if($password == $row["password"]){
-    //             header("Location: profile.php");
 
-    //         }
-    //         else{
-    //             echo "<script> alert ('Wrong Password');</script>";
-    //         }
-    //     }
-    //     else{
-    //         echo "<script> alert ('User Not Registered');</script>";
-    //     }
-    // }
+        
+
+        if (isset($_POST['cancel'])) {
+            header('Location: index.php');
+            die;
+        }
         
        
             
@@ -59,8 +51,7 @@
            
         $conn->close();
     }
-    
-    
+        
     
  
 
@@ -85,13 +76,11 @@
         <h1 class="fw-bold">Beauty Reviews</h1>
     </header>
     <section>
-        <!-- <div class="color"></div>
-        <div class="color"></div>
-        <div class="color"></div> -->
 
         <form action="" method="post" autocomplete="off">
             <p class="title">LOGIN FORM</p>
             <div class="mb-2">
+                
                 <label><i class="fas fa-envelope me-2"></i> Email</label>
                 <input name= "email" type="text" class="form-control" placeholder="Enter Your Email">
             </div>

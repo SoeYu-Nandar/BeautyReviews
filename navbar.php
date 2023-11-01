@@ -22,8 +22,11 @@
 
 
             <!-- toggle button for mobile  -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span></button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                 data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
 
             <!-- navbar links -->
@@ -38,7 +41,7 @@
                     <li class="nav-item">
                         <a href="#About Us" class="nav-link fs-5 fw-bold">ABOUT US</a>
                     </li>
-                    <li class="nav-item me-3 ms-2 sm:me-2">
+                    <li class="nav-item me-3 ms-2">
                         <a href="index.php" class="btn btn-outline-primary ">LOGIN</a>
                     </li>
                     <li class="nav-item me-2">
@@ -143,6 +146,28 @@
                 </div>
             </div>
 
+            <div class="col-12 col-md-6 col-lg-4 mb-2">
+                <div class="card text-center">
+                    <img src="img/eating.jpg" class="card-img-top" alt="Eating">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-muted lh-base">ကျန်းမာစေမည့် <br>အလေ့အကျင့်ကောင်းများ</h5>
+                        <a href="News/N8.html" class="btn btn-outline-danger" role="button">
+                            အပြည့်အစုံဖတ်ရှုရန်</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4 mb-2">
+                <div class="card text-center">
+                    <img src="img/doingexercise.jpg" class="card-img-top" alt="Doing Exercise">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-muted lh-base">ကျန်းမာသောလူမှုဘဝပိုင်ဆိုင်စေရန် လုပ်ဆောင်သင့်သော အလေ့အထများ</h5>
+                        <a href="News/N9.html" class="btn btn-outline-danger" role="button">
+                            အပြည့်အစုံဖတ်ရှုရန်</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- For About Us -->
@@ -190,7 +215,7 @@
         <!-- Copyright -->
     </footer>
 
-    <script src="css/bootstrap.bundle.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
