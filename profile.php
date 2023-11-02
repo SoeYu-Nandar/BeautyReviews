@@ -274,7 +274,7 @@ if(!empty($_SESSION["id"])){
                             </figure>
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img class="profile-pic" src="img/cleaning.jpg" alt="profile">
+                                    <img class="profile-pic" src="img/<?php echo $row['image'];?>" alt="profile">
                                     <span class="profile-name"><?php echo $row["username"];?></span>
                                 </div>
                                 <div class="d-none d-md-block">
