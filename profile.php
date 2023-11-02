@@ -1,36 +1,31 @@
 <?php 
 
+session_start();
 $servername = "localhost";
-   $username = "root";
-   $password = "";
-   $dbname = "beauty_reviews";
-   
-//    if(isset($_POST['submit'])){
-//     $email = $_POST["email"];
-//     $password = $_POST["password"];
-//    }
-   
-   // Create connection
-   $conn = new mysqli($servername, $username, $password, $dbname);
-   // Check connection
-   if ($conn->connect_error) {
-     die("Connection failed: " . $conn->connect_error);
-   }
-  
-   $sql = "SELECT * FROM users";
-$result = mysqli_query($conn,$sql);
-$row = mysqli_fetch_assoc($result);
+$username = "root";
+$password = "";
+$dbname = "beauty_reviews";
 
-/*if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        // Process and display user data here
-        echo "User ID: " . $row["id"] . "<br>";
-        echo "Name: " . $row["username"] . "<br>";
-        // Add more fields as needed
-    }
-} else {
-    echo "No users found.";
-}*/
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+} 
+
+if(!empty($_SESSION["id"])){
+    $id =$_SESSION["id"];
+    
+    $result = mysqli_query($conn,"SELECT * FROM users WHERE id ='$id'");
+    $row=mysqli_fetch_assoc($result);
+}else{
+    header("Location: index.php");
+}
+
+
+
+
 
 
    
@@ -280,7 +275,7 @@ $row = mysqli_fetch_assoc($result);
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <img class="profile-pic" src="img/cleaning.jpg" alt="profile">
-                                    <span class="profile-name"><?php echo $row['username']; ?></span>
+                                    <span class="profile-name"><?php echo $row["username"];?></span>
                                 </div>
                                 <div class="d-none d-md-block">
                                 <a href="editprofile.php">

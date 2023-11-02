@@ -1,45 +1,42 @@
 <?php 
-    
+    session_start();
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "beauty_reviews";
     
     
-    if(isset($_POST['submit'])) {
-        $email = $_POST["email"];
-        $inputPassword = $_POST["password"]; 
-       
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+ if(isset($_POST["submit"])){
+ 
+ $usernameemail = $_POST["usernameemail"];
+ $password = $_POST["password"];
+ $result =mysqli_query($conn,"SELECT * FROM users where username = '$usernameemail' OR email = '$usernameemail'");
+ $row = mysqli_fetch_assoc($result);
+ if(mysqli_num_rows($result)>0){
+    if($password ==$row["password"]){
+        $_SESSION["login"] =true;
+        $_SESSION["id"] = $row["id"];
         
-    
-        $conn = new mysqli($servername, $username, $password, $dbname);
-    
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }else{
-            $stmt = $conn->prepare("select * from users where email =?");
-            $stmt->bind_param("s",$email);
-            $stmt->execute();
-            $stmt_result = $stmt->get_result();
-            if ($stmt_result->num_rows > 0) {
-                $data = $stmt_result->fetch_assoc();
-            
-                if ($data['password'] === $inputPassword) {
-                    echo "<script> alert ('Login Successfully');</script>";
-                    header("Location: profile.php");
-                } else {
-                    echo "<script> alert ('Invalid Email or Password');</script>";
-                }
-            } else {
-                echo "<script> alert ('Invalid Email or Password');</script>";
-            }
+        header("Location: profile.php");
+
+    }else{
+        echo "<script>alert ('Psssword does not match');</script>";
+ }
+    }
+
+ 
+ else{
+    echo "<script>alert ('User Not Found');</script>";
         }
-                    
+ 
+}
         
-
-        
-
         if (isset($_POST['cancel'])) {
             header('Location: index.php');
             die;
@@ -50,7 +47,7 @@
            
            
         $conn->close();
-    }
+
         
     
  
@@ -81,8 +78,8 @@
             <p class="title">LOGIN FORM</p>
             <div class="mb-2">
                 
-                <label><i class="fas fa-envelope me-2"></i> Email</label>
-                <input name= "email" type="text" class="form-control" placeholder="Enter Your Email">
+                <label><i class="fas fa-envelope me-2"></i>UserName or Email</label>
+                <input name= "usernameemail" type="text" class="form-control" placeholder="Enter Your Username or Email">
             </div>
             <div class="mb-2">
                 <label><i class="fas fa-key me-2"></i> Password</label>
