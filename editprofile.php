@@ -21,6 +21,7 @@ if ($conn->connect_error) {
       $email =$_REQUEST['email'];
       $password =$_REQUEST['password'];
       $img = $_FILES['img']['name'];
+      $img1 = $_FILES['img1']['name'];
 
       if((!empty($username)) && (!empty($email)))
       {
@@ -37,6 +38,13 @@ if ($conn->connect_error) {
             move_uploaded_file($tmpName,$uploadDir.$img);
             $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE id='$id'");
           }
+          if(!empty($img1))
+          {
+            $tmpName = $_FILES['img1']['tmp_name'];
+            $uploadDir = "img/";
+            move_uploaded_file($tmpName,$uploadDir.$img1);
+            $upquery = mysqli_query($conn,"UPDATE users SET cimage='$img1' WHERE id='$id'");
+          }
           
         header('Location: profile.php');
         exit;
@@ -45,13 +53,17 @@ if ($conn->connect_error) {
         header('Location: editprofile.php');
         exit;
       }
-
+      
     }
 
     $id =$_SESSION["id"];
     $result = mysqli_query($conn,"SELECT * FROM users WHERE id ='$id'");
     $row=mysqli_fetch_assoc($result);
 
+    if(isset($_POST['cancel']))
+    {
+      header('Location: profile.php');
+    }
 
 
 ?>
@@ -81,10 +93,13 @@ if ($conn->connect_error) {
         <input name="password" id="password" type="password" class="form-control mb-2" placeholder="Change Your Password" required>
 
         <label for="img">Profile Picture</label>
-        <input name="img" type="file" id ="img" class="form-control mb-2" placeholder="Change Profile" required>
+        <input name="img" type="file" id ="img" class="form-control mb-2" placeholder="Change Profile">
+
+        <label for="img1">Cover Picture</label>
+        <input name="img1" type="file" id ="img1" class="form-control mb-2" placeholder="Change Cover">
 
         <button class="btn btn-primary" type="submit" name="submit">Edit Form</button>
-        <button class="btn btn-secondary">Cancel</button>
+        <button class="btn btn-secondary" name="cancel">Cancel</button>
         <a href="profile.php">Your Profile</a>
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 $servername = "localhost";
@@ -11,24 +11,32 @@ $dbname = "beauty_reviews";
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} 
+    die("Connection failed: " . $conn->connect_error);
+}
 
-if(!empty($_SESSION["id"])){
-    $id =$_SESSION["id"];
-    
-    $result = mysqli_query($conn,"SELECT * FROM users WHERE id ='$id'");
-    $row=mysqli_fetch_assoc($result);
-}else{
+
+if (!empty($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE id ='$id'");
+    $row = mysqli_fetch_assoc($result);
+} else {
     header("Location: index.php");
+}
+
+// posting
+include("post.php");
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $post = new Post();
+    $id = $_SESSION["id"];
+    $result = $post->create_post($id, $_POST);
 }
 
 
 
 
 
-
-   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -270,20 +278,20 @@ if(!empty($_SESSION["id"])){
                         <div class="cover">
                             <div class="gray-shade"></div>
                             <figure>
-                                <img src="img/waterfall.jpg" class="img-fluid" alt="profile cover">
+                                <img src="img/<?php echo $row['cimage']; ?>" class="img-fluid" alt="profile cover">
                             </figure>
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img class="profile-pic" src="img/<?php echo $row['image'];?>" alt="profile">
-                                    <span class="profile-name"><?php echo $row["username"];?></span>
+                                    <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile">
+                                    <span class="profile-name"><?php echo $row["username"]; ?></span>
                                 </div>
                                 <div class="d-none d-md-block">
-                                <a href="editprofile.php">
-                                    <button class="btn btn-primary btn-icon-text btn-edit-profile">
-                                        <img src="icons/edit.svg" class="me-2">Edit profile
-                                             
-                                    </button>
-                                    </a>           
+                                    <a href="editprofile.php">
+                                        <button class="btn btn-primary btn-icon-text btn-edit-profile">
+                                            <img src="icons/edit.svg" class="me-2">Edit profile
+
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -292,8 +300,8 @@ if(!empty($_SESSION["id"])){
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
 
                                 <img src="icons/columns.svg" alt="Colums" class="me-2">
-                                <li class="header-link-item  d-flex align-items-center active">
-                                    <a class="pt-1px d-none d-md-block" href="#">Timeline</a>
+                                <li class="header-link-item  d-flex align-items-center">
+                                    <a class="pt-1px d-none d-md-block" href="timeline.php">Timeline</a>
                                 </li>
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
@@ -349,71 +357,76 @@ if(!empty($_SESSION["id"])){
                             </div>
 
                             <!-- About Card Body -->
-                           
+
                             <div class="mt-3">
-                            <img src="icons/makeup.svg" alt="" style="width:24px;">
+                                <img src="icons/makeup.svg" alt="" style="width:24px;">
                                 <a href="#makeup" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
                             </div>
 
                             <div class="mt-3">
-                            <img src="icons/hair.svg" alt="" style="width:24px;">
+                                <img src="icons/hair.svg" alt="" style="width:24px;">
                                 <a href="#hair" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
                             </div>
 
                             <div class="mt-3">
-                            <img src="icons/body.svg" alt="" style="width:24px;">
+                                <img src="icons/body.svg" alt="" style="width:24px;">
                                 <a href="#body" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
                             </div>
 
                             <div class="mt-3">
-                            <img src="icons/face.svg" alt="" style="width:24px;">
+                                <img src="icons/face.svg" alt="" style="width:24px;">
                                 <a href="#face" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
-           
-                   
-            
 
-    <!-- Posting Card One -->
-    <div class="col-md-8 col-xl-6 middle-wrapper">
-        <div class="row">
-        <div class="col-md-12 grid-margin">
-    
-        <div class="card rounded">
-        <div class="card-header">
-        <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-        <div class="ms-2">
-        <input type="text" placeholder="Write Review" class="border-1 rounded">
-        </div>
-        </div>
-      
-        <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="post">
-            Post
-        </button>
-        
-        <!-- d-flex close -->
-        </div>  
-        </div>
-        <!-- d-flex-close -->
-           
-        </div>
-        </div>
+
+
+
+                <!-- Posting Card One -->
+                <div class="col-md-8 col-xl-9 middle-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 grid-margin">
+
+                            <div class="card rounded">
+                                <div class="card-header">
+                                    <!-- Posting -->
+                                    <form action="" method="post">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="d-flex align-items-center">
+
+                                                
+                                                    <input type="text" class="form-control" placeholder="Write your review..." name="post">
+                                                    
+                                                
+                                            </div>
+
+                                             <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="post">
+                                                Post
+                                            </button> 
+
+                                            <!-- d-flex close -->
+                                        </div>
+                                </div>
+
+                                </form>
+                                <!-- d-flex-close -->
+
+                            </div>
+                        </div>
 
                         <!-- Posting Card-->
                         <div class="col-md-12">
                             <div class="card rounded">
                                 <div class="card-header">
                                     <div class="d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                            <div class="ml-2">
-                                                <p>Chuu</p>
-                                                <p class="tx-11 text-muted">5 min ago</p>
+                                        <div class="d-flex">
+                                            <img class="img-xs rounded-circle my-1" src="img/<?php echo $row['image']; ?>">
+                                            <div>
+                                                <p class="ms-2"><?php echo $row["username"]; ?></p>
+                                                <p class="text-muted">5 min ago</p>
                                             </div>
                                         </div>
                                         <div class="dropdown">
@@ -430,7 +443,7 @@ if(!empty($_SESSION["id"])){
                                                     <img src="icons/trash-2.svg" alt="Delete" class="me-2">
                                                     <span class>Delete</span></a>
 
-            
+
                                             </div>
                                         </div>
                                     </div>
@@ -463,100 +476,12 @@ if(!empty($_SESSION["id"])){
                     </div>
                 </div>
 
-                <div class="d-none d-xl-block col-xl-3 right-wrapper">
-                    <div class="row">
-                        <div class="latest-photos">
-                            <div class="row">
-                            </div>
-                        </div>
-                    </div>
 
-
-                    <div class="col-md-12 grid-margin">
-                        <div class="card rounded">
-                            <div class="card-body">
-                                <h6 class="card-title">Active Now</h6>
-                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                    <div class="d-flex align-items-center hover-pointer">
-
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Phoo</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;">
-                                    </button>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                    <div class="d-flex align-items-center hover-pointer">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Phyo</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;">
-                                    </button>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                    <div class="d-flex align-items-center hover-pointer">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Chuu</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;">
-                                    </button>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                    <div class="d-flex align-items-center hover-pointer">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Maung</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;">
-                                    </button>
-                                </div>
-
-                                <div class="d-flex justify-content-between mb-2 pb-2 border-bottom">
-                                    <div class="d-flex align-items-center hover-pointer">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Han Bin</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;">
-                                    </button>
-                                </div>
-
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center hover-pointer">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ms-2">
-                                            <p>Hao</p>
-                                        </div>
-                                    </div>
-                                    <button class="btn btn-icon">
-                                        <img src="icons/circle.svg" alt="Active" style="width:10px;background-color:#4FBB3A;border-radius:10px">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
     </div>
-    </div>
+
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
