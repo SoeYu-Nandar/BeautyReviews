@@ -13,28 +13,41 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+// Selected the users from the database
+if (!empty($_SESSION["userid"])) {
+    $userid = $_SESSION["userid"];
 
-
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION["id"];
-
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE id ='$id'");
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE userid ='$userid'");
     $row = mysqli_fetch_assoc($result);
 } else {
     header("Location: index.php");
-}
 
+}
 // posting
 include("post.php");
+include("user.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $post = new Post();
-    $id = $_SESSION["id"];
-    $result = $post->create_post($id, $_POST);
+        $post = new Post();
+        $userid = $_SESSION["userid"];
+        $result= $post->create_post($userid, $_POST);
+    
+    if($result == "") {
+        header("Location: profile.php");
+        die;
+    }else {
+        echo "<div class='alert alert-danger d-inline' role='alert'>
+                This is a danger alert—check it out!
+            </div>";
+        // echo "<br>The following errors occured :<br><br>";
+        // echo $result;
+        // echo"</div>";
+    }
 }
-
-
-
+// collect posts
+$post = new Post();
+$id = $_SESSION["userid"];
+$posts= $post->get_posts($id);
 
 
 ?>
@@ -386,93 +399,49 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
                 <!-- Posting Card One -->
-                <div class="col-md-8 col-xl-9 middle-wrapper">
-                    <div class="row">
-                        <div class="col-md-12 grid-margin">
-
-                            <div class="card rounded">
-                                <div class="card-header">
-                                    <!-- Posting -->
-                                    <form action="" method="post">
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <div class="d-flex align-items-center">
-
-                                                
-                                                    <input type="text" class="form-control" placeholder="Write your review..." name="post">
-                                                    
-                                                
-                                            </div>
-
-                                             <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="post">
-                                                Post
-                                            </button> 
-
-                                            <!-- d-flex close -->
-                                        </div>
-                                </div>
-
-                                </form>
-                                <!-- d-flex-close -->
-
+ <div class="col-md-8 col-xl-9 middle-wrapper">
+    <div class="row">
+        <!-- Posting Area -->
+            <div class="col-md-12 grid-margin">
+                <div class="card rounded">
+                    <div class="card-header">
+                        <form action="" method="post" onsubmit="return validateForm()">
+                            <div class="d-flex align-items-center justify-content-between">
+                                                                                
+                                <input type="text" class="form-control me-2" placeholder="Write your review..." name="post">
+                                
+                                <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
+                                    <option value= "">Reviews For ....</option>
+                                    <option value = "makeup">Makeup</option>
+                                    <option value = "hair">Hair</option>
+                                    <option value = "body">Body</option>
+                                    <option value = "face">Face</option>
+                                </select>
+                                <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post">
+                                    Post
+                                </button> 
                             </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <!-- End Postin Area -->
 
-                        <!-- Posting Card-->
-                        <div class="col-md-12">
-                            <div class="card rounded">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="d-flex">
-                                            <img class="img-xs rounded-circle my-1" src="img/<?php echo $row['image']; ?>">
-                                            <div>
-                                                <p class="ms-2"><?php echo $row["username"]; ?></p>
-                                                <p class="text-muted">5 min ago</p>
-                                            </div>
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" data-bs-toggle="dropdown" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <img src="icons/more-horizontal.svg" alt="More Button">
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+        <!-- Posting Card-->
+            <?php 
+            
+                if($posts)
+                {
+                    foreach($posts as $ROW) {
 
-                                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                                    <img src="icons/edit-3.svg" alt="Edit" class="me-2">
-                                                    <span class>Edit</span></a>
-
-                                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                                    <img src="icons/trash-2.svg" alt="Delete" class="me-2">
-                                                    <span class>Delete</span></a>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card Two Body -->
-                                <div class="card-body">
-                                    <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                    <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
-                                </div>
-                                <div class="card-footer">
-                                    <div class="d-flex post-actions">
-                                        <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                            <img src="icons/heart.svg" alt="Like">
-                                            <p class="d-none d-md-block ms-2">Like</p>
-                                        </a>
-
-                                        <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                            <img src="icons/message-circle.svg" alt="Comment">
-                                            <p class="d-none d-md-block ms-2">Comment</p>
-                                        </a>
-                                        <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                            <img src="icons/share.svg" alt="Share">
-                                            <p class="d-none d-md-block ms-2">Share</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        $user = new User();
+                        $ROW_USER = $user->get_user($ROW['userid']);
+                        include("posting.php");
+                    }
+                }
+            
+            ?>
+        <!-- Posting Card -->
                     </div>
                 </div>
 
@@ -485,7 +454,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
+         function validateForm() {
+            var selectBox = document.getElementById("reviews");
+            var selectedValue = selectBox.value;
 
+            if (selectedValue === "") {
+                alert("Please select an item from the dropdown.");
+                return false; // Prevent form submission
+            }
+        }
     </script>
 
 

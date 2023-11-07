@@ -1,3 +1,4 @@
+<!-- Log In -->
 <?php 
     session_start();
     $servername = "localhost";
@@ -12,6 +13,7 @@
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
+    //Check  User logIn
  if(isset($_POST["submit"])){
  
  $usernameemail = $_POST["usernameemail"];
@@ -22,6 +24,7 @@
     if($password ==$row["password"]){
         $_SESSION["login"] =true;
         $_SESSION["id"] = $row["id"];
+        $_SESSION["userid"] = $row["userid"];
         
         header("Location: profile.php");
 
@@ -37,15 +40,13 @@
  
 }
         
+
         if (isset($_POST['cancel'])) {
             header('Location: index.php');
             die;
         }
         
-       
-            
-           
-           
+     
         $conn->close();
 
         
