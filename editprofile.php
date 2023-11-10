@@ -14,10 +14,11 @@ if ($conn->connect_error) {
 // if(!isset($_SESSION['login'])){
 //   header('Location: index.php');
 // }
-
+    
     if(isset($_REQUEST['submit']))
     {
       $username =$_REQUEST['username'];
+      $gender =$_REQUEST['gender'];
       $email =$_REQUEST['email'];
       $password =$_REQUEST['password'];
       $img = $_FILES['img']['name'];
@@ -27,18 +28,22 @@ if ($conn->connect_error) {
       {
         $id =$_SESSION["id"];
         $upquery = mysqli_query($conn,"UPDATE users SET username='$username',email ='$email' WHERE id='$id'");
-          if(!empty($password))
+          if(!empty($password))//check password
           {
             $upquery = mysqli_query($conn,"UPDATE users SET password='$password' WHERE id='$id'");
           }
-          if(!empty($img))
+          if(!empty($gender))//check gender
+          {
+            $upquery = mysqli_query($conn,"UPDATE users SET gender='$gender' WHERE id='$id'");
+          }
+          if(!empty($img))//check profile image
           {
             $tmpName = $_FILES['img']['tmp_name'];
             $uploadDir = "img/";
             move_uploaded_file($tmpName,$uploadDir.$img);
             $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE id='$id'");
           }
-          if(!empty($img1))
+          if(!empty($img1))//check cover image
           {
             $tmpName = $_FILES['img1']['tmp_name'];
             $uploadDir = "img/";
@@ -85,6 +90,14 @@ if ($conn->connect_error) {
     <p class="title">EDIT PROFILE</p>
         <label for="username">Username</label>
         <input name="username" id ="username" value ="<?php echo $row['username']; ?>" type="text" class="form-control mb-2" placeholder="Change Your User Name" required>
+        <label>Gender</label>
+        <select name="gender" class="form-select" required>
+                <option disabled selected>Gender</option>
+                <option <?php if($row['gender']=="Male"){echo "selected";}?>>Male</option>
+                <option <?php if($row['gender']=="Female"){echo "selected";}?>>Female</option>
+                
+                
+            </select>
 
         <label for="email">Email</label>
         <input name="email" id ="email" value ="<?php echo $row['email']; ?>" type="text" class="form-control mb-2" placeholder="Change Your Email" required>

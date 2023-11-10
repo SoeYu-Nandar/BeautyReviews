@@ -11,9 +11,10 @@ class Post {
 
             $post = addslashes($data['post']);
             $postid = $this->create_postid();
+            $reviews_for =$data['reviews'];
 
-            $query = "insert into posts (userid,postid,post) 
-            values ('$userid','$postid','$post')";
+            $query = "insert into posts (userid,postid,post,reviews_for) 
+            values ('$userid','$postid','$post','$reviews_for')";
 
             $DB = new Database();
             $DB->save($query);
@@ -49,7 +50,9 @@ class Post {
         }
         return $number;
     }
-   
+
+
+
 }
 
 

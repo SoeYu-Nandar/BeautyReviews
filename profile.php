@@ -32,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $userid = $_SESSION["userid"];
         $result= $post->create_post($userid, $_POST);
     
-    if($result == "") {
+    
+    if($result == "" && $reviewResult =="") {
         header("Location: profile.php");
         die;
     }else {
@@ -432,13 +433,16 @@ $posts= $post->get_posts($id);
             
                 if($posts)
                 {
+
                     foreach($posts as $ROW) {
 
                         $user = new User();
                         $ROW_USER = $user->get_user($ROW['userid']);
+                        
                         include("posting.php");
                     }
-                }
+                    }
+                
             
             ?>
         <!-- Posting Card -->

@@ -9,6 +9,7 @@
                     <div>
                         <p class="ms-2"><?php echo $row["username"]; ?></p>
                         <p class="text-muted"><?php  echo $row["date"]; ?></p>
+                        <p class="text-muted"><?php  echo "#".$ROW["reviews_for"]; ?></p>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -32,6 +33,8 @@
         <div class="card-body">
             <p class="mb-3 tx-14">
                 <?php echo $ROW['post'];
+                
+              
                 
                 
                 
