@@ -16,7 +16,14 @@ if ($conn->connect_error) {
 
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
+
+$activeuser = 0;
+$inactiveuser = 0;
+    
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,13 +93,62 @@ $result = $conn->query($sql);
 
                     </div>
                 </nav>
+
+                <!-- Table section -->
+                <div class="mt-1 flex-column flex-lg-row text-center">
+                    <div class="col">
+                        <h2 class=" h3 text-info">User Management Table</h2>
+                        <?php
+                        if ($result->num_rows > 0) {
+                            $activeuser = 0;
+                            $inactiveuser = 0;
+
+                            echo '<table class = "table">';
+                            echo "<tr><th>ID</th><th>UserName</th><th>Email</th><th>Action</th></tr>";
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["username"] . "</td>";
+                                echo "<td>" . $row["email"] . "</td>";
+                                echo '<td>';
+
+                                        if ($row["suspended"] == 0) {
+                                            
+                                            echo '<a class="btn btn-sm btn-success" href="status.php?id=' . $row['id'] . '&suspended=1">Active</a>';
+                                            $activeuser++;
+                                        } else {
+                                            $inactiveuser++;
+                                            echo '<a class="btn btn-sm btn-warning" href="status.php?id=' . $row['id'] . '&suspended=0">Inactive</a>';
+                                        }
+
+                                        echo '</td>';
+                                        echo '</tr>';
+                                    }
+                            echo "</table>";
+                        
+                            
+                        }
+                       
+                        else{
+                            echo "No records found";
+                        }
+                        ?>
+
+
+
+
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
                 <!-- card item -->
                 <div class="container-fluid mt-3 p-4">
                     <div class="row flex-column flex-lg-row">
                         <div class="col">
                             <div class="card mb-3 bg-success text-white">
                                 <div class="card-body">
-                                    <h3 class="card-title h2">30</h3>
+                                    <h3 class="card-title h2"><?php echo $activeuser;?></h3>
                                     <img src="icons/users-arrow-down-profile-avatar-user.svg" alt="Colums" width="30px" height="30px">
                                     <span class="text-white">Active Users</span>
 
@@ -104,7 +160,7 @@ $result = $conn->query($sql);
                         <div class="col">
                             <div class="card mb-3 bg-warning text-white">
                                 <div class="card-body">
-                                    <h3 class="card-title h2">20</h3>
+                                    <h3 class="card-title h2"><?php echo $inactiveuser;?></h3>
                                     <img src="icons/suspendedicon.png" alt="Colums" width="30px" height="30px">
                                     <span class="text-white">Suspended Users</span>
 
@@ -125,42 +181,7 @@ $result = $conn->query($sql);
 
                     </div>
                 </div>
-                <!-- Table section -->
-                <div class="mt-1 flex-column flex-lg-row text-center">
-                    <div class="col">
-                        <h2 class=" h3 text-info">User Management Table</h2>
-                        <?php
-                        if ($result->num_rows > 0) {
-                            echo '<table class = "table">';
-                            echo "<tr><th>ID</th><th>UserName</th><th>Email</th><th>Action</th></tr>";
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>";
-                                echo "<td>" . $row["id"] . "</td>";
-                                echo "<td>" . $row["username"] . "</td>";
-                                echo "<td>" . $row["email"] . "</td>";
-                                echo '<td>
-                                            <form method="post" autocomplete="off">
-                                                <button type="submit" name="submit" class="btn btn-outline-primary">Post</button>
-                                                <button type="submit" name="active" class="btn btn-outline-success">Active</button>
-                                                <button type="submit" name="block" class="btn btn-outline-danger">Block</button>
-                                            </form>
-                                        </td>';
-                                echo "</tr>";
-                            }
-                            echo "</table>";
-                        } else {
-                            echo "No records found";
-                        }
-                        ?>
-
-
-
-
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
+                
     <!-- footer -->
     <footer class="text-center py-4 text-muted bg-light">
         &copy; Copyright 2023
