@@ -23,6 +23,49 @@ if (!empty($_SESSION["id"])) {
 } else {
     header("Location: index.php");
 }
+
+if (!empty($_SESSION["id"])) {
+    $id = $_SESSION["id"];
+
+    // Assuming $conn is your database connection
+    $result = mysqli_query($conn, "SELECT users.*, posts.* FROM users
+                                    LEFT JOIN posts ON users.userid = posts.userid
+                                    ORDER BY posts.id DESC
+                                    LIMIT 10");
+    
+     // Fetch all rows using a loop
+     $users = array();
+     while ($row_result = mysqli_fetch_assoc($result)) {
+         $user_id = $row_result['userid'];
+       
+    // Create an associative array for the user if it doesn't exist
+        if(!isset($users[$user_id])) {
+            $users[$user_id] = array(
+                'users' =>array(
+                    'userid' => $row_result['userid'],
+                    'username' => $row_result['username'],
+                    'image' =>$row_result['image'],
+
+                ),
+                'posts'=>array(),
+            );
+        }
+// Add post information
+    $users[$user_id]['posts'][] = array(
+        'post' => $row_result['post'],
+        'date' => $row_result['date'],
+        'reviews_for'=>$row_result['reviews_for'],
+    );
+    
+    }
+
+    // Now $posts contains an array of all posts
+} else {
+    header("Location: index.php");
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -310,114 +353,66 @@ if (!empty($_SESSION["id"])) {
 
             <!-- Posting Card One -->
             <div class="col-md-8 col-xl-9 middle-wrapper">
-                <div class="row">
-                    <div class="col-md-12 grid-margin">
-
-                        <div class="card rounded">
-                            <div class="card-header">
-                                <!-- Posting -->
-                                <form action="" method="post">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div class="d-flex align-items-center">
-
-                                            
-                                           
-                                                <input type="text" class="form-control" placeholder="Write Your Review..." name="post">
-                                            
-                                        </div>
-
-                                        <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="post">
-                                            Post
-                                        </button>
-
-                                        <!-- d-flex close -->
-                                    </div>
-                            </div>
-
-                            </form>
-                            <!-- d-flex-close -->
-
-                        </div>
+    <div class="row">
+        <div class="col-md-12 grid-margin">
+            <div class="card rounded">
+                <div class="card-header">
+                <!-- Posting -->
+                <form action="" method="post" onsubmit="return validateForm()">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <input type="text" class="form-control me-2" placeholder="Write Your Review..." name="post">
+                        <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
+                            <option value= "">Reviews For ....</option>
+                            <option value = "makeup">Makeup</option>
+                            <option value = "hair">Hair</option>
+                            <option value = "body">Body</option>
+                            <option value = "face">Face</option>
+                        </select>        
+                        <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="post">
+                        Post
+                        </button>
                     </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    <!-- Ending Posting Area -->
+            <?php  
+            
+            foreach($users as $userId=>$userData){
 
-                    <!-- Posting Card-->
-                    <div class="col-md-12">
-                        <div class="card rounded">
-                            <div class="card-header">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <img class="img-xs rounded-circle" src="img/cleaning.jpg" alt>
-                                        <div class="ml-2">
-                                            <p>Chuu</p>
-                                            <p class="tx-11 text-muted">5 min ago</p>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn p-0" data-bs-toggle="dropdown" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="icons/more-horizontal.svg" alt="More Button">
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                foreach($userData['posts'] as $posts) {
 
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                                <img src="icons/edit-3.svg" alt="Edit" class="me-2">
-                                                <span class>Edit</span></a>
+                  
 
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                                <img src="icons/trash-2.svg" alt="Delete" class="me-2">
-                                                <span class>Delete</span></a>
+                    include("timelineClass.php");
+                
+            
+        }  
+    }
+            ?>
+            
 
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Card Two Body -->
-                            <div class="card-body">
-                                <p class="mb-3 tx-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
-                            </div>
-                            <div class="card-footer">
-                                <div class="d-flex post-actions">
-                                    <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                        <img src="icons/heart.svg" alt="Like">
-                                        <p class="d-none d-md-block ms-2">Like</p>
-                                    </a>
-
-                                    <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                        <img src="icons/message-circle.svg" alt="Comment">
-                                        <p class="d-none d-md-block ms-2">Comment</p>
-                                    </a>
-                                    <a href="javascript:;" class="d-flex align-items-center text-muted ms-4">
-                                        <img src="icons/share.svg" alt="Share">
-                                        <p class="d-none d-md-block ms-2">Share</p>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <div class="d-none d-xl-block col-xl-3 right-wrapper">
-                <div class="row">
-                    <div class="latest-photos">
-                        <div class="row">
-                        </div>
-                    </div>
-                </div>
 
-
-               
-            </div>
         </div>
 
     </div>
-    </div>
-    </div>
+</div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
+         function validateForm() {
+            var selectBox = document.getElementById("reviews");
+            var selectedValue = selectBox.value;
+
+            if (selectedValue === "") {
+                alert("Please select an item from the dropdown.");
+                return false; // Prevent form submission
+            }
+        }
 
     </script>
 

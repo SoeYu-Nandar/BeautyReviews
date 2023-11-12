@@ -40,8 +40,9 @@ if ($conn->connect_error) {
           {
             $tmpName = $_FILES['img']['tmp_name'];
             $uploadDir = "img/";
-            move_uploaded_file($tmpName,$uploadDir.$img);
-            $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE id='$id'");
+              move_uploaded_file($tmpName,$uploadDir.$img);
+              $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE id='$id'");
+           
           }
           if(!empty($img1))//check cover image
           {

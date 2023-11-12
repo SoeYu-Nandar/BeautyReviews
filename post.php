@@ -50,8 +50,21 @@ class Post {
         }
         return $number;
     }
+    // public function get_all_posts() {
 
+    //     $query = "select * from posts ordered by id desc limit 10";
 
+    //     $DB = new Database();
+    //     $result = $DB->read($query);
+
+    //     if($result) {
+    //         return $result;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+
+    
 
 }
 

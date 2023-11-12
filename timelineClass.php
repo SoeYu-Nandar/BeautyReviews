@@ -1,15 +1,16 @@
 
 
+<!-- Posting Card-->
 <div class="col-md-12">
     <div class="card rounded">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex">
-                    <img class="img-xs rounded-circle my-1" src="img/<?php echo $row['image']; ?>">
+                    <img class="img-xs rounded-circle my-1" src="img/<?php echo $userData["users"]["image"]; ?>">
                     <div>
-                        <p class="ms-2"><?php echo $row["username"]; ?></p>
+                        <p class="ms-2"><?php echo $userData["users"]["username"]; ?></p>
                         <p class="text-muted"><?php  echo $row["date"]; ?></p>
-                        <p class="text-muted"><?php  echo "#".$ROW["reviews_for"]; ?></p>
+                        <p class="text-muted"><?php  echo "#".$posts["reviews_for"]; ?></p>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -32,7 +33,7 @@
         <!-- Card Two Body -->
         <div class="card-body">
             <p class="mb-3 tx-14">
-                <?php echo $ROW['post'];
+                <?php echo $posts["post"];
                 ?>
             </p>
             <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
@@ -57,16 +58,5 @@
         <!-- Card Footer -->
     </div>
 </div>
-<!-- Posting Card -->
 
-
-
-
-
-
-
-
-
-
-
-
+    <!-- Posting Card -->

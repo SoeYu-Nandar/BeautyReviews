@@ -28,10 +28,15 @@ include("post.php");
 include("user.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    
         $post = new Post();
         $userid = $_SESSION["userid"];
-        $result= $post->create_post($userid, $_POST);
-    
+         //Check if the user is suspended
+        if ($row["suspended"] == 1) {
+            echo "<script> alert('Your account is suspended by admin.');</script>";
+        } else {
+            // User is not suspended, proceed with post creation
+            $result = $post->create_post($userid, $_POST);
     
     if($result == "" && $reviewResult =="") {
         header("Location: profile.php");
@@ -44,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // echo $result;
         // echo"</div>";
     }
+}
 }
 // collect posts
 $post = new Post();
@@ -327,11 +333,6 @@ $posts= $post->get_posts($id);
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
                                     <img src="icons/image.svg" alt="Image" class="me-2">
                                     <a class="pt-1px d-none d-md-block" href="#">Photos</a>
-                                </li>
-
-                                <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
-                                    <img src="icons/user.svg" alt="User" class="me-2">
-                                    <a class="pt-1px d-none d-md-block" href="#">About</a>
                                 </li>
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">

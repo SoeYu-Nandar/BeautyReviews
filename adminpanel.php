@@ -17,9 +17,7 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
-$activeuser = 0;
-$inactiveuser = 0;
-    
+
 
 ?>
 
@@ -102,6 +100,8 @@ $inactiveuser = 0;
                         if ($result->num_rows > 0) {
                             $activeuser = 0;
                             $inactiveuser = 0;
+                            $blockuser = 0;
+                            
 
                             echo '<table class = "table">';
                             echo "<tr><th>ID</th><th>UserName</th><th>Email</th><th>Action</th></tr>";
@@ -111,25 +111,32 @@ $inactiveuser = 0;
                                 echo "<td>" . $row["username"] . "</td>";
                                 echo "<td>" . $row["email"] . "</td>";
                                 echo '<td>';
+                                //suspended user
+                                if ($row["suspended"] == 0) {
 
-                                        if ($row["suspended"] == 0) {
-                                            
-                                            echo '<a class="btn btn-sm btn-success" href="status.php?id=' . $row['id'] . '&suspended=1">Active</a>';
-                                            $activeuser++;
-                                        } else {
-                                            $inactiveuser++;
-                                            echo '<a class="btn btn-sm btn-warning" href="status.php?id=' . $row['id'] . '&suspended=0">Inactive</a>';
-                                        }
+                                    echo '<a class="btn btn-sm btn-success m-2" href="status.php?id=' . $row['id'] . '&suspended=1">Active</a>';
+                                    $activeuser++;
+                                } else {
+                                    $inactiveuser++;
+                                    echo '<a class="btn btn-sm btn-warning m-2" href="status.php?id=' . $row['id'] . '&suspended=0">Suspend</a>';
+                                }
+                                //block user
+                                if ($row["status"] == 0) {
 
-                                        echo '</td>';
-                                        echo '</tr>';
-                                    }
+                                    echo '<a class="btn btn-sm btn-info m-2" href="blockuser.php?id=' . $row['id'] . '&status=1">Unblock</a>';
+                                    
+                                } else {
+                                    $blockuser++;
+                                    echo '<a class="btn btn-sm btn-danger m-2" href="blockuser.php?id=' . $row['id'] . '&status=0">Block</a>';
+                                }
+
+
+                                echo '</td>';
+                                
+                                echo '</tr>';
+                            }
                             echo "</table>";
-                        
-                            
-                        }
-                       
-                        else{
+                        } else {
                             echo "No records found";
                         }
                         ?>
@@ -142,46 +149,46 @@ $inactiveuser = 0;
             </main>
         </div>
     </div>
-                <!-- card item -->
-                <div class="container-fluid mt-3 p-4">
-                    <div class="row flex-column flex-lg-row">
-                        <div class="col">
-                            <div class="card mb-3 bg-success text-white">
-                                <div class="card-body">
-                                    <h3 class="card-title h2"><?php echo $activeuser;?></h3>
-                                    <img src="icons/users-arrow-down-profile-avatar-user.svg" alt="Colums" width="30px" height="30px">
-                                    <span class="text-white">Active Users</span>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col">
-                            <div class="card mb-3 bg-warning text-white">
-                                <div class="card-body">
-                                    <h3 class="card-title h2"><?php echo $inactiveuser;?></h3>
-                                    <img src="icons/suspendedicon.png" alt="Colums" width="30px" height="30px">
-                                    <span class="text-white">Suspended Users</span>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="card mb-3 bg-danger text-white">
-                                <div class="card-body">
-                                    <h3 class="card-title h2">5</h3>
-                                    <img src="icons/blockicon.png" alt="Colums" width="30px" height="30px">
-                                    <span class="text-white">Blocked Users</span>
-
-                                </div>
-                            </div>
-                        </div>
+    <!-- card item -->
+    <div class="container-fluid mt-3 p-4">
+        <div class="row flex-column flex-lg-row">
+            <div class="col">
+                <div class="card mb-3 bg-success text-white">
+                    <div class="card-body">
+                        <h3 class="card-title h2"><?php echo $activeuser; ?></h3>
+                        <img src="icons/users-arrow-down-profile-avatar-user.svg" alt="Colums" width="30px" height="30px">
+                        <span class="text-white">Active Users</span>
 
                     </div>
                 </div>
-                
+            </div>
+
+
+            <div class="col">
+                <div class="card mb-3 bg-warning text-white">
+                    <div class="card-body">
+                        <h3 class="card-title h2"><?php echo $inactiveuser; ?></h3>
+                        <img src="icons/suspendedicon.png" alt="Colums" width="30px" height="30px">
+                        <span class="text-white">Suspended Users</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card mb-3 bg-danger text-white">
+                    <div class="card-body">
+                        <h3 class="card-title h2"><?php echo $blockuser; ?></h3>
+                        <img src="icons/blockicon.png" alt="Colums" width="30px" height="30px">
+                        <span class="text-white">Blocked Users</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- footer -->
     <footer class="text-center py-4 text-muted bg-light">
         &copy; Copyright 2023
