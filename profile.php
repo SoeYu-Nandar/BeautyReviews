@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 $servername = "localhost";
 $username = "root";
@@ -27,8 +26,9 @@ if (!empty($_SESSION["userid"])) {
 include("post.php");
 include("user.php");
 
+
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    
+
         $post = new Post();
         $userid = $_SESSION["userid"];
          //Check if the user is suspended
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             echo "<script> alert('Your account is suspended by admin.');</script>";
         } else {
             // User is not suspended, proceed with post creation
-            $result = $post->create_post($userid, $_POST);
+            $result = $post->create_post($userid, $_POST,$_FILES);
     
     if($result == "" && $reviewResult =="") {
         header("Location: profile.php");
@@ -51,6 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 }
+
+ 
 // collect posts
 $post = new Post();
 $id = $_SESSION["userid"];
@@ -407,11 +409,12 @@ $posts= $post->get_posts($id);
             <div class="col-md-12 grid-margin">
                 <div class="card rounded">
                     <div class="card-header">
-                        <form action="" method="post" onsubmit="return validateForm()">
+                        <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
                             <div class="d-flex align-items-center justify-content-between">
                                                                                 
                                 <input type="text" class="form-control me-2" placeholder="Write your review..." name="post">
-                                
+                                <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
+                                <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
                                 <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
                                     <option value= "">Reviews For ....</option>
                                     <option value = "makeup">Makeup</option>
@@ -419,7 +422,7 @@ $posts= $post->get_posts($id);
                                     <option value = "body">Body</option>
                                     <option value = "face">Face</option>
                                 </select>
-                                <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post">
+                                <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
                                     Post
                                 </button> 
                             </div>

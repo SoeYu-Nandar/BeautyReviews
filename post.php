@@ -4,17 +4,39 @@
 include("connect.php");
 class Post {
     private $error = "";
+   
 
-    public function create_post($userid, $data) {
+    public function create_post($userid, $data, $files) {
 
-        if(!empty($data['post'])) {
 
+        if(!empty($data['post']) || !empty($files['file']['name'])) 
+        {
+
+            $myimage = "";
+            $has_image = 0;
+
+            if(!empty($files['file']['name'])) {
+
+              
+                $folder = "uploads/" . $userid . "/" ;
+
+                // create folder
+                if(!file_exists($folder)) {
+                    mkdir($folder,0777,true);
+                }
+
+                $myimage = $folder . basename($_FILES['file']['name']);
+
+                move_uploaded_file($_FILES['file']['tmp_name'],$myimage);
+
+                $has_image = 1;
+            }
             $post = addslashes($data['post']);
             $postid = $this->create_postid();
             $reviews_for =$data['reviews'];
 
-            $query = "insert into posts (userid,postid,post,reviews_for) 
-            values ('$userid','$postid','$post','$reviews_for')";
+            $query = "insert into posts (userid,postid,post,reviews_for,post_image,has_image) 
+            values ('$userid','$postid','$post','$reviews_for','$myimage','$has_image')";
 
             $DB = new Database();
             $DB->save($query);
@@ -25,6 +47,7 @@ class Post {
         }
 
         return $this->error;
+        
     }
     public function get_posts($id) {
 
@@ -50,23 +73,13 @@ class Post {
         }
         return $number;
     }
-    // public function get_all_posts() {
-
-    //     $query = "select * from posts ordered by id desc limit 10";
-
-    //     $DB = new Database();
-    //     $result = $DB->read($query);
-
-    //     if($result) {
-    //         return $result;
-    //     }else{
-    //         return false;
-    //     }
-    // }
 
     
+   
+    
+} 
 
-}
+
 
 
 ?>

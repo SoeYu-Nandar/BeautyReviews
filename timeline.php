@@ -55,11 +55,13 @@ if (!empty($_SESSION["id"])) {
         'post' => $row_result['post'],
         'date' => $row_result['date'],
         'reviews_for'=>$row_result['reviews_for'],
+        'post_image' =>$row_result['post_image'],
     );
     
     }
 
     // Now $posts contains an array of all posts
+  
 } else {
     header("Location: index.php");
 }
@@ -326,6 +328,7 @@ if (!empty($_SESSION["id"])) {
                                     <img src="icons/more-horizontal.svg" alt="">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    
                                     <a class="dropdown-item d-flex align-items-center" href="editprofile.php">
                                         <img src="icons/edit-2.svg" alt="Edit" class="me-2">
                                         <span class>Edit</span></a>

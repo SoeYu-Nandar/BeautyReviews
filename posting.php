@@ -17,11 +17,14 @@
                         <img src="icons/more-horizontal.svg" alt="More Button">
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                        
+
                         <a class="dropdown-item d-flex align-items-center" href="#">
                             <img src="icons/edit-3.svg" alt="Edit" class="me-2">
                             <span class>Edit</span></a>
+                            
 
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="postdelete.php?id=<?php echo $ROW['postid']?>" >
                             <img src="icons/trash-2.svg" alt="Delete" class="me-2">
                             <span class>Delete</span></a>
                     </div>
@@ -33,6 +36,16 @@
         <div class="card-body">
             <p class="mb-3 tx-14">
                 <?php echo $ROW['post'];
+                ?> <br><br>
+                <?php 
+                if(file_exists($ROW['post_image'])) 
+                {
+                    echo"<div class='text-center'>";
+                      echo "<img src='{$ROW['post_image']}' style='width:500px;height:500px;'/>";
+                      echo"</div>";
+                }
+
+                
                 ?>
             </p>
             <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>

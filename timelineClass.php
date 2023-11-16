@@ -22,8 +22,8 @@
                             <img src="icons/edit-3.svg" alt="Edit" class="me-2">
                             <span class>Edit</span></a>
 
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <img src="icons/trash-2.svg" alt="Delete" class="me-2">
+                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <img src="icons/trash-2.svg" alt="Edit" class="me-2" width="30" height="30">
                             <span class>Delete</span></a>
                     </div>
                 </div>
@@ -34,6 +34,15 @@
         <div class="card-body">
             <p class="mb-3 tx-14">
                 <?php echo $posts["post"];
+                ?>
+                <br><br>
+                <?php 
+                if(isset($posts["post_image"]) && file_exists($posts["post_image"])) {
+                    echo "<div class='text-center'>";
+                    echo "<img src='{$posts['post_image']}' style='width:500px;height:500px;'/>";
+                    echo "</div>";
+                }
+                
                 ?>
             </p>
             <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
