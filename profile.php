@@ -443,7 +443,7 @@ $posts= $post->get_posts($id);
                         $user = new User();
                         $ROW_USER = $user->get_user($ROW['userid']);
                         
-                        include("posting.php");
+                        include("profilePosting.php");
                     }
                     }
                 
@@ -471,6 +471,18 @@ $posts= $post->get_posts($id);
                 return false; // Prevent form submission
             }
         }
+
+        document.getElementById("likeIcon").addEventListener("click", function() {
+    
+        var imageElement = this.querySelector("img");
+
+        // Toggle the fill color
+        if (imageElement.style.fill === "red") {
+        pathElement.style.fill = "blue";
+        } else {
+        imageElement.style.fill = "red";
+        }
+    });
     </script>
 
 

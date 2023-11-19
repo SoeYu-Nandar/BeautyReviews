@@ -2,6 +2,7 @@
 
 // User Posting 
 include("connect.php");
+
 class Post {
     private $error = "";
    
@@ -62,6 +63,93 @@ class Post {
             return false;
         }
     }
+    public function get_one_posts($postid) {
+
+        if(!is_numeric($postid)){
+            return false;
+        }
+        $query = "SELECT * FROM posts WHERE postid ='$postid' limit 1";
+
+        $DB = new Database();
+        $result = $DB->read($query);
+
+        if($result) {
+            return $result[0];
+        }else{
+            return false;
+        }
+    }
+
+    public function delete_post($postid) {
+
+        if(!is_numeric($postid)){
+            return false;
+        }
+         $query = "DELETE FROM posts WHERE postid ='$postid' limit 1";
+
+         $DB = new Database();
+         $result = $DB->delete($query);
+         
+
+       
+    }
+    public function edit_post($postid) {
+
+        if(!is_numeric($postid)){
+            return false;
+        }
+         $query = "UPDATE posts SET WHERE postid='$postid'";
+
+         $DB = new Database();
+         $result = $DB->edit($query);
+         
+
+       
+    }
+    public function like_post($id, $type, $userid) {
+
+        if($type == "post") {
+            // increment the post table
+            $DB = new Database();
+            $sql = "update posts set likes = likes +1 where postid = '$id' limit 1";
+            $DB->save($sql);
+            // save likes details
+            $sql = "select likes from likes where type ='post' && contentid ='$id' limit 1" ;
+            $result = $DB->read($sql);
+            if(is_array($result)) {
+
+                $likes = json_decode($result[0]['likes'],true);
+
+                $user_ids = array_column($likes, "userid");
+
+                if(!in_array($userid,$user_ids)) {
+
+                    
+                    $arr["userid"] = $userid;
+                    $arr["date"] = date("Y-m-d H:i:s");
+                    
+                    $likes[] = $arr;
+                    $likes_string = json_encode($likes);
+                    $sql = "update likes set likes = '$likes_string' where type ='post' && contentid ='$id' limit 1" ;
+                    $DB->save($sql);
+                }
+
+            }else {
+
+                $arr["userid"] = $userid;
+                $arr["date"] = date("Y-m-d H:i:s");
+
+                $arr2[] = $arr;
+                $likes = json_encode($arr2);
+                $sql = "insert into likes (type,contentid,likes) values ('$type','$id','$likes')";
+                $DB->save($sql);
+            }
+
+            
+        }
+        
+
+    }
     private function create_postid() {
         
         $length = rand(4,9);
@@ -74,7 +162,7 @@ class Post {
         return $number;
     }
 
-    
+
    
     
 } 

@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex">
-                    <img class="img-xs rounded-circle my-1" src="img/<?php echo $row['image']; ?>">
+                    <img class="img-xs rounded-circle my-1" src="img/<?php echo $row["image"]; ?>">
                     <div>
                         <p class="ms-2"><?php echo $row["username"]; ?></p>
                         <p class="text-muted"><?php  echo $row["date"]; ?></p>
@@ -19,12 +19,12 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                         
 
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="postedit.php?id=<?php echo $ROW['postid']?>"  name ="edit">
                             <img src="icons/edit-3.svg" alt="Edit" class="me-2">
                             <span class>Edit</span></a>
                             
 
-                        <a class="dropdown-item d-flex align-items-center" href="postdelete.php?id=<?php echo $ROW['postid']?>" >
+                        <a class="dropdown-item d-flex align-items-center" href="postdelete.php?id=<?php echo $ROW['postid']?>"  name ="delete">
                             <img src="icons/trash-2.svg" alt="Delete" class="me-2">
                             <span class>Delete</span></a>
                     </div>
@@ -41,7 +41,7 @@
                 if(file_exists($ROW['post_image'])) 
                 {
                     echo"<div class='text-center'>";
-                      echo "<img src='{$ROW['post_image']}' style='width:500px;height:500px;'/>";
+                      echo "<img src='{$ROW['post_image']}' style='width:300px;height:300px;'/>";
                       echo"</div>";
                 }
 
@@ -51,19 +51,15 @@
             <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
         </div>
         <div class="card-footer">
-            <div class="d-flex post-actions">
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/heart.svg" alt="Like">
-                    <p class="d-none d-md-block ms-2 ">Like</p>
+            <div class="d-flex post-actions justify-content-around">
+                <a href="like.php?type=post&id=<?php echo $ROW['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+                    <img src="icons/heart.svg" alt="Like" id="likeIcon">
+                    <p class="d-none d-md-block ms-2 ">Like(<?php echo $ROW['likes'] ?>)</p>
                 </a>
 
                 <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
                     <img src="icons/message-circle.svg" alt="Comment">
                     <p class="d-none d-md-block ms-2">Comment</p>
-                </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/share.svg" alt="Share">
-                    <p class="d-none d-md-block ms-2 ">Share</p>
                 </a>
             </div>
         </div>

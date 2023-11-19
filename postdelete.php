@@ -1,9 +1,52 @@
 <?php
-
+session_start();
 // post delete
-include("connect.php");
+include("config.php");
+include('post.php');
+include('user.php');
 
+
+
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+  header("Location: index.php");
+  exit();
+}
+
+$Post = new Post();
+$ERROR = "";
+if (isset($_GET['id'])) {
+  
+        $ROW = $Post->get_one_posts($_GET['id']);
+        
+
+        if (!$ROW) {
+          $ERROR = "Post does not has found!";
+        }
+} else {
+  $ERROR = "Post does not has found!";
+}
+
+$user = new User();
+$ROW_USER = $user->get_user($ROW['userid']);
+
+//post deleting
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+  $deleteResult = $Post->delete_post($ROW['postid']);
+  //header("Location: profile.php");
+  //die;
+  if ($deleteResult) {
+    header("Location: profile.php");
+    exit();
+  } else {
+    echo "Failed to delete the post.";
+  }
+  
+  
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +60,21 @@ include("connect.php");
     body {
       background-color: #f9fafb;
       margin-top: 20px;
-      display: flex;
+
+    }
+
+    .img-xs {
+      width: 37px;
+      height: 37px;
+    }
+
+    .rounded-circle {
+      border-radius: 50% !important;
+    }
+
+    img {
+      vertical-align: middle;
+      border-style: none;
     }
 
     .card-header:first-child {
@@ -81,74 +138,65 @@ include("connect.php");
         <div class="card-header">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex">
-              <img class="img-xs rounded-circle my-1" src="img/<?php echo $userData["users"]["image"]; ?>">
+              <img class="img-xs rounded-circle my-1" src="img/<?php echo $ROW_USER['image']; ?>">
               <div>
-                <p class="ms-2">username</p>
-                <p class="text-muted">date</p>
-                <p class="text-muted">#body</p>
+                <p><?php echo $ROW_USER['username']; ?></p>
+                <p class="text-muted"><?php echo $ROW["date"]; ?></p>
+                <p class="text-muted"><?php echo "#" . $ROW["reviews_for"]; ?></p>
               </div>
             </div>
-            <form action="" method="post">
+            <form method="post">
 
 
-              <!-- Button trigger modal -->
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Delete
-              </button>
+              <!-- Delete Post-->
+              <!-- <input type="hidden" name="postid" value=""> -->
+              <!-- <input id="post_button" type="submit" value="Delete"> -->
+              <button type="submit" name="delete" class="btn btn-primary">Delete</button>
 
-              <!-- Modal -->
               
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      Do you want to delete this post?
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-primary">Yes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          
-    </form>
-  </div>
-  </div>
+            </form>
+          </div>
+        </div>
 
 
 
-  <!-- Card Two Body -->
-  <div class="card-body">
-    <p class="mb-3 tx-14">
+        <!-- Card Two Body -->
+        <div class="card-body">
+          <p class="mb-3 tx-14">
+            <?php
+             echo $ROW['post'];
+            ?> <br><br>
+           
+           <?php if(file_exists($ROW['post_image'])) 
+            {
+                echo"<div class='text-center'>";
+                  echo "<img src='{$ROW['post_image']}' style='width:300px;height:300px;'/>";
+                  echo"</div>";
+            }
+             ?>
+          </p>
+          <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex post-actions">
+            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+              <img src="icons/heart.svg" alt="Like">
+              <p class="d-none d-md-block ms-2 ">Like</p>
+            </a>
 
-    </p>
-    <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
-  </div>
-  <div class="card-footer">
-    <div class="d-flex post-actions">
-      <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-        <img src="icons/heart.svg" alt="Like">
-        <p class="d-none d-md-block ms-2 ">Like</p>
-      </a>
-
-      <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-        <img src="icons/message-circle.svg" alt="Comment">
-        <p class="d-none d-md-block ms-2">Comment</p>
-      </a>
-      <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-        <img src="icons/share.svg" alt="Share">
-        <p class="d-none d-md-block ms-2 ">Share</p>
-      </a>
+            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+              <img src="icons/message-circle.svg" alt="Comment">
+              <p class="d-none d-md-block ms-2">Comment</p>
+            </a>
+            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+              <img src="icons/share.svg" alt="Share">
+              <p class="d-none d-md-block ms-2 ">Share</p>
+            </a>
+          </div>
+        </div>
+        <!-- Card Footer -->
+      </div>
     </div>
-  </div>
-  <!-- Card Footer -->
-  </div>
-  </div>
 
   </div>
   </div>

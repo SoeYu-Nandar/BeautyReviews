@@ -33,6 +33,25 @@ function read($query) {
     
 
 }
+function delete($query){
+    $conn = $this->connect();
+    $result = mysqli_query($conn,$query);
+    if(!$result) {
+        return false;
+    }else{
+        header('Location: profile.php');
+}
+}
+function edit($query){
+    $conn = $this->connect();
+    $result = mysqli_query($conn,$query);
+    if(!$result) {
+        return false;
+    }else{
+        header('Location: profile.php');
+}
+}
+
 
 function save($query) {
 
@@ -49,6 +68,8 @@ function save($query) {
 }
 
 $DB = new Database();
+
+
 
 
 

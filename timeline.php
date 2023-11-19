@@ -56,6 +56,8 @@ if (!empty($_SESSION["id"])) {
         'date' => $row_result['date'],
         'reviews_for'=>$row_result['reviews_for'],
         'post_image' =>$row_result['post_image'],
+        'postid' =>$row_result['postid'],
+        'likes' =>$row_result['likes'],
     );
     
     }
@@ -388,7 +390,7 @@ if (!empty($_SESSION["id"])) {
 
                   
 
-                    include("timelineClass.php");
+                    include("timelinePosting.php");
                 
             
         }  

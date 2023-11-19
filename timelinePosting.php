@@ -22,7 +22,7 @@
                             <img src="icons/edit-3.svg" alt="Edit" class="me-2">
                             <span class>Edit</span></a>
 
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center" href="delete.php">
                         <img src="icons/trash-2.svg" alt="Edit" class="me-2" width="30" height="30">
                             <span class>Delete</span></a>
                     </div>
@@ -48,20 +48,17 @@
             <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
         </div>
         <div class="card-footer">
-            <div class="d-flex post-actions">
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+            <div class="d-flex post-actions justify-content-around">
+            <a href="like.php?type=post&id=<?php echo $posts['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
                     <img src="icons/heart.svg" alt="Like">
-                    <p class="d-none d-md-block ms-2 ">Like</p>
+                    <p class="d-none d-md-block ms-2 ">Like(<?php echo $posts['likes'] ?>)</p>
                 </a>
 
                 <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
                     <img src="icons/message-circle.svg" alt="Comment">
                     <p class="d-none d-md-block ms-2">Comment</p>
                 </a>
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/share.svg" alt="Share">
-                    <p class="d-none d-md-block ms-2 ">Share</p>
-                </a>
+               
             </div>
         </div>
         <!-- Card Footer -->
