@@ -109,10 +109,7 @@ class Post {
     public function like_post($id, $type, $userid) {
 
         if($type == "post") {
-            // increment the post table
             $DB = new Database();
-            $sql = "update posts set likes = likes +1 where postid = '$id' limit 1";
-            $DB->save($sql);
             // save likes details
             $sql = "select likes from likes where type ='post' && contentid ='$id' limit 1" ;
             $result = $DB->read($sql);
@@ -132,6 +129,22 @@ class Post {
                     $likes_string = json_encode($likes);
                     $sql = "update likes set likes = '$likes_string' where type ='post' && contentid ='$id' limit 1" ;
                     $DB->save($sql);
+
+                     // increment the post table
+                    
+                     $sql = "update posts set likes = likes +1 where postid = '$id' limit 1";
+                     $DB->save($sql);
+
+                }else{
+                    $key = array_search($userid,$user_ids);
+                    unset($likes[$key]);
+                    $likes_string = json_encode($likes);
+                    $sql = "update likes set likes = '$likes_string' where type ='post' && contentid ='$id' limit 1" ;
+                    $DB->save($sql);
+
+                    $sql = "update posts set likes = likes -1 where postid = '$id' limit 1";
+                    $DB->save($sql); 
+                   
                 }
 
             }else {
@@ -143,6 +156,11 @@ class Post {
                 $likes = json_encode($arr2);
                 $sql = "insert into likes (type,contentid,likes) values ('$type','$id','$likes')";
                 $DB->save($sql);
+
+                // increment the post table
+                
+                $sql = "update posts set likes = likes +1 where postid = '$id' limit 1";
+                $DB->save($sql);    
             }
 
             

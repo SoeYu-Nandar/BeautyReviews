@@ -1,5 +1,13 @@
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <div class="col-md-12">
     <div class="card rounded">
         <div class="card-header">
@@ -10,6 +18,7 @@
                         <p class="ms-2"><?php echo $row["username"]; ?></p>
                         <p class="text-muted"><?php  echo $row["date"]; ?></p>
                         <p class="text-muted"><?php  echo "#".$ROW["reviews_for"]; ?></p>
+                        
                     </div>
                 </div>
                 <div class="dropdown">
@@ -52,13 +61,19 @@
         </div>
         <div class="card-footer">
             <div class="d-flex post-actions justify-content-around">
+                <?php 
+                    $likes = "";
+
+                    $likes = ($ROW['likes'] > 0) ? "(" .$ROW['likes'] . ")": "";
+                
+                ?>
                 <a href="like.php?type=post&id=<?php echo $ROW['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/heart.svg" alt="Like" id="likeIcon">
-                    <p class="d-none d-md-block ms-2 ">Like(<?php echo $ROW['likes'] ?>)</p>
+                    <img src="icons/heart-fill.svg" alt="Like" class="likeIcon" style="width:25px";>
+                    <p class="d-none d-md-block ms-2 ">Like<?php echo $likes?></p>
                 </a>
 
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/message-circle.svg" alt="Comment">
+                <a href="comment.php?type=post&id=<?php echo $ROW['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+                    <img src="icons/chat-heart.svg" alt="Comment" class="likeIcon" style="width:25px";>
                     <p class="d-none d-md-block ms-2">Comment</p>
                 </a>
             </div>
@@ -79,3 +94,7 @@
 
 
 
+
+    
+</body>
+</html>

@@ -49,13 +49,19 @@
         </div>
         <div class="card-footer">
             <div class="d-flex post-actions justify-content-around">
+            <?php 
+                    $likes = "";
+
+                    $likes = ($posts['likes'] > 0) ? "(" .$posts['likes'] . ")": "";
+                
+                ?>
             <a href="like.php?type=post&id=<?php echo $posts['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/heart.svg" alt="Like">
-                    <p class="d-none d-md-block ms-2 ">Like(<?php echo $posts['likes'] ?>)</p>
+                    <img src="icons/heart-fill.svg" alt="Like" class="likeIcon" style="width:25px";>
+                    <p class="d-none d-md-block ms-2 ">Like<?php echo $likes?></p>
                 </a>
 
                 <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-                    <img src="icons/message-circle.svg" alt="Comment">
+                    <img src="icons/chat-heart.svg" alt="Comment" class="likeIcon" style="width:25px";>
                     <p class="d-none d-md-block ms-2">Comment</p>
                 </a>
                

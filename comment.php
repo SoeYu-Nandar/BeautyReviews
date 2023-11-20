@@ -1,52 +1,3 @@
-<?php
-session_start();
-// post delete
-include("config.php");
-include('post.php');
-include('user.php');
-
-
-
-// Check if the user is logged in
-if (!isset($_SESSION['id'])) {
-  header("Location: index.php");
-  exit();
-}
-
-$Post = new Post();
-$ERROR = "";
-if (isset($_GET['id'])) {
-  
-        $ROW = $Post->get_one_posts($_GET['id']);
-        
-
-        if (!$ROW) {
-          $ERROR = "Post does not has found!";
-        }
-} else {
-  $ERROR = "Post does not has found!";
-}
-
-$user = new User();
-$ROW_USER = $user->get_user($ROW['userid']);
-
-//post deleting
-if($_SERVER['REQUEST_METHOD'] == "POST"){
-  $deleteResult = $Post->delete_post($ROW['postid']);
-  //header("Location: profile.php");
-  //die;
-  if ($deleteResult) {
-    header("Location: profile.php");
-    exit();
-  } else {
-    echo "Failed to delete the post.";
-  }
-  
-  
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -124,10 +75,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
       border: 1px solid #f2f4f9;
       border-radius: 0.25rem;
     }
-    .likeIcon:hover,
-        .likeIcon:focus{
-            filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
-        }
   </style>
 
 <body>
@@ -142,18 +89,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <div class="card-header">
           <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex">
-              <img class="img-xs rounded-circle my-1" src="img/<?php echo $ROW_USER['image']; ?>">
+              
               <div>
                 <p><?php echo $ROW_USER['username']; ?></p>
-                <p class="text-muted"><?php echo $ROW["date"]; ?></p>
-                <p class="text-muted"><?php echo "#" . $ROW["reviews_for"]; ?></p>
+                
               </div>
             </div>
             <form method="post">
 
 
-              
-              <button type="submit" name="delete" class="btn btn-primary">Delete</button>
+              <!-- Delete Post-->
+              <!-- <input type="hidden" name="postid" value=""> -->
+              <!-- <input id="post_button" type="submit" value="Delete"> -->
+              <button type="submit" name="delete" class="btn btn-primary">Comment</button>
 
               
             </form>
@@ -179,24 +127,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
           </p>
           <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
         </div>
-        <div class="card-footer">
-          <div class="d-flex post-actions">
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/heart.svg" alt="Like">
-              <p class="d-none d-md-block ms-2 ">Like</p>
-            </a>
-
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/message-circle.svg" alt="Comment">
-              <p class="d-none d-md-block ms-2">Comment</p>
-            </a>
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/share.svg" alt="Share">
-              <p class="d-none d-md-block ms-2 ">Share</p>
-            </a>
-          </div>
-        </div>
-        <!-- Card Footer -->
+        
+      
       </div>
     </div>
 
@@ -204,4 +136,3 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   </div>
 
 </body>
-</html>

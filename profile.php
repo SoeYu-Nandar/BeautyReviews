@@ -288,6 +288,10 @@ $posts= $post->get_posts($id);
             border: 1px solid #f2f4f9;
             border-radius: 0.25rem;
         }
+        .likeIcon:hover,
+        .likeIcon:focus{
+            filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
+        }
     </style>
 </head>
 
@@ -412,7 +416,7 @@ $posts= $post->get_posts($id);
                         <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
                             <div class="d-flex align-items-center justify-content-between">
                                                                                 
-                                <input type="text" class="form-control me-2" placeholder="Write your review..." name="post">
+                            <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
                                 <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
                                 <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
                                 <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
@@ -472,17 +476,7 @@ $posts= $post->get_posts($id);
             }
         }
 
-        document.getElementById("likeIcon").addEventListener("click", function() {
-    
-        var imageElement = this.querySelector("img");
-
-        // Toggle the fill color
-        if (imageElement.style.fill === "red") {
-        pathElement.style.fill = "blue";
-        } else {
-        imageElement.style.fill = "red";
-        }
-    });
+        
     </script>
 
 
