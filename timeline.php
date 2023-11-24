@@ -42,10 +42,10 @@ if($result == "" && $reviewResult =="") {
 }
 }
 
-if (!empty($_SESSION["id"])) {
-    $id = $_SESSION["id"];
+if (!empty($_SESSION["userid"])) {
+    $userid = $_SESSION["userid"];
 
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE id ='$id'");
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE userid ='$userid'");
     $row = mysqli_fetch_assoc($result);
 } else {
     header("Location: index.php");
@@ -54,7 +54,7 @@ if (!empty($_SESSION["id"])) {
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
 
-    // Assuming $conn is your database connection
+    // Assuming $conn is database connection
     $result = mysqli_query($conn, "SELECT users.*, posts.* FROM users
                                     LEFT JOIN posts ON users.userid = posts.userid
                                     ORDER BY posts.id DESC

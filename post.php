@@ -93,19 +93,7 @@ class Post {
 
        
     }
-    public function edit_post($postid) {
-
-        if(!is_numeric($postid)){
-            return false;
-        }
-         $query = "UPDATE posts SET WHERE postid='$postid'";
-
-         $DB = new Database();
-         $result = $DB->edit($query);
-         
-
-       
-    }
+    
     public function like_post($id, $type, $userid) {
 
         if($type == "post") {
@@ -181,11 +169,87 @@ class Post {
     }
 
 
-   
+    public function edit_post($userid,$data, $files) {
+
+
+        if(!empty($data['post']) || !empty($files['file']['name'])) 
+        {
+
+            $myimage = "";
+            $has_image = 0;
+
+            if(!empty($files['file']['name'])) {
+
+                //$userid = $data['userid'];
+                //$postid =addslashes($data['postid']); 
+                $folder = "uploads/" . $userid . "/" ;
+
+                // create folder
+                if(!file_exists($folder)) {
+                    mkdir($folder,0777,true);
+                }
+
+                $myimage = $folder . basename($_FILES['file']['name']);
+
+                move_uploaded_file($_FILES['file']['tmp_name'],$myimage);
+
+                $has_image = 1;
+            }
+            $post = addslashes($data['post']);
+            $postid =addslashes($data['postid']); 
+            
+            $reviews_for =$data['reviews'];
+            if($has_image){
+            $query = "update posts set post = '$post',reviews_for='$reviews_for' where postid = '$postid' limit 1";
+            }else{
+            $query = "update posts set post = '$post',post_image='$myimage',reviews_for='$reviews_for' where postid = '$postid' limit 1";
+            }
+            $DB = new Database();
+            $DB->save($query);
+
+        }else 
+        {
+            $this->error .="Please type something to post!<br>";
+        }
+
+        return $this->error;
+        
+    }
+
+
+
+    public function get_user_posts() {
+
+       
+        $query = "SELECT users.image,users.username,posts.* FROM users LEFT JOIN posts ON users.userid = posts.userid";
+
+        $DB = new Database();
+        $result = $DB->read($query);
+
+        if($result) {
+            return $result;
+        }else{
+            return false;
+        }
+    }
+
+
+//     public function get_user_posts() {
+
     
-} 
+//     $query ="SELECT users.image,users.username,posts.userid FROM users LEFT JOIN posts ON users.userid = posts.userid";
+//     $DB = new Database();
+//     $row_result = $DB->read($query);
+//     if($row_result){
 
+//         return $row_result;
 
+//     }else{
+//         return false;
+//     }
+       
+// }
+    }
 
 
 ?>

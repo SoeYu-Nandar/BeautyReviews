@@ -17,7 +17,10 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM users";
 $result = $conn->query($sql);
 
-
+if(isset($_POST['submit'])){
+    $search = $_POST["search"];
+    $result =mysqli_query($conn,"SELECT * FROM users where username='$search'");
+}
 
 ?>
 
@@ -57,9 +60,9 @@ $result = $conn->query($sql);
                         <span class="d-none d-lg-inline">Add New User</span>
                     </a>
 
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="reportinfo.php" class="list-group-item list-group-item-action">
                         <i class="fas fa-edit"></i>
-                        <span class="d-none d-lg-inline">Data Edit</span>
+                        <span class="d-none d-lg-inline">Report Information</span>
                     </a>
 
                 </div>
@@ -68,8 +71,16 @@ $result = $conn->query($sql);
             <!-- upper navbar -->
             <main class="col-10 bg-secondary-subtle">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="flex-fill"></div>
+                    <div class="flex-fill">
+                        
+                    </div>
                     <div class="navbar nav">
+                    <form method="post">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Username" name="search">
+                                <button class="btn btn-outline-secondary" type="submit" name="submit"><img src="icons/search.png" alt="Colums" width="30px" height="30px"></button>
+                            </div>
+                        </form>
                         <li class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fas fa-user-circle"></i>
@@ -101,15 +112,16 @@ $result = $conn->query($sql);
                             $activeuser = 0;
                             $inactiveuser = 0;
                             $blockuser = 0;
-                            
+
 
                             echo '<table class = "table">';
-                            echo "<tr><th>ID</th><th>UserName</th><th>Email</th><th>Action</th></tr>";
+                            echo "<tr><th>ID</th><th>Username</th><th>Email</th><th>Action</th></tr>";
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
                                 echo "<td>" . $row["id"] . "</td>";
                                 echo "<td>" . $row["username"] . "</td>";
                                 echo "<td>" . $row["email"] . "</td>";
+
                                 echo '<td>';
                                 //suspended user
                                 if ($row["suspended"] == 0) {
@@ -124,7 +136,6 @@ $result = $conn->query($sql);
                                 if ($row["status"] == 0) {
 
                                     echo '<a class="btn btn-sm btn-info m-2" href="blockuser.php?id=' . $row['id'] . '&status=1">Unblock</a>';
-                                    
                                 } else {
                                     $blockuser++;
                                     echo '<a class="btn btn-sm btn-danger m-2" href="blockuser.php?id=' . $row['id'] . '&status=0">Block</a>';
@@ -132,7 +143,7 @@ $result = $conn->query($sql);
 
 
                                 echo '</td>';
-                                
+
                                 echo '</tr>';
                             }
                             echo "</table>";

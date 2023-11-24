@@ -9,7 +9,7 @@
                     <img class="img-xs rounded-circle my-1" src="img/<?php echo $userData["users"]["image"]; ?>">
                     <div>
                         <p class="ms-2"><?php echo $userData["users"]["username"]; ?></p>
-                        <p class="text-muted"><?php  echo $row["date"]; ?></p>
+                        <p class="text-muted"><?php  echo $posts["date"]; ?></p>
                         <p class="text-muted"><?php  echo "#".$posts["reviews_for"]; ?></p>
                     </div>
                 </div>
@@ -18,13 +18,11 @@
                         <img src="icons/more-horizontal.svg" alt="More Button">
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <a class="dropdown-item d-flex align-items-center" href="#">
-                            <img src="icons/edit-3.svg" alt="Edit" class="me-2">
-                            <span class>Edit</span></a>
+                        <a class="dropdown-item d-flex align-items-center" href="totalusers.php">
+                            <img src="icons/daily-report.png" alt="Edit" class="me-2" width="30px" height="30px">
+                            <span class>Report User</span></a>
 
-                        <a class="dropdown-item d-flex align-items-center" href="delete.php">
-                        <img src="icons/trash-2.svg" alt="Edit" class="me-2" width="30" height="30">
-                            <span class>Delete</span></a>
+                        
                     </div>
                 </div>
             </div>
@@ -60,7 +58,7 @@
                     <p class="d-none d-md-block ms-2 ">Like<?php echo $likes?></p>
                 </a>
 
-                <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+                <a href="comment.php?type=post&id=<?php echo $posts['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
                     <img src="icons/chat-heart.svg" alt="Comment" class="likeIcon" style="width:25px";>
                     <p class="d-none d-md-block ms-2">Comment</p>
                 </a>

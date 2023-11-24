@@ -24,11 +24,13 @@ if (!empty($_SESSION["userid"])) {
 } else {
     header("Location: index.php");
 }
-//Selected the posts from the database
 $Post = new Post();
+//Selected the posts from the database
+
 $ERROR = "";
 if (isset($_GET['id'])) {
-
+   
+    
     $ROW = $Post->get_one_posts($_GET['id']);
 
 
@@ -38,9 +40,20 @@ if (isset($_GET['id'])) {
 } else {
     $ERROR = "Post does not has found!";
 }
+//post editing
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $Post->edit_post($userid,$_POST,$_FILES);
+  //header("Location: profile.php");
+  //die;
+
+}
+ 
 
 
-    
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,7 +62,7 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    
+
     <title>Editing Post</title>
     <style>
         body {
@@ -137,19 +150,30 @@ if (isset($_GET['id'])) {
                         <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
                             <div class="d-flex align-items-center justify-content-between">
 
-                                <textarea class="form-control me-2" placeholder="Write Your Review..." name="post" ><?php echo $ROW['post']; ?></textarea>
+                                <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"><?php echo $ROW['post']; ?></textarea>
                                 <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
-                                <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
+                                <input type="file" name="image" id="postImage" style="display:none;visibility:hidden;">
                                 <select name="reviews" class="form-select me-2" required>
-                                    <option >Reviews For ....</option>
-                                    <option value ="makeup" <?php if($ROW['reviews_for']=="makeup"){echo "selected";}?>>Makeup</option>
-                                    <option value ="hair" <?php if($ROW['reviews_for']=="hair"){echo "selected";}?>>Hair</option>
-                                    <option value ="body" <?php if($ROW['reviews_for']=="body"){echo "selected";}?>>Body</option>
-                                    <option value ="face" <?php if($ROW['reviews_for']=="face"){echo "selected";}?>>Face</option>
+                                    <option>Reviews For ....</option>
+                                    <option value="makeup" <?php if ($ROW['reviews_for'] == "makeup") {
+                                                                echo "selected";
+                                                            } ?>>Makeup</option>
+                                    <option value="hair" <?php if ($ROW['reviews_for'] == "hair") {
+                                                                echo "selected";
+                                                            } ?>>Hair</option>
+                                    <option value="body" <?php if ($ROW['reviews_for'] == "body") {
+                                                                echo "selected";
+                                                            } ?>>Body</option>
+                                    <option value="face" <?php if ($ROW['reviews_for'] == "face") {
+                                                                echo "selected";
+                                                            } ?>>Face</option>
                                 </select>
-                                <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="update">
-                                    Update
-                                </button>
+                                <form method="post" enctype="multipart/form-data">
+                                    <input type="hidden" name="postid" value="<?php echo $ROW['postid'] ?>">
+                                    <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" name="update">
+                                        Save
+                                    </button>
+                                </form>
                             </div>
                         </form>
                     </div>
@@ -168,9 +192,10 @@ if (isset($_GET['id'])) {
                                     <p class="text-muted"><?php echo $row["date"]; ?></p>
                                     <p class="text-muted"><?php echo "#" . $ROW["reviews_for"]; ?></p>
                                 </div>
+
                             </div>
-                            
-                            
+
+
                         </div>
                     </div>
 
@@ -214,20 +239,18 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
 
-             <script src="js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
-         function validateForm() {
-            var selectBox = document.getElementById("reviews");
-            var selectedValue = selectBox.value;
+            <script src="js/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript">
+                function validateForm() {
+                    var selectBox = document.getElementById("reviews");
+                    var selectedValue = selectBox.value;
 
-            if (selectedValue === "") {
-                alert("Please select an item from the dropdown.");
-                return false; // Prevent form submission
-            }
-        } 
-
-        
-    </script>
+                    if (selectedValue === "") {
+                        alert("Please select an item from the dropdown.");
+                        return false; // Prevent form submission
+                    }
+                }
+            </script>
 
 
 

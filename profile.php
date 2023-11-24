@@ -52,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 }
 }
 
+
+
  
 // collect posts
 $post = new Post();
@@ -332,7 +334,7 @@ $posts= $post->get_posts($id);
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
                                     <img src="icons/users.svg" alt="Users" class="ms-2">
-                                    <a class="pt-1px d-none d-md-block" href="#">Users</a>
+                                    <a class="pt-1px d-none d-md-block" href="reportuser.php">Users</a>
                                 </li>
 
 
