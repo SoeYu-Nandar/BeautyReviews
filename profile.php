@@ -20,7 +20,6 @@ if (!empty($_SESSION["userid"])) {
     $row = mysqli_fetch_assoc($result);
 } else {
     header("Location: index.php");
-
 }
 // posting
 include("post.php");
@@ -29,36 +28,36 @@ include("user.php");
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        $post = new Post();
-        $userid = $_SESSION["userid"];
-         //Check if the user is suspended
-        if ($row["suspended"] == 1) {
-            echo "<script> alert('Your account is suspended by admin.');</script>";
+    $post = new Post();
+    $userid = $_SESSION["userid"];
+    //Check if the user is suspended
+    if ($row["suspended"] == 1) {
+        echo "<script> alert('Your account is suspended by admin.');</script>";
+    } else {
+        // User is not suspended, proceed with post creation
+        $result = $post->create_post($userid, $_POST, $_FILES);
+
+        if ($result == "" && $reviewResult == "") {
+            header("Location: profile.php");
+            die;
         } else {
-            // User is not suspended, proceed with post creation
-            $result = $post->create_post($userid, $_POST,$_FILES);
-    
-    if($result == "" && $reviewResult =="") {
-        header("Location: profile.php");
-        die;
-    }else {
-        echo "<div class='alert alert-danger d-inline' role='alert'>
+            echo "<div class='alert alert-danger d-inline' role='alert'>
                 This is a danger alert—check it out!
             </div>";
-        // echo "<br>The following errors occured :<br><br>";
-        // echo $result;
-        // echo"</div>";
+            // echo "<br>The following errors occured :<br><br>";
+            // echo $result;
+            // echo"</div>";
+        }
     }
 }
-}
 
 
 
- 
+
 // collect posts
 $post = new Post();
 $id = $_SESSION["userid"];
-$posts= $post->get_posts($id);
+$posts = $post->get_posts($id);
 
 
 ?>
@@ -290,8 +289,9 @@ $posts= $post->get_posts($id);
             border: 1px solid #f2f4f9;
             border-radius: 0.25rem;
         }
+
         .likeIcon:hover,
-        .likeIcon:focus{
+        .likeIcon:focus {
             filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
         }
     </style>
@@ -313,22 +313,23 @@ $posts= $post->get_posts($id);
                                     <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile">
                                     <span class="profile-name"><?php echo $row["username"]; ?></span>
                                 </div>
-                                <div class="d-none d-md-block">
+                                <!-- <div class="d-none d-md-block">
                                     <a href="editprofile.php">
                                         <button class="btn btn-primary btn-icon-text btn-edit-profile">
                                             <img src="icons/edit.svg" class="me-2">Edit profile
 
                                         </button>
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <!-- Header Links -->
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
 
-                                <img src="icons/columns.svg" alt="Colums" class="me-2">
+
                                 <li class="header-link-item  d-flex align-items-center">
+                                    <img src="icons/columns.svg" alt="Colums" class="me-2">
                                     <a class="pt-1px d-none d-md-block" href="timeline.php">Timeline</a>
                                 </li>
 
@@ -339,15 +340,11 @@ $posts= $post->get_posts($id);
 
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
-                                    <img src="icons/image.svg" alt="Image" class="me-2">
-                                    <a class="pt-1px d-none d-md-block" href="#">Photos</a>
+                                    <img src="icons/edit.svg" alt="Image" class="me-2">
+                                    <a class="pt-1px d-none d-md-block" href="editprofile.php">Edit Profile</a>
                                 </li>
 
-                                <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
 
-                                    <img src="icons/settings.svg" alt="Settings" class="me-2">
-                                    <a class="pt-1px d-none d-md-block" href="#">Settings</a>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -409,53 +406,52 @@ $posts= $post->get_posts($id);
 
 
                 <!-- Posting Card One -->
- <div class="col-md-8 col-xl-9 middle-wrapper">
-    <div class="row">
-        <!-- Posting Area -->
-            <div class="col-md-12 grid-margin">
-                <div class="card rounded">
-                    <div class="card-header">
-                        <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
-                            <div class="d-flex align-items-center justify-content-between">
-                                                                                
-                            <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
-                                <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
-                                <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
-                                <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
-                                    <option value= "">Reviews For ....</option>
-                                    <option value = "makeup">Makeup</option>
-                                    <option value = "hair">Hair</option>
-                                    <option value = "body">Body</option>
-                                    <option value = "face">Face</option>
-                                </select>
-                                <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
-                                    Post
-                                </button> 
+                <div class="col-md-8 col-xl-9 middle-wrapper">
+                    <div class="row">
+                        <!-- Posting Area -->
+                        <div class="col-md-12 grid-margin">
+                            <div class="card rounded">
+                                <div class="card-header">
+                                    <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+                                        <div class="d-flex align-items-center justify-content-between">
+
+                                            <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
+                                            <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
+                                            <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
+                                            <select name="reviews" id="reviews" class="form-select me-2" required>
+                                                <option value="">Reviews For ....</option>
+                                                <option value="makeup">Makeup</option>
+                                                <option value="hair">Hair</option>
+                                                <option value="body">Body</option>
+                                                <option value="face">Face</option>
+                                            </select>
+                                            <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
+                                                Post
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        <!-- End Postin Area -->
+                        </div>
+                        <!-- End Postin Area -->
 
-        <!-- Posting Card-->
-            <?php 
-            
-                if($posts)
-                {
+                        <!-- Posting Card-->
+                        <?php
 
-                    foreach($posts as $ROW) {
+                        if ($posts) {
 
-                        $user = new User();
-                        $ROW_USER = $user->get_user($ROW['userid']);
-                        
-                        include("profilePosting.php");
-                    }
-                    }
-                
-            
-            ?>
-        <!-- Posting Card -->
+                            foreach ($posts as $ROW) {
+
+                                $user = new User();
+                                $ROW_USER = $user->get_user($ROW['userid']);
+
+                                include("profilePosting.php");
+                            }
+                        }
+
+
+                        ?>
+                        <!-- Posting Card -->
                     </div>
                 </div>
 
@@ -468,7 +464,7 @@ $posts= $post->get_posts($id);
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
-         function validateForm() {
+        function validateForm() {
             var selectBox = document.getElementById("reviews");
             var selectedValue = selectBox.value;
 
@@ -477,8 +473,6 @@ $posts= $post->get_posts($id);
                 return false; // Prevent form submission
             }
         }
-
-        
     </script>
 
 

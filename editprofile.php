@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -26,22 +26,22 @@ if ($conn->connect_error) {
 
       if((!empty($username)) && (!empty($email)))
       {
-        $id =$_SESSION["id"];
-        $upquery = mysqli_query($conn,"UPDATE users SET username='$username',email ='$email' WHERE id='$id'");
+        $userid =$_SESSION["userid"];
+        $upquery = mysqli_query($conn,"UPDATE users SET username='$username',email ='$email' WHERE userid='$userid'");
           if(!empty($password))//check password
           {
-            $upquery = mysqli_query($conn,"UPDATE users SET password='$password' WHERE id='$id'");
+            $upquery = mysqli_query($conn,"UPDATE users SET password='$password' WHERE userid='$userid'");
           }
           if(!empty($gender))//check gender
           {
-            $upquery = mysqli_query($conn,"UPDATE users SET gender='$gender' WHERE id='$id'");
+            $upquery = mysqli_query($conn,"UPDATE users SET gender='$gender' WHERE userid='$userid'");
           }
           if(!empty($img))//check profile image
           {
             $tmpName = $_FILES['img']['tmp_name'];
             $uploadDir = "img/";
               move_uploaded_file($tmpName,$uploadDir.$img);
-              $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE id='$id'");
+              $upquery = mysqli_query($conn,"UPDATE users SET image='$img' WHERE userid='$userid'");
            
           }
           if(!empty($img1))//check cover image
@@ -62,8 +62,8 @@ if ($conn->connect_error) {
       
     }
 
-    $id =$_SESSION["id"];
-    $result = mysqli_query($conn,"SELECT * FROM users WHERE id ='$id'");
+    $userid =$_SESSION["userid"];
+    $result = mysqli_query($conn,"SELECT * FROM users WHERE userid ='$userid'");
     $row=mysqli_fetch_assoc($result);
 
     if(isset($_POST['cancel']))

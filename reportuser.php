@@ -63,7 +63,7 @@ if (isset($_POST['cancel'])) {
 
 
         </select>
-        <!-- <textarea name="comments" placeholder="Write Comments.."></textarea><br> -->
+        
         <div class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" name="comments"></textarea>
             <label for="floatingTextarea">Comments</label>

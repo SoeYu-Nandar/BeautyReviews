@@ -6,7 +6,6 @@ include('post.php');
 include('user.php');
 
 
-
 // Check if the user is logged in
 if (!isset($_SESSION['id'])) {
   header("Location: index.php");
@@ -150,7 +149,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
               </div>
             </div>
             <form method="post">
-
 
               
               <button type="submit" name="delete" class="btn btn-primary">Delete</button>
