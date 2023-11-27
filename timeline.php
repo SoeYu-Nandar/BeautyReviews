@@ -382,25 +382,25 @@ if (!empty($_SESSION["id"])) {
                     </div>
 
                     <h6 class="card-title mb-0 ms-4">Your Favoruriate</h6>
-                    <div class="mt-3 ms-5">
-                                <img src="icons/makeup.svg" alt="" style="width:24px;">
-                                <a href="#makeup" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
-                            </div>
+                        <div class="mt-3 ms-5">
+                            <img src="icons/makeup.svg" alt="" style="width:24px;">
+                            <a href="makeup.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
+                        </div>
 
-                            <div class="mt-3 ms-5">
-                                <img src="icons/hair.svg" alt="" style="width:24px;">
-                                <a href="#hair" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
-                            </div>
+                        <div class="mt-3 ms-5">
+                            <img src="icons/hair.svg" alt="" style="width:24px;">
+                           <a href="hair.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
+                        </div>
 
-                            <div class="mt-3 ms-5">
-                                <img src="icons/body.svg" alt="" style="width:24px;">
-                                <a href="#body" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
-                            </div>
+                        <div class="mt-3 ms-5">
+                            <img src="icons/body.svg" alt="" style="width:24px;">
+                            <a href="body.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
+                        </div>
 
-                            <div class="mt-3 ms-5 mb-2">
-                                <img src="icons/face.svg" alt="" style="width:24px;">
-                                <a href="#face" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
-                            </div>
+                        <div class="mt-3 ms-5 mb-2">
+                            <img src="icons/face.svg" alt="" style="width:24px;">
+                            <a href="face.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
+                        </div>
                 </div>
             </div>
 

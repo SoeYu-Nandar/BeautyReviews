@@ -16,7 +16,6 @@
                     <img class="img-xs rounded-circle my-1" src="img/<?php echo $row["image"]; ?>">
                     <div>
                         <p class="ms-2"><?php echo $row["username"]; ?></p>
-                        <p class="text-muted"><?php  echo $posts["date"]; ?></p>
                         <p class="text-muted"><?php  echo "#".$ROW["reviews_for"]; ?></p>
                         
                     </div>

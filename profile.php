@@ -353,50 +353,7 @@ $posts = $post->get_posts($id);
             <!-- Row Profile Body -->
 
             <div class="row profile-body">
-
-                <div class="d-none d-md-block col-md-4 col-xl-3 left-wrapper">
-                    <div class="card rounded">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h6 class="card-title mb-0">Your Favoruriate</h6>
-                                <!-- About Dropdown Menu -->
-                                <div class="dropdown">
-                                    <button class="btn" data-bs-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="icons/more-horizontal.svg" alt="">
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item d-flex align-items-center" href="#">
-                                            <img src="icons/edit-2.svg" alt="Edit" class="me-2">
-                                            <span class>Edit</span></a>
-
-                                        <a class="dropdown-item d-flex align-items-center" href="logout.php">
-                                            <img src="icons/log-out.svg" alt="Logout" class="me-2">
-                                            <span class>Logout</span></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- About Card Body -->
-
-                            <div class="mt-3">
-                                <img src="icons/makeup.svg" alt="" style="width:24px;">
-                                <a href="#makeup" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
-                            </div>
-
-                            <div class="mt-3">
-                                <img src="icons/hair.svg" alt="" style="width:24px;">
-                                <a href="#hair" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
-                            </div>
-
-                            <div class="mt-3">
-                                <img src="icons/body.svg" alt="" style="width:24px;">
-                                <a href="#body" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
-                            </div>
-
-                            <div class="mt-3">
-                                <img src="icons/face.svg" alt="" style="width:24px;">
-                                <a href="#face" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
-                            </div>
+                <div class="d-none d-md-block col-md-8 col-xl-12 left-wrapper">
 
                         </div>
                     </div>
@@ -406,7 +363,7 @@ $posts = $post->get_posts($id);
 
 
                 <!-- Posting Card One -->
-                <div class="col-md-8 col-xl-9 middle-wrapper">
+                <div class="col-md-8 col-xl-12 middle-wrapper">
                     <div class="row">
                         <!-- Posting Area -->
                         <div class="col-md-12 grid-margin">
