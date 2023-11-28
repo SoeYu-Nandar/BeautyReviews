@@ -30,28 +30,38 @@ if (isset($_GET['id'])) {
 } else {
     $ERROR = "Post does not has found!";
 }
-//gtting username and profile image from the database
+
+
+//getting username and profile image from the database
 $user = new User();
 $ROW_USER = $user->get_user($ROW['userid']);
 
-
+$postid=$_GET['id'];
 //inserting comment into the database
-if(isset($_POST['commentSubmit'])){
+if (isset($_POST['commentSubmit'])) {
+    $postid=$_GET['id'];
     $userid = $_SESSION["userid"];
-    
     $date = $_POST['date'];
     $message = $_POST['message'];
-
-    $sql = "INSERT INTO comments (userid,date,message)
-    VALUES ('$userid','$date','$message')";
-    $result = $conn->query($sql);
     
-   
+
+    $sql = "INSERT INTO comments (userid,postid,date,message)
+    VALUES ('$userid','$postid','$date','$message')";
+    $result = $conn->query($sql);
 }
 //getting comment from the database
-$sql = "SELECT * FROM comments";
+$sql = "SELECT * FROM comments WHERE postid='$postid'";
 $result = $conn->query($sql);
 
+//getting users form the database
+ $userid = $_SESSION["userid"];
+ $sql1 = "SELECT * FROM users WHERE userid='$userid'";
+ $result1 = $conn->query($sql1);
+ $row1 = mysqli_fetch_assoc($result1);
+
+
+
+        
 
 ?>
 
@@ -84,6 +94,9 @@ $result = $conn->query($sql);
         img {
             vertical-align: middle;
             border-style: none;
+        }
+        .profile-pic {
+            border-radius:50%;
         }
 
         .card-header:first-child {
@@ -133,42 +146,66 @@ $result = $conn->query($sql);
             border: 1px solid #f2f4f9;
             border-radius: 0.25rem;
         }
-        .comment-section{
-            
-            padding:10px;
-            margin-bottom:4px;
-            background-color:#efefef;
-            border-radius:4px;
-            position:relative; 
-            
+
+        .comment-section {
+
+            padding: 10px;
+            margin-bottom: 4px;
+            background-color: #efefef;
+            border-radius: 4px;
+            position: relative;
+
         }
+
         .comment-section p {
-            font-family:arial;
-            font-size:14px;
-            line-height:16px;
-            color:#282828;
-            font-weight:100;
-            
-            
+            font-family: arial;
+            font-size: 14px;
+            line-height: 16px;
+            color: #282828;
+            font-weight: 100;
+
+
         }
+
         .edit-btn {
-            position:absolute;
-            top:0px;
-            right:0px;
+            position: absolute;
+            top: 0px;
+            right: 50px;
         }
-        .edit-btn button{
-            width:50px;
-            height:30px;
-            color:#282828;
-            background-color:#efefef;
-            opacity:0.7;
-            border:none;
+
+        .edit-btn button {
+            width: 60px;
+            height: 30px;
+            color: #282828;
+            background-color: #efefef;
+            opacity: 0.7;
+            border: none;
         }
-        .edit-btn button:hover{
-            
-            opacity:1;
+
+        .edit-btn button:hover {
+
+            opacity: 1;
         }
-        
+
+        .delete-btn {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+        }
+
+        .delete-btn button {
+            width: 60px;
+            height: 30px;
+            color: #282828;
+            background-color: #efefef;
+            opacity: 0.7;
+            border: none;
+        }
+
+        .delete-btn button:hover {
+
+            opacity: 1;
+        }
     </style>
 
 <body>
@@ -221,6 +258,7 @@ $result = $conn->query($sql);
 
                         <?php
                         echo "<form method='post'> 
+                            <input type='hidden' name='cid' value='Anonymous'>
                             <input type='hidden' name='userid' value='Anonymous'>
                             <input type='hidden' name='date' value='" . date('Y-m-d H:i') . "'>
                             <div class='form-floating'>
@@ -233,27 +271,47 @@ $result = $conn->query($sql);
 
                         </div>
                         </form>";
-                        while($row = $result->fetch_assoc()){
-                            echo "<div class='comment-section'><p>";
-                            echo $row['userid'].'<br><br>';
-                            echo $row['date'].'<br><br>';
-                            echo $row['message'].'<br>';
+                        
                             
-                            echo "</p>
-                            <form class='edit-btn' method='post' action='editcomment.php'>
-                            <input type='hidden' name='id' value='".$row['id']."'>
-                            <input type='hidden' name='userid' value='".$row['userid']."'>
-                            <input type='hidden' name='date' value='".$row['date']."'>
-                            <input type='hidden' name='message' value='".$row['message']."'>
+                        while ($row = $result->fetch_assoc()) {
+                            
+                            echo "<div class='comment-section'><p>";
+                            echo '<img class="profile-pic me-2" src="img/' . $row1["image"] . '" alt="profile" width="30px" height="30px">';
+                            echo $row1['username'] . '<br><br>';
+                            //echo $row['date'] . '<br><br>';
+                            echo $row['message'] . '<br>';
+
+
+                            echo "</p>";
+                            if( isset($_SESSION['userid'])){
+                                if($_SESSION['userid'] == $row1['userid']){
+                                    
+                        echo"<form class='edit-btn' method='post' action='editcomment.php'>
+                            <input type='hidden' name='postid' value='" . $row['postid'] . "'>
+                            <input type='hidden' name='cid' value='" . $row['cid'] . "'>
+                            <input type='hidden' name='userid' value='" . $row['userid'] . "'>
+                            <input type='hidden' name='date' value='" . $row['date'] . "'>
+                            <input type='hidden' name='message' value='" . $row['message'] . "'>
                             <button>Edit</button>
                             </form>";
-                            
-                            
-                            
+
+
+                            echo "</p>
+                            <form class='delete-btn' method='post' action='deletecomment.php'>
+                            <input type='hidden' name='cid' value='" . $row['cid'] . "'>
+                            <input type='hidden' name='userid' value='" . $row['userid'] . "'>
+                            <input type='hidden' name='date' value='" . $row['date'] . "'>
+                            <input type='hidden' name='message' value='" . $row['message'] . "'>
+                            <button>Delete</button>
+                            </form>";
+
+
+
                             echo "</div>";
+                            }
                         }
-                            
-                        
+                        }
+
 
                         ?>
 

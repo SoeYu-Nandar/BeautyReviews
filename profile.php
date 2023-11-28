@@ -40,14 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($result == "" && $reviewResult == "") {
             header("Location: profile.php");
             die;
-        } else {
-            echo "<div class='alert alert-danger d-inline' role='alert'>
-                This is a danger alert—check it out!
-            </div>";
-            // echo "<br>The following errors occured :<br><br>";
-            // echo $result;
-            // echo"</div>";
-        }
+        } 
     }
 }
 
@@ -294,6 +287,8 @@ $posts = $post->get_posts($id);
         .likeIcon:focus {
             filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
         }
+
+        
     </style>
 </head>
 
@@ -382,9 +377,10 @@ $posts = $post->get_posts($id);
                                                 <option value="body">Body</option>
                                                 <option value="face">Face</option>
                                             </select>
-                                            <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
+                                            <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit" id="myBtn">
                                                 Post
                                             </button>
+                                           
                                         </div>
                                     </form>
                                 </div>
