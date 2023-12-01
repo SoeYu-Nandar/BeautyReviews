@@ -31,37 +31,39 @@ if (isset($_GET['id'])) {
     $ERROR = "Post does not has found!";
 }
 
-
+$postid = $_GET['id'];
 //getting username and profile image from the database
 $user = new User();
 $ROW_USER = $user->get_user($ROW['userid']);
+$SHOW_USER = $user->get_all_user($ROW['userid'], $postid);
 
-$postid=$_GET['id'];
+
+
+
 //inserting comment into the database
 if (isset($_POST['commentSubmit'])) {
-    $postid=$_GET['id'];
+    $postid = $_GET['id'];
     $userid = $_SESSION["userid"];
     $date = $_POST['date'];
     $message = $_POST['message'];
-    
+
 
     $sql = "INSERT INTO comments (userid,postid,date,message)
     VALUES ('$userid','$postid','$date','$message')";
     $result = $conn->query($sql);
 }
+
+
 //getting comment from the database
-$sql = "SELECT * FROM comments WHERE postid='$postid'";
+$sql = "SELECT * FROM comments WHERE postid = '$postid'";
 $result = $conn->query($sql);
 
 //getting users form the database
- $userid = $_SESSION["userid"];
- $sql1 = "SELECT * FROM users WHERE userid='$userid'";
- $result1 = $conn->query($sql1);
- $row1 = mysqli_fetch_assoc($result1);
+$userid = $_SESSION["userid"];
+$sql1 = "SELECT * FROM users WHERE userid='$username'";
+$result1 = $conn->query($sql1);
+$row1 = mysqli_fetch_assoc($result1);
 
-
-
-        
 
 ?>
 
@@ -95,8 +97,9 @@ $result = $conn->query($sql);
             vertical-align: middle;
             border-style: none;
         }
+
         .profile-pic {
-            border-radius:50%;
+            border-radius: 50%;
         }
 
         .card-header:first-child {
@@ -187,6 +190,27 @@ $result = $conn->query($sql);
             opacity: 1;
         }
 
+        .reply-btn {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+        }
+
+        .reply-btn button {
+            width: 60px;
+            height: 30px;
+            color: #282828;
+            background-color: #efefef;
+            opacity: 0.7;
+            border: none;
+        }
+
+        .reply-btn button:hover {
+
+            opacity: 1;
+        }
+
+
         .delete-btn {
             position: absolute;
             top: 0px;
@@ -247,7 +271,7 @@ $result = $conn->query($sql);
                         }
                         ?>
                     </p>
-                    <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
+
                 </div>
                 <div class="card-footer">
                     <div class="d-block post-actions">
@@ -271,46 +295,60 @@ $result = $conn->query($sql);
 
                         </div>
                         </form>";
-                        
-                            
-                        while ($row = $result->fetch_assoc()) {
-                            
-                            echo "<div class='comment-section'><p>";
-                            echo '<img class="profile-pic me-2" src="img/' . $row1["image"] . '" alt="profile" width="30px" height="30px">';
-                            echo $row1['username'] . '<br><br>';
+
+                        if ($SHOW_USER) {
+                            // echo "<div class='comment-section'><p>";
+                            // echo '<img class="profile-pic me-2" src="img/' . $row1["image"] . '" alt="profile" width="30px" height="30px">';
+                            // echo $row1['username'] . '<br><br>';
                             //echo $row['date'] . '<br><br>';
-                            echo $row['message'] . '<br>';
+                            //  echo $ROW['message'] . '<br>';
 
+                            foreach ($SHOW_USER as $ROW) 
+                            {
 
-                            echo "</p>";
-                            if( isset($_SESSION['userid'])){
-                                if($_SESSION['userid'] == $row1['userid']){
-                                    
-                        echo"<form class='edit-btn' method='post' action='editcomment.php'>
-                            <input type='hidden' name='postid' value='" . $row['postid'] . "'>
-                            <input type='hidden' name='cid' value='" . $row['cid'] . "'>
-                            <input type='hidden' name='userid' value='" . $row['userid'] . "'>
-                            <input type='hidden' name='date' value='" . $row['date'] . "'>
-                            <input type='hidden' name='message' value='" . $row['message'] . "'>
+                                echo "<div class='comment-section'><p>";
+                                echo '<img class="profile-pic me-2" src="img/' . $ROW["image"] . '" alt="profile" width="30px" height="30px">';
+                                echo $ROW['username'] . '<br><br>';
+                                //echo $row['date'] . '<br><br>';
+                                echo $ROW['message'] . '<br>';
+
+                                // echo "</p>";
+                                if($_SESSION['userid']==$ROW['userid'])
+                                {
+                                echo "<form class='edit-btn' method='post' action='editcomment.php'>
+                            <input type='hidden' name='postid' value='" . $ROW['postid'] . "'>
+                            <input type='hidden' name='cid' value='" . $ROW['cid'] . "'>
+                            <input type='hidden' name='userid' value='" . $ROW['userid'] . "'>
+                            <input type='hidden' name='date' value='" . $ROW['date'] . "'>
+                            <input type='hidden' name='message' value='" . $ROW['message'] . "'>
                             <button>Edit</button>
                             </form>";
 
 
-                            echo "</p>
+                                echo "</p>
                             <form class='delete-btn' method='post' action='deletecomment.php'>
-                            <input type='hidden' name='cid' value='" . $row['cid'] . "'>
-                            <input type='hidden' name='userid' value='" . $row['userid'] . "'>
-                            <input type='hidden' name='date' value='" . $row['date'] . "'>
-                            <input type='hidden' name='message' value='" . $row['message'] . "'>
+                            <input type='hidden' name='cid' value='" . $ROW['cid'] . "'>
+                            <input type='hidden' name='userid' value='" . $ROW['userid'] . "'>
+                            <input type='hidden' name='date' value='" .$ROW['date'] . "'>
+                            <input type='hidden' name='message' value='" . $ROW['message'] . "'>
                             <button>Delete</button>
+                            </form>";
+                        }
+
+                            echo "
+                            <form class='reply-btn' method='post' action='reply.php'>
+                            <input type='hidden' name='cid' value='" . $ROW['cid'] . "'>
+                            <input type='hidden' name='userid' value='" . $ROW['userid'] . "'>
+                            <input type='hidden' name='message' value='" . $ROW['message'] . "'>
+                            <button>Reply</button>
                             </form>";
 
 
 
-                            echo "</div>";
+                                echo "</div>";
                             }
                         }
-                        }
+
 
 
                         ?>

@@ -49,7 +49,7 @@ if ($conn->connect_error) {
             $tmpName = $_FILES['img1']['tmp_name'];
             $uploadDir = "img/";
             move_uploaded_file($tmpName,$uploadDir.$img1);
-            $upquery = mysqli_query($conn,"UPDATE users SET cimage='$img1' WHERE id='$id'");
+            $upquery = mysqli_query($conn,"UPDATE users SET cimage='$img1' WHERE userid='$userid'");
           }
           
         header('Location: profile.php');

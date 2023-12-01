@@ -31,3 +31,4 @@ function deleteComments($conn)
         header('Location: timeline.php');
     }
 }
+

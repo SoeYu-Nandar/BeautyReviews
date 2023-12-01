@@ -441,8 +441,6 @@ if (!empty($_SESSION["id"])) {
 
                 foreach($userData['posts'] as $posts) {
 
-                  
-
                     include("timelinePosting.php");
                 
             

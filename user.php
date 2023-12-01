@@ -13,23 +13,22 @@ class User {
          return false;
       }
    }
-   public function get_all_user($id) {
+   public function get_all_user($id,$postid) {
 
-       $query = "select users.*, posts.* from users
-      left join posts on users.userid = posts.userid
-      where users.userid = '$id'
-      ordered by posts.id desc
-      limit 10";
+       $query = "SELECT comments.*, users.username, users.image
+                  FROM comments
+                  INNER JOIN users ON comments.userid = users.userid
+                  WHERE comments.postid = '$postid'";
+                 
       $DB = new Database();
       $result = $DB->read($query);
-
-      if($result) {
-         return $result[0];
-      }else {
-         return false;
-      }
+         return $result;
    }
+
+
 }
+
+
 
 
 
