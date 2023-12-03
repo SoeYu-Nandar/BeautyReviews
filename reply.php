@@ -20,10 +20,11 @@ if (isset($_POST['replySubmit'])) {
     $result = $conn->query($sql);
 }
 $userid = $_SESSION["userid"];
+$cid = $_POST['cid'];
 $query = "SELECT replies.*, users.username, users.image
              FROM replies
              INNER JOIN users ON replies.userid = users.userid
-             ";
+             where replies.cid='$cid'";
 $res = $conn->query($query);
 //$ROW = mysqli_fetch_assoc($res);
 

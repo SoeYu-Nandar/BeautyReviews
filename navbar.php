@@ -54,7 +54,7 @@
 
     </nav>
     <!-- For Home -->
-    <img src="img/ss.png" alt="">
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- Beauty Tips Card -->
     <div class="container" id="Beauty Tips">
         <p class="small-title text-center text-muted fs-3 ">

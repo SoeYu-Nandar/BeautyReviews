@@ -59,7 +59,7 @@
 
                 <a href="comment.php?type=post&id=<?php echo $posts['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
                     <img src="icons/chat-heart.svg" alt="Comment" class="likeIcon" style="width:25px";>
-                    <p class="d-none d-md-block ms-2">Comment<?php echo $likes?></p>
+                    <p class="d-none d-md-block ms-2">Comment</p>
                 </a>
                
             </div>
