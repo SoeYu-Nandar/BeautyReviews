@@ -21,6 +21,16 @@ if (isset($_POST["submit"])) {
     $result = mysqli_query($conn, "SELECT * FROM users where username = '$usernameemail' OR email = '$usernameemail'");
     $row = mysqli_fetch_assoc($result);
     if (mysqli_num_rows($result) > 0) {
+        if ($row["username"] == 'admin' && $row["email"] == 'admin@gmail.com' && $row["password"] == 'password') {
+            session_start();
+            $_SESSION["login"] = true;
+            $_SESSION["id"] = $row["id"];
+            $_SESSION["userid"] = $row["userid"];
+
+            echo "<script>alert('Admin login Successfully');</script>";
+            header("Location: adminpanel.php");
+            exit;
+        }
         if ($password == $row["password"]) {
             $_SESSION["login"] = true;
             $_SESSION["id"] = $row["id"];

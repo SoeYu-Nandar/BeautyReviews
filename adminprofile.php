@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 if (!empty($_SESSION["id"])) {
     $id = $_SESSION["id"];
 
-    $result = mysqli_query($conn, "SELECT * FROM admins WHERE id ='$id'");
+    $result = mysqli_query($conn, "SELECT * FROM users  WHERE username='admin' and password='password'");
     $row = mysqli_fetch_assoc($result);
 } else {
     header("Location: adminlogin.php");
@@ -72,7 +72,7 @@ if (!empty($_SESSION["id"])) {
                 <table class="table table-striped table-info text-center">
                     <tr>
                         <th>Name</th>
-                        <td><?php echo $row["name"]; ?></td>
+                        <td><?php echo $row["username"]; ?></td>
                     </tr>
                     <tr>
                         <th>Gender</th>

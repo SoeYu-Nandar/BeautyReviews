@@ -21,14 +21,14 @@ if(isset($_REQUEST['submit']))
       if((!empty($name)) && (!empty($email)))
       {
         $id =$_SESSION["id"];
-        $upquery = mysqli_query($conn,"UPDATE admins SET name='$name',email ='$email' WHERE id='$id'");
+        $upquery = mysqli_query($conn,"UPDATE users SET username='$name',email ='$email' WHERE id=31");
           if(!empty($password))
           {
-            $upquery = mysqli_query($conn,"UPDATE admins SET password='$password' WHERE id='$id'");
+            $upquery = mysqli_query($conn,"UPDATE users SET password='$password' WHERE id=31");
           }
           if(!empty($gender))
           {
-            $upquery = mysqli_query($conn,"UPDATE admins SET gender='$gender' WHERE id='$id'");
+            $upquery = mysqli_query($conn,"UPDATE users SET gender='$gender' WHERE id=31");
           }
           
         }
@@ -37,7 +37,7 @@ if(isset($_REQUEST['submit']))
     }
 
           $id =$_SESSION["id"];
-          $result = mysqli_query($conn,"SELECT * FROM admins WHERE id ='$id'");
+          $result = mysqli_query($conn,"SELECT * FROM users WHERE id ='31'");
           $row=mysqli_fetch_assoc($result);
         
       
@@ -75,7 +75,7 @@ if(isset($_REQUEST['submit']))
     
 
             
-            <input name="name" type="text" value ="<?php echo $row['name']; ?>"class="form-control mb-3" placeholder="Enter Your Name">
+            <input name="name" type="text" value ="<?php echo $row['username']; ?>"class="form-control mb-3" placeholder="Enter Your Name">
         
         
             <select name="gender" class="form-select mb-3" required>

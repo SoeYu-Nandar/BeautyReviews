@@ -65,6 +65,17 @@ if(isset($_POST['submit'])){
                         <span class="d-none d-lg-inline">Report Information</span>
                     </a>
 
+                    <!-- <a href="adminprofile.php" class="list-group-item list-group-item-action">
+                        <i class="fas fa-user-circle"></i>
+                        <span class="d-none d-lg-inline">Admin Profile</span>
+                    </a> -->
+
+                    <a href="logout.php" class="list-group-item list-group-item-action">
+                    <img src="icons/log-out.svg" alt="Logout">
+                        <span class="d-none d-lg-inline">Logout</span>
+                    </a>
+
+
                 </div>
 
             </nav>
@@ -81,7 +92,7 @@ if(isset($_POST['submit'])){
                                 <button class="btn btn-outline-secondary" type="submit" name="submit"><img src="icons/search.png" alt="Colums" width="30px" height="30px"></button>
                             </div>
                         </form>
-                        <li class="nav-item dropdown">
+                        <!-- <li class="nav-item dropdown">
                             <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                                 <i class="fas fa-user-circle"></i>
                             </a>
@@ -94,10 +105,10 @@ if(isset($_POST['submit'])){
                                     <a href="adminlogin.php" class="dropdown-item">Logout</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
+                        </li> -->
+                         <!-- <li class="nav-item">
                             <a href="adminedit.php" class="nav-link"><i class="fas fa-cog"></i></a>
-                        </li>
+                        </li>  -->
 
 
                     </div>
