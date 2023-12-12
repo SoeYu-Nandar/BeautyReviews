@@ -1,110 +1,212 @@
-<!-- Log In -->
-<?php
-session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "beauty_reviews";
-
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-//Check  User logIn
-if (isset($_POST["submit"])) {
-
-    $usernameemail = $_POST["usernameemail"];
-    $password = $_POST["password"];
-    $result = mysqli_query($conn, "SELECT * FROM users where username = '$usernameemail' OR email = '$usernameemail'");
-    $row = mysqli_fetch_assoc($result);
-    if (mysqli_num_rows($result) > 0) {
-        if ($row["username"] == 'admin' && $row["email"] == 'admin@gmail.com' && $row["password"] == 'password') {
-            session_start();
-            $_SESSION["login"] = true;
-            $_SESSION["id"] = $row["id"];
-            $_SESSION["userid"] = $row["userid"];
-
-            echo "<script>alert('Admin login Successfully');</script>";
-            header("Location: adminpanel.php");
-            exit;
-        }
-        if ($password == $row["password"]) {
-            $_SESSION["login"] = true;
-            $_SESSION["id"] = $row["id"];
-            $_SESSION["userid"] = $row["userid"];
-
-            if ($row["status"] == 1) {
-                echo "<script>alert ('Your account is blocked by admin');</script>";
-            } else {
-
-                header("Location: profile.php");
-                exit;
-            }
-        } else {
-            echo "<script>alert ('Psssword does not match');</script>";
-        }
-    } else {
-        echo "<script>alert ('User Not Found');</script>";
-    }
-}
-
-
-if (isset($_POST['cancel'])) {
-    header('Location: index.php');
-    die;
-}
-
-
-$conn->close();
-
-
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty for everyone</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bgcolor">
+<body style="background-color: #f1f1f1" ;>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color:#FDEDEE">
+        <div class="container-xxl">
+            <a href="#" class="navbar-brand">
+                <span class="fw-bold fs-3 text-secondary">
+                    <img src="img/beautyicon.png" alt="BeautyIcon" width="50px" height="50px">BEAUTY REVIEWS
+                </span>
+            </a>
 
-    <header>
-        <img src="img/beautyicon.png" alt="Beautyicon" width="80px" height="80px">
-        <h1 class="fw-bold">Beauty Reviews</h1>
-    </header>
-    <section>
 
-        <form action="" method="post" autocomplete="off">
-            <p class="title">LOGIN FORM</p>
-            <div class="mb-2">
+            <!-- toggle button for mobile  -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <label><i class="fas fa-envelope me-2"></i>UserName or Email</label>
-                <input name="usernameemail" type="text" class="form-control" placeholder="Enter Your Username or Email">
+
+            <!-- navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="#Home" class="nav-link fs-5 fw-bold">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#Beauty Tips" class="nav-link fs-5 fw-bold">BEAUTY TIPS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#About Us" class="nav-link fs-5 fw-bold">ABOUT US</a>
+                    </li>
+                    <li class="nav-item me-3 ms-2">
+                        <a href="login.php" class="btn btn-outline-primary ">LOGIN</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a href="register.php" class="btn btn-outline-secondary ">REGISTER</a>
+                    </li>
+                </ul>
             </div>
-            <div class="mb-2">
-                <label><i class="fas fa-key me-2"></i> Password</label>
-                <input name="password" type="password" class="form-control" placeholder="Enter Your Password">
+        </div>
+
+
+    </nav>
+    <!-- For Home -->
+
+   
+        <!-- Beauty Tips Card -->
+        <div class="container" id="Beauty Tips">
+            <p class="small-title text-center text-muted fs-3 ">
+                Beauty Tips</p>
+
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/skinbreakout.jpg" class="card-img-top" alt="skin breakout">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base"> နေ့တိုင်း Exfoliate လုပ်သောအခါ <br>ရလာမည့် ဆိုးကျိုးများ</h5>
+                            <a href="News/N1.html" class="btn btn-outline-danger" role="center">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/cleaning.jpg" class="card-img-top" alt="cleaning">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted lh-base"> SkinCare လုပ်သောနေရာတွင် <br>ချန်ထားလို့မရသော အဆင့်များ</h5>
+                            <a href="News/N2.html" class="btn btn-outline-danger" role="center">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/face.jpg" class="card-img-top" alt="skin breakout">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base"> မျက်နှာပေါ်သို့ ဘယ်တော့မှမတင်သင့်သောအရာ (၆)ခု</h5>
+                            <a href="News/N3.html" class="btn btn-outline-danger role=" button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/faceoil.jpg" class="card-img-top" alt="skin breakout">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base">ညတွင်းချင်းတောက်ပသော အသားအရေကို ရရှိစေမည့်နည်းလမ်း (၆)ခု</h5>
+                            <a href="News/N4.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/dryskin.jpg" class="card-img-top" alt="skin breakout">
+                        <div class="card-body">
+                            <h5 class="card-title text-muted lh-base">ဝက်ခြံကြောင့်နီမြန်းရောင်ရမ်းတာတွေကိုသက်သာစေသောနည်းလမ်း(၅)ခု</h5>
+                            <a href="News/N5.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/hairTreatment.jpg" class="card-img-top" alt="hair treatment">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base">ဆံပင်ကျွတ်ခြင်းကို သက်သာစေသည့်နည်းလမ်းများ</h5>
+                            <a href="News/N6.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/bodyCare.jpg" class="card-img-top" alt="body care">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base">အသားအရည် လှပစေမည့် <br>နည်းလမ်း(၅)မျိူး</h5>
+                            <a href="News/N7.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/eating.jpg" class="card-img-top" alt="Eating">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base">ကျန်းမာစေမည့် <br>အလေ့အကျင့်ကောင်းများ</h5>
+                            <a href="News/N8.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <img src="img/doingexercise.jpg" class="card-img-top" alt="Doing Exercise">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-muted lh-base">ကျန်းမာသောလူမှုဘဝပိုင်ဆိုင်စေရန် လုပ်ဆောင်သင့်သော အလေ့အထများ</h5>
+                            <a href="News/N9.html" class="btn btn-outline-danger" role="button">
+                                အပြည့်အစုံဖတ်ရှုရန်</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- For About Us -->
+        <div id="About Us">
+            <div class="card text-center bg-body-tertiary">
+                <div class="card-body">
+                    <p class="small-title text-center text-muted fs-3 ">
+                        <img src="img/beautyicon.png" alt="BeautyIcon" width="50px" height="50px">About Us
+                    </p>
+
+                    <p class="card-text text-center">Our website gives the information between cosmetics users.</p>
+                    <a href="index.php" class="btn btn-primary justify-content-md-end">Join Us</a><br>
+
+                    <!-- Facebook -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+                    <!-- Google -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+                    <!-- Github -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button" data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+
+                </div>
+
+
             </div>
 
-            <button class="btn btn-primary" name="submit">Login</button>
-            <button class="btn btn-secondary">Cancel</button>
+        </div>
 
-            <p class="forget">Don't have an account?<a href="register.php">Sign Up</a></p>
 
-        </form>
-    </section>
+
+        <!-- For footer -->
+        <footer class="text-center text-white">
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                © 2023 Copyright:
+                <a class="text-dark" href="register.php">BeautyReviews</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+        <script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -377,7 +377,7 @@ if (!empty($_SESSION["id"])) {
                         <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile" width="100px" height="100px">
                         
                     </p>
-                        <p class="profile-name text-center my-3 text-muted"><?php echo $row["username"];?></p>
+                        <p class="profile-name text-center my-3 fs-5" style="color:#000;font-weight:bold"><?php echo $row["username"];?></p>
                     </a>
                     </div>
 

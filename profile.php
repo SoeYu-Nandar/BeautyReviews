@@ -72,22 +72,26 @@ $posts = $post->get_posts($id);
         .profile-page .profile-header {
             box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
             border: 1px solid #f2f4f9;
+         
         }
 
         .profile-page .profile-header .cover {
             position: relative;
             border-radius: .25rem .25rem 0 0;
+             
         }
 
 
         .profile-page .profile-header .cover figure {
             margin-bottom: 0;
+           
         }
 
         @media (max-width: 767px) {
             .profile-page .profile-header .cover figure {
                 height: 110px;
                 overflow: hidden;
+                
             }
         }
 
@@ -133,17 +137,20 @@ $posts = $post->get_posts($id);
             left: 0;
             z-index: 2;
             width: 100%;
+            height:50%;
             padding: 0 20px;
         }
 
         .profile-page .profile-header .cover .cover-body .profile-pic {
             border-radius: 50%;
             width: 100px;
+            height:100px;
         }
 
         @media (max-width: 767px) {
             .profile-page .profile-header .cover .cover-body .profile-pic {
                 width: 70px;
+                height:70px;
             }
         }
 
@@ -190,17 +197,6 @@ $posts = $post->get_posts($id);
             width: 30px;
             height: 30px;
         }
-
-        .profile-page .profile-body .right-wrapper .latest-photos>.row {
-            margin-right: 0;
-            margin-left: 0;
-        }
-
-        .profile-page .profile-body .right-wrapper .latest-photos>.row>div {
-            padding-left: 3px;
-            padding-right: 3px;
-        }
-
         .profile-page .profile-body .right-wrapper .latest-photos>.row>div figure {
             -webkit-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
@@ -301,21 +297,13 @@ $posts = $post->get_posts($id);
                         <div class="cover">
                             <div class="gray-shade"></div>
                             <figure>
-                                <img src="img/<?php echo $row['cimage']; ?>" class="img-fluid" alt="profile cover">
+                                <img src="img/<?php echo $row['cimage']; ?>" class="img-fluid" alt="profile cover" style="height:300px">
                             </figure>
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile">
-                                    <span class="profile-name"><?php echo $row["username"]; ?></span>
+                                    <span class="profile-name" style="color:#000;font-weight:bold"><?php echo $row["username"]; ?></span>
                                 </div>
-                                <!-- <div class="d-none d-md-block">
-                                    <a href="editprofile.php">
-                                        <button class="btn btn-primary btn-icon-text btn-edit-profile">
-                                            <img src="icons/edit.svg" class="me-2">Edit profile
-
-                                        </button>
-                                    </a>
-                                </div> -->
                             </div>
                         </div>
                         <!-- Header Links -->

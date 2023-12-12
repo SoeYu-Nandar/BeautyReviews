@@ -202,11 +202,11 @@ class Post
                     $postid =addslashes($data['postid']); 
                     
                     $reviews_for =$data['reviews'];
-                    if($has_image){
-                    $query = "update posts set post = '$post',reviews_for='$reviews_for' where postid = '$postid' limit 1";
-                    }else{
+                    // if($has_image){
                     $query = "update posts set post = '$post',post_image='$myimage',reviews_for='$reviews_for' where postid = '$postid' limit 1";
-                    }
+                    // }else{
+                    // $query = "update posts set post = '$post',post_image='$myimage',reviews_for='$reviews_for' where postid = '$postid' limit 1";
+                    // }
                     $DB = new Database();
                     $DB->save($query);
 
