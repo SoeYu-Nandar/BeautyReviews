@@ -8,9 +8,21 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+  .carousel-item{
+    background-color: burlywood;
+   
+  }
+   p{
+    position:absolute;
+    top:50%;
+    left:50%;
+    
+  }
+</style>
 </head>
 
-<body style="background-color: #f1f1f1" ;>
+<body style="background-color: #f1f1f1;">
     <!-- navbar -->
     <nav class="navbar navbar-expand-md navbar-light" style="background-color:#FDEDEE">
         <div class="container-xxl">
@@ -52,7 +64,30 @@
 
     </nav>
     <!-- For Home -->
-
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img/homeimg3.jpg" class="d-block w-10" alt="...">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>Quia consequatur ea sequi atque distinctio, sunt illum, eaque corporis aut sit quisquam? Facilis libero necessitatibus ducimus numquam quas. Neque, facere optio!</p>
+      </div>
+      <div class="carousel-item">
+        <img src="img/homeimg2.jpg" class="d-block w-20" alt="...">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>Molestiae numquam quod eius, iure maiores adipisci, aliquam vitae nostrum soluta labore illum nisi eveniet debitis alias, et delectus ab consectetur minima!</p>
+      </div>
+      <div class="carousel-item">
+        <img src="img/homeimg1.jpg" class="d-block w-50" alt="...">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias dolor et optio soluta quasi tenetur. <br> Delectus deleniti quidem facere unde vero labore necessitatibus error nostrum, possimus est quasi, recusandae natus.</p>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
    
         <!-- Beauty Tips Card -->
         <div class="container" id="Beauty Tips">

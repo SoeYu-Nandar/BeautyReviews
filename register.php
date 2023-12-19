@@ -99,7 +99,7 @@
       
         .fa-eye {
             position: absolute;
-            top: 40%;
+            top: 38%;
             right: 8%;
             cursor: pointer;
             color: lightgray;
@@ -142,18 +142,18 @@
        <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required>
 
 
-       <!-- <div class="form-check">
-      <input name = "agree" class="form-check-input-lg" type="checkbox" value="" id="invalidCheck" required> -->
+        <div class="form-check">
+      <input name = "agree" class="form-check-input-lg" type="checkbox" value="" id="invalidCheck" required>
 
 
-       <!-- <label class="form-check-label" for="invalidCheck">
-        Agree to terms and policy
-      </label><br>   -->
+        <label class="form-check-label" for="invalidCheck">
+        Agree to <a href="policy.php">Terms and Conditions</a>
+      </label><br>  
 
 
 
-       <!-- </div>
-   -->
+        </div>
+   
    
 
    
