@@ -93,8 +93,8 @@ if ($conn->connect_error) {
         
       }
       .cover-pic {
-        width: 150px;
-        height: 150px;
+        width: 115px;
+        height: 115px;
         border-radius: 15px;
         
         

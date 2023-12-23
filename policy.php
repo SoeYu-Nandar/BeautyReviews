@@ -12,14 +12,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            min-height: 80vh;
             margin: 0;
 
         }
 
         .wrap {
             width: 21cm;
-            height: 40cm;
+            height: 38cm;
             border: none;
             box-sizing: border-box;
             border-radius:30px;
@@ -61,8 +61,8 @@
         </div>
         <div class="second">
             
-            <h3><i>Introduction</i></h3>
-            <p>
+            
+            <p style="text-align: center;">
             Welcome to Beauty Reviews Website <br>
             By using this website, you agree to comply with and be bound by the following terms and policies.
             </p>
@@ -114,8 +114,8 @@
             </p>
             <br>
             <br>
-            <br>
-            <p>
+        
+            <p style="padding-bottom: 30px;">
             <i>By using this Beauty Reviews Page, you acknowledge that you have read, understood, and agreed to these terms and policies.</i>
 
 
@@ -124,6 +124,8 @@
 
         </div>
     </div>
+
+    
 </body>
 
 </html>

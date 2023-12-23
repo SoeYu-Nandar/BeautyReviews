@@ -96,6 +96,24 @@
      <link rel="stylesheet" href="css/bootstrap.min.css">     
      <title>Registration Form</title>
      <style>
+      .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        
+      }
+      .cover-pic {
+        width: 115px;
+        height: 115px;
+        border-radius: 15px;
+        
+        
+      }
+      .title {
+    
+    margin-bottom: 2px;
+    
+}
       
         .fa-eye {
             position: absolute;
@@ -120,6 +138,9 @@
 
        <p class="title">REGISTER FORM</p>
 
+       <label for="img"><img class="profile-pic" src="img/" alt="profile" style="margin: 15px;">Profile Picture</label>
+       <input name="img" type="file" id="img" class="form-control mb-2" placeholder="Change Profile" required style="display:none;visibility:hidden;">
+
        <input name="username" type="text" class="form-control mb-3" placeholder="User Name" required>
        <select name="gender" class="form-select mb-3" required id="gender">
          <option>Gender</option>
@@ -135,11 +156,10 @@
 
        <input name="password2" type="password" class="form-control mb-3" placeholder="Retype Password" required>
 
-       <label for="img">Profile Picture</label>
-       <input name="img" type="file" id="img" class="form-control mb-2" placeholder="Change Profile" required>
+       
 
-       <label for="img1">Cover Picture</label>
-       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required>
+       <label for="img1"><img class="cover-pic" src="img/ alt="cover" style="margin: 10px;">Cover Picture</label>
+       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required style="display:none;visibility:hidden;">
 
 
         <div class="form-check">
