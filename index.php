@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-.carousel-item img{
-    background-size: cover;
-}
-.content {
+
+.content{
   position: relative;
   padding-left:200px;
-  padding-bottom:350px;
+  padding-bottom:400px;
+}   
+.intro{
+  position: relative;
+  padding-left:30px;
+  padding-bottom:550px;
 }   
 .content h2 {
   color: #fff;
-  font-size: 6em;
+  font-size: 4em;
   position: absolute;
   transform: translate(-50%, -50%);
 }
@@ -68,54 +71,12 @@
 </head>
 
 <body style="background-color: #f1f1f1;">
-    
-    <!-- For Home -->
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/beauty1.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <div class="content">
-        <h2>Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
-        <h2>Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
-        </div>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/beauty2.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="img/beauty3.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-<!-- navbar -->
-<nav class="navbar navbar-expand-md navbar-light">
+    <!-- navbar -->
+<nav class="navbar navbar-expand-md navbar-inverse fixed-top" style="background-color: #F9F1F2;">
         <div class="container-xxl">
             <a href="#" class="navbar-brand">
-                <span class="fw-bold fs-3 text-secondary">
-                    <img src="img/beautyicon.png" alt="BeautyIcon" width="50px" height="50px">BEAUTY REVIEWS
+                <span class="fs-3 fw-bold text-secondary">
+                    <img src="img/beautyicon.png" alt="BeautyIcon" width="50px" height="50px">BEAUTY REVIEWS 
                 </span>
             </a>
 
@@ -138,20 +99,80 @@
                     <li class="nav-item">
                         <a href="#About Us" class="nav-link fs-5 fw-bold">ABOUT US</a>
                     </li>
-                    <li class="nav-item me-3 ms-2">
+                    <li class="nav-item me-3 ms-2 mb-sm-2">
                         <a href="login.php" class="btn btn-outline-primary ">LOGIN</a>
                     </li>
-                    <li class="nav-item me-2">
+                    <li class="nav-item me-2 mb-sm-2">
                         <a href="register.php" class="btn btn-outline-secondary ">REGISTER</a>
                     </li>
                 </ul>
             </div>
         </div>
-
-
     </nav>
 
    
+    <!-- For Home -->
+    <div id="Home">
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+  </div>
+  <div class="carousel-inner"  style="background-size:cover;height:100vh;">
+    <div class="carousel-item active">
+      <img src="img/beauty1.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block ">
+        <div class="content text-sm pb-sm-5 ps-sm-5">
+        <h2 class="text-sm-2">Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
+        <h2 class="text-sm-2">Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-cup-of-couple-8015783.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+       <div class="intro">
+       <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+       </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-rachel-claire-5490778.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-monstera-production-6621181.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-monstera-production-6621441.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
+
     <!-- <div class="homecontainer">
         <div class="slide-container">
             <div class="slide">

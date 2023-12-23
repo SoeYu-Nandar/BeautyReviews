@@ -116,7 +116,7 @@
         <h1 class="fw-bold my-8">Beauty Reviews</h1>
      </header>  -->
 
-     <form method="post" action="" autocomplete="off" enctype="multipart/form-data" style="margin: 30px auto;">
+     <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
 
        <p class="title">REGISTER FORM</p>
 

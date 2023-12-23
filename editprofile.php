@@ -82,6 +82,32 @@ if ($conn->connect_error) {
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <title>Edit</title>
+    <style>
+      body.bgcolor{
+        overflow:visible;
+      }
+      .profile-pic {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        
+      }
+      .cover-pic {
+        width: 150px;
+        height: 150px;
+        border-radius: 15px;
+        
+        
+      }
+      .title {
+    
+    margin-bottom: 2px;
+    
+}
+      
+            
+
+    </style>
 </head>
 
 <body class="bgcolor">
@@ -89,8 +115,18 @@ if ($conn->connect_error) {
     <form method="post" action="" autocomplete="off" enctype="multipart/form-data">
 
     <p class="title">EDIT PROFILE</p>
+
+
+    
+
+    <label for="img"><img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile" style="margin: 15px;">Change profile</label>
+        <input name="img" type="file" id ="img" class="form-control" placeholder="Change Profile" style="display:none;visibility:hidden;"><br>
+
+        
+
+
         <label for="username">Username</label>
-        <input name="username" id ="username" value ="<?php echo $row['username']; ?>" type="text" class="form-control mb-2" placeholder="Change Your User Name" required>
+        <input name="username" id ="username" value ="<?php echo $row['username']; ?>" type="text" class="form-control mb-1" placeholder="Change Your User Name" required>
         <label>Gender</label>
         <select name="gender" class="form-select" required>
                 <option disabled selected>Gender</option>
@@ -101,17 +137,15 @@ if ($conn->connect_error) {
             </select>
 
         <label for="email">Email</label>
-        <input name="email" id ="email" value ="<?php echo $row['email']; ?>" type="text" class="form-control mb-2" placeholder="Change Your Email" required>
+        <input name="email" id ="email" value ="<?php echo $row['email']; ?>" type="text" class="form-control mb-1" placeholder="Change Your Email" required>
 
         <label for="password">Password</label>
-        <input name="password" id="password" type="password" class="form-control mb-2" placeholder="Change Your Password" required>
+        <input name="password" id="password" type="password" class="form-control" placeholder="Change Your Password" required>
 
-        <label for="img">Profile Picture</label>
-        <input name="img" type="file" id ="img" class="form-control mb-2" placeholder="Change Profile">
+        <label for="img1"><img class="cover-pic" src="img/<?php echo $row['cimage']; ?>" alt="cover" style="margin: 10px;">Change Cover</label>
+        <input name="img1" type="file" id ="img1" class="form-control" placeholder="Change Cover" style="display:none;visibility:hidden;">
 
-        <label for="img1">Cover Picture</label>
-        <input name="img1" type="file" id ="img1" class="form-control mb-2" placeholder="Change Cover">
-
+        
         <button class="btn btn-primary" type="submit" name="submit">Edit Form</button>
         <button class="btn btn-secondary" name="cancel">Cancel</button>
         <a href="profile.php">Your Profile</a>

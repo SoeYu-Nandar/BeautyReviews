@@ -72,11 +72,13 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
-    <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="css/bootstrap.min.css">
+     <link rel="stylesheet" href="style.css"> 
     <script src="js/bootstrap.bundle.min.js"></script>
     <title>Login Form</title>
     <style>
+        
         .fa-eye {
             position: absolute;
             top: 53%;
@@ -94,9 +96,9 @@ $conn->close();
         <img src="img/beautyicon.png" alt="Beautyicon" width="80px" height="80px">
         <h1 class="fw-bold">Beauty Reviews</h1>
     </header> -->
-    <section>
+     <section>
 
-        <form action="" method="post" autocomplete="off" style="margin: 10px auto;">
+        <form action="" method="post" autocomplete="off">
             <p class="title">LOGIN FORM</p>
             <div class="mb-2">
 
@@ -115,7 +117,8 @@ $conn->close();
             <p class="forget">Don't have an account?<a href="register.php">Sign Up</a></p>
 
         </form>
-    </section>
+    </section> 
+    
     <script>
         var passwordInput = document.getElementById('passwordInput');
         var eye = document.getElementById('eye');
