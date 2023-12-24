@@ -158,8 +158,8 @@
 
        
 
-       <label for="img1"><img class="cover-pic" src="img/ alt="cover" style="margin: 10px;">Cover Picture</label>
-       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required style="display:none;visibility:hidden;">
+       <label for="img1"><img class="cover-pic" src="img/ "alt="cover" style="margin: 10px;">Cover Picture</label>
+       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required>
 
 
         <div class="form-check">
@@ -217,6 +217,9 @@
         };
         eye.addEventListener('click', showHidePassword);
 
+
+        
+   
 
     </script>
 

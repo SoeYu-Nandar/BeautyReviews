@@ -9,17 +9,20 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+.intro{
+    position: relative;
+  padding-left:20%;
+  margin-bottom:80vh;
+  background-color: black;
+  opacity:0.2;
+}   
 
 .content{
   position: relative;
-  padding-left:200px;
-  padding-bottom:400px;
+  padding-left:20%;
+  padding-bottom:80vh;
 }   
-.intro{
-  position: relative;
-  padding-left:30px;
-  padding-bottom:550px;
-}   
+
 .content h2 {
   color: #fff;
   font-size: 4em;
@@ -67,6 +70,26 @@
     );
   }
 }
+/* @media only screen and (max-width:1200px){
+    .content {
+    padding-left:20%;
+    padding-bottom:80vh;
+  }
+  .content h2 {
+    font-size: 4em;
+}
+} */
+/* @media only screen and (min-width:768px){
+    .content {
+    padding-left: 20%;
+    padding-bottom:50vh;
+  }
+  .content h2 {
+  font-size: 3em;
+  padding-top:25vh;
+}
+} */
+
     </style>
 </head>
 
@@ -124,41 +147,50 @@
   <div class="carousel-inner"  style="background-size:cover;height:100vh;">
     <div class="carousel-item active">
       <img src="img/beauty1.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-md-block ">
-        <div class="content text-sm pb-sm-5 ps-sm-5">
-        <h2 class="text-sm-2">Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
-        <h2 class="text-sm-2">Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
+      <div class="carousel-caption">
+        <div class="content">
+        <h2>Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
+        <h2>Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h2>
         </div>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/pexels-cup-of-couple-8015783.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-md-block">
+      <div class="carousel-caption">
        <div class="intro">
-       <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <p>Step into the realm of beauty with our exclusive Beauty Review Page, you go-to 
+                    destination for all things radiant and glamorous. We believe that beauty is not just
+                    skin deep; it's a journey, an expression and an art. Here, we invite you to share your
+                    experiences, discover hidden gems, and connect with a community that celebrates the
+                    diversity of beauty.</p>
        </div>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/pexels-rachel-claire-5490778.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-md-block">
+      <div class="carousel-caption">
+      <div class="intro">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>
+      </div>
       </div>
     </div>
     <div class="carousel-item">
       <img src="img/pexels-monstera-production-6621181.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-md-block">
+      <div class="carousel-caption">
+        <div class="intro">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>
-      </div>
+        </div>
+    </div>
     </div>
     <div class="carousel-item">
       <img src="img/pexels-monstera-production-6621441.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-md-block">
+      <div class="carousel-caption">
+        <div class="intro">
         <h5>Third slide label</h5>
         <p>Some representative placeholder content for the third slide.</p>
+        </div>
       </div>
     </div>
   </div>
