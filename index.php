@@ -10,13 +10,28 @@
     <link rel="stylesheet" href="style.css">
     <style>
 .intro{
-    position: relative;
-  padding-left:20%;
-  margin-bottom:80vh;
+  position: relative;
+  padding:50px;
+  margin-bottom:50vh;
   background-color: black;
-  opacity:0.2;
-}   
+  opacity:0.5;
+  border-radius: 20px;
+  box-shadow: 10px 10px 5px #38192C;
+} 
+h2{
+    font-size:50px;
+}  
+.intro p{
+    font-size: 25px;
+    text-align:center;
+    /* font-weight: bold; */
+    font-family: 'Courier New', Courier, monospace;
 
+}
+.intro p span{
+    font-style: italic;
+    font-size:40px;
+}
 .content{
   position: relative;
   padding-left:20%;
@@ -143,6 +158,8 @@
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
   </div>
   <div class="carousel-inner"  style="background-size:cover;height:100vh;">
     <div class="carousel-item active">
@@ -158,10 +175,9 @@
       <img src="img/pexels-cup-of-couple-8015783.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption">
        <div class="intro">
-        <p>Step into the realm of beauty with our exclusive Beauty Review Page, you go-to 
-                    destination for all things radiant and glamorous. We believe that beauty is not just
-                    skin deep; it's a journey, an expression and an art. Here, we invite you to share your
-                    experiences, discover hidden gems, and connect with a community that celebrates the
+        <p><span>  𝓑𝓮𝓪𝓾𝓽𝔂 </span> is not just
+                    skin deep; it's a journey, an <span> 𝐸𝓍𝓅𝓇𝑒𝓈𝓈𝒾♡𝓃 </span> and an <span> 𝒜𝓇𝓉 </span>. Here, we <span> 𝐼𝓃𝓋𝒾𝓉𝑒 </span> you to share your
+                    experiences, discover hidden gems, and <span>𝒞🌞𝓃𝓃𝑒𝒸𝓉</span> &nbsp;with a community that celebrates the
                     diversity of beauty.</p>
        </div>
       </div>
@@ -170,8 +186,7 @@
       <img src="img/pexels-rachel-claire-5490778.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption">
       <div class="intro">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <div style="font-size:45px";>𝒲𝒽𝓎 𝒿𝑜𝒾𝓃 𝒪𝓊𝓇 𝐵𝑒𝒶𝓊𝓉𝓎 𝑅𝑒𝓋𝒾𝑒𝓌𝓈 𝒫𝒶𝑔𝑒?</div>
       </div>
       </div>
     </div>
@@ -179,8 +194,9 @@
       <img src="img/pexels-monstera-production-6621181.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption">
         <div class="intro">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h2> 𝒜 𝒰𝓃𝒾𝓋𝑒𝓇𝓈𝑒 🌺𝒻 𝒫𝓇🌸𝒹𝓊𝒸𝓉𝓈: </h2>
+        <p>Dive into a universe filled with the latest skincare, makeup,
+                    haircare, and fragrance products.</p>
         </div>
     </div>
     </div>
@@ -188,8 +204,34 @@
       <img src="img/pexels-monstera-production-6621441.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption">
         <div class="intro">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h2> 𝑅𝑒𝒶𝓁 𝑅𝑒𝓋𝒾𝑒𝓌𝓈 𝒻𝓇❀𝓂 𝑅𝑒𝒶𝓁 𝒰𝓈𝑒𝓇𝓈: </h2>
+        <p>Tired of biased reviews?At our Beauty Review Page, 
+                    authenticity is our mantra. Unleash the power of genuine reviews from real users
+                    who have tried and tested products firsthand. Trust the insights of your fellow 
+                    beauty aficionados.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-monstera-production-6621367.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption">
+        <div class="intro">
+        <h2> 𝐼𝓃𝓉𝑒𝓇𝒶𝒸𝓉𝒾𝓋𝑒 𝒶𝓃𝒹 𝐸𝓃𝑔𝒶𝑔𝒾𝓃𝑔:</h2>
+        <p>This is not just a review page;it's a community where
+                    your voice matters. Connect with like-minded beauty lovers, exchange ideas, and 
+                    make friends who share your passion. Your beauty journey is meant to be shared.</p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/pexels-monstera-production-6621225.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption">
+        <div class="intro">
+        <h2> 𝐿𝒾𝓀𝑒, 𝒞❀𝓂𝓂𝑒𝓃𝓉, 𝒞💍𝓃𝓃𝑒𝒸𝓉:</h2>
+        <p>When you log in, immerse yourself in a world of 
+                    interactions. Like the reviews that resonate with you, comment on others' experiences
+                    and let the beauty community thrive.It's more than just reviews; it's a celebration of 
+                    beauty diversity.</p>
         </div>
       </div>
     </div>
@@ -205,68 +247,7 @@
 </div>
 </div>
 
-    <!-- <div class="homecontainer">
-        <div class="slide-container">
-            <div class="slide">
-                <div class="content">
-                    <h3>Welcome to Our Beauty Oasis: Where Your Opinions Blossom!</h3>
-                </div>
-            </div>
-        </div>
-        <div class="slide-container">
-            <div class="slide">
-                <div class="content">
-                    <p>Step into the realm of beauty with our exclusive Beauty Review Page, you go-to 
-                    destination for all things radiant and glamorous. We believe that beauty is not just
-                    skin deep; it's a journey, an expression and an art. Here, we invite you to share your
-                    experiences, discover hidden gems, and connect with a community that celebrates the
-                    diversity of beauty.</p>
-                <div class="image">
-                    <img src="img/beautysvg3.png" alt="beauty">
-                </div>
-                </div>
-            </div>
-        </div>
-        <div class="slide-container">
-            <div class="slide">
-                <div class="content">
-                    <h2>Why join Our Beauty Reviews Page?</h2>
-                    <h3>A Universe of Products:</h3>
-                    <p>Dive into a universe filled with the latest skincare, makeup,
-                    haircare, and fragrance products.</p>
 
-                    <h3>Real Reviews from Real Users:</h3>
-                    <p>Tired of biased reviews?At our Beauty Review Page, 
-                    authenticity is our mantra. Unleash the power of genuine reviews from real users
-                    who have tried and tested products firsthand. Trust the insights of your fellow 
-                    beauty aficionados.</p>
-
-                    <h3>Interactive and Engaging:</h3>
-                    <p>This is not just a review page;it's a community where
-                    your voice matters. Connect with like-minded beauty lovers, exchange ideas, and 
-                    make friends who share your passion. Your beauty journey is meant to be shared.</p>
-
-                    <h3>Like, Comment, Connect:</h3>
-                    <p>When you log in, immerse yourself in a world of 
-                    interactions. Like the reviews that resonate with you, comment on others' experiences
-                    and let the beauty community thrive.It's more than just reviews; it's a celebration of 
-                    beauty diversity.</p>
-                </div>
-            </div>
-        </div>
-        <div class="slide-container">
-            <div class="slide">
-                <div class="content">
-                    <h3>How to get Started:</h3>
-                    <p>Register and Create Your Profile 
-                        Explore the Universe
-                        Share Your Experience
-                        Connect with the Community
-                        Stay Updated</p>
-                </div>
-            </div>
-        </div>
-    </div> -->
    
         <!-- Beauty Tips Card -->
         <div class ="container" id="Beauty Tips">

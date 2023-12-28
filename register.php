@@ -96,6 +96,9 @@
      <link rel="stylesheet" href="css/bootstrap.min.css">     
      <title>Registration Form</title>
      <style>
+      body {
+        overflow:hidden;
+      }
       .profile-pic {
         width: 50px;
         height: 50px;
@@ -115,13 +118,25 @@
     
 }
       
-        .fa-eye {
+        #eye {
             position: absolute;
-            top: 38%;
-            right: 8%;
+            top:302px;
+             right: 30px; 
             cursor: pointer;
             color: lightgray;
         }
+        #profile {
+          position:relative;
+          top:20px;
+          left:-17px;
+
+        }
+        #cover {
+          position:absolute;
+          top:500px;
+          left:133px;
+        }
+       
     </style>
      
 
@@ -138,8 +153,8 @@
 
        <p class="title">REGISTER FORM</p>
 
-       <label for="img"><img class="profile-pic" src="img/" alt="profile" style="margin: 15px;">Profile Picture</label>
-       <input name="img" type="file" id="img" class="form-control mb-2" placeholder="Change Profile" required style="display:none;visibility:hidden;">
+       <label for="img"><img class="profile-pic" src="img/profile.png" alt="profile" style="margin:10px;" onclick="triggerClick()" id="imgDisplay"><i class="fa fa-camera" id ="profile"></i>Profile Picture</label>
+       <input name="img" type="file" id="img" class="form-control mb-3" placeholder="Change Profile"  style="display:none;visibility:hidden;" onchange="displayImg(this)">
 
        <input name="username" type="text" class="form-control mb-3" placeholder="User Name" required>
        <select name="gender" class="form-select mb-3" required id="gender">
@@ -158,8 +173,8 @@
 
        
 
-       <label for="img1"><img class="cover-pic" src="img/ "alt="cover" style="margin: 10px;">Cover Picture</label>
-       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover" required>
+       <label for="img1"><img class="cover-pic" src="img/cover.jpg "alt="cover" style="margin: 5px;" onclick="triggerCover()" id="coverDisplay"><i class="fa fa-camera" id ="cover" ></i>Cover Picture</label>
+       <input name="img1" type="file" id="img1" class="form-control mb-2" placeholder="Change Cover"  style="display:none;visibility:hidden;" onchange="displayCover(this)">
 
 
         <div class="form-check">
@@ -218,8 +233,35 @@
         eye.addEventListener('click', showHidePassword);
 
 
-        
+        //profile Image Change
+        function triggerClick() {
+          document.querySelector('#img').click();
+        }
+        function displayImg(e){
+          if(e.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+              document.querySelector('#imgDisplay').setAttribute('src',e.target.result);
+            }
+            reader.readAsDataURL(e.files[0]);
+          }
+        }
    
+        //cover Image Change
+        function triggerCover() {
+          document.querySelector('#img1').click();
+        }
+        function displayCover(e){
+          if(e.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+              document.querySelector('#coverDisplay').setAttribute('src',e.target.result);
+            }
+            reader.readAsDataURL(e.files[0]);
+          }
+        }
 
     </script>
 
