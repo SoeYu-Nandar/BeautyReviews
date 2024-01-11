@@ -50,8 +50,6 @@
       move_uploaded_file($_FILES['img']['tmp_name'], $uploadDir . $img);
       move_uploaded_file($_FILES['img1']['tmp_name'], $uploadDir . $img1);
 
-
-
       if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Registration Successfully');</script>";
         header('Location: login.php');
@@ -62,7 +60,7 @@
       $conn->close();
     
   }else{
-    echo "<script>alert('Retype password does not match your current password');</script>";
+    echo "<script>alert('Your password does not match current password:Retype password');</script>";
   }
 }
     if (isset($_POST['cancel'])) {

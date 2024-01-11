@@ -18,6 +18,28 @@ if (!empty($_SESSION["userid"])) {
 
     $result = mysqli_query($conn, "SELECT * FROM users WHERE userid ='$userid'");
     $row = mysqli_fetch_assoc($result);
+    $profileimage = $row['image'];
+    $coverimage = $row['cimage'];
+
+    $userprofile = "img/".$profileimage;
+    $usercover = "img/" .$coverimage;
+    $default = "img/profile.png";
+    $default_cover = "img/cover.jpg";
+
+    if (!empty($profileimage) && file_exists($userprofile)) {
+        $profileimage = $userprofile;
+
+    }else{
+        $profileimage = $default;
+    }
+
+    if (!empty($coverimage) && file_exists($usercover)) {
+        $coverimage = $usercover;
+
+    }else{
+        $coverimage = $default_cover;
+    }
+
 } else {
     header("Location: index.php");
 }
@@ -40,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($result == "" && $reviewResult == "") {
             header("Location: profile.php");
             die;
-        } 
+        }
     }
 }
 
@@ -72,26 +94,26 @@ $posts = $post->get_posts($id);
         .profile-page .profile-header {
             box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
             border: 1px solid #f2f4f9;
-         
+
         }
 
         .profile-page .profile-header .cover {
             position: relative;
             border-radius: .25rem .25rem 0 0;
-             
+
         }
 
 
         .profile-page .profile-header .cover figure {
             margin-bottom: 0;
-           
+
         }
 
         @media (max-width: 767px) {
             .profile-page .profile-header .cover figure {
                 height: 110px;
                 overflow: hidden;
-                
+
             }
         }
 
@@ -137,20 +159,20 @@ $posts = $post->get_posts($id);
             left: 0;
             z-index: 2;
             width: 100%;
-            height:50%;
+            height: 50%;
             padding: 0 20px;
         }
 
         .profile-page .profile-header .cover .cover-body .profile-pic {
             border-radius: 50%;
             width: 100px;
-            height:100px;
+            height: 100px;
         }
 
         @media (max-width: 767px) {
             .profile-page .profile-header .cover .cover-body .profile-pic {
                 width: 70px;
-                height:70px;
+                height: 70px;
             }
         }
 
@@ -197,6 +219,7 @@ $posts = $post->get_posts($id);
             width: 30px;
             height: 30px;
         }
+
         .profile-page .profile-body .right-wrapper .latest-photos>.row>div figure {
             -webkit-transition: all .3s ease-in-out;
             transition: all .3s ease-in-out;
@@ -283,8 +306,6 @@ $posts = $post->get_posts($id);
         .likeIcon:focus {
             filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
         }
-
-        
     </style>
 </head>
 
@@ -297,11 +318,11 @@ $posts = $post->get_posts($id);
                         <div class="cover">
                             <div class="gray-shade"></div>
                             <figure>
-                                <img src="img/<?php echo $row['cimage']; ?>" class="img-fluid" alt="profile cover" style="height:300px">
+                                <img src="<?php echo $coverimage; ?>" class="img-fluid" alt="profile cover" style="height:300px">
                             </figure>
                             <div class="cover-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile">
+                                    <img class="profile-pic" src="<?php echo $profileimage; ?>" alt="profile">
                                     <span class="profile-name" style="color:#000;font-weight:bold"><?php echo $row["username"]; ?></span>
                                 </div>
                             </div>
@@ -338,68 +359,68 @@ $posts = $post->get_posts($id);
             <div class="row profile-body">
                 <div class="d-none d-md-block col-md-8 col-xl-12 left-wrapper">
 
-                        </div>
-                    </div>
                 </div>
-
-
-
-
-                <!-- Posting Card One -->
-                <div class="col-md-8 col-xl-12 middle-wrapper">
-                    <div class="row">
-                        <!-- Posting Area -->
-                        <div class="col-md-12 grid-margin">
-                            <div class="card rounded">
-                                <div class="card-header">
-                                    <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
-                                        <div class="d-flex align-items-center justify-content-between">
-
-                                            <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
-                                            <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
-                                            <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
-                                            <select name="reviews" id="reviews" class="form-select me-2" required>
-                                                <option value="">Reviews For ....</option>
-                                                <option value="makeup">Makeup</option>
-                                                <option value="hair">Hair</option>
-                                                <option value="body">Body</option>
-                                                <option value="face">Face</option>
-                                            </select>
-                                            <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit" id="myBtn">
-                                                Post
-                                            </button>
-                                           
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Postin Area -->
-
-                        <!-- Posting Card-->
-                        <?php
-
-                        if ($posts) {
-
-                            foreach ($posts as $ROW) {
-
-                                $user = new User();
-                                $ROW_USER = $user->get_user($ROW['userid']);
-
-                                include("profilePosting.php");
-                            }
-                        }
-
-
-                        ?>
-                        <!-- Posting Card -->
-                    </div>
-                </div>
-
-
             </div>
-
         </div>
+
+
+
+
+        <!-- Posting Card One -->
+        <div class="col-md-8 col-xl-12 middle-wrapper">
+            <div class="row">
+                <!-- Posting Area -->
+                <div class="col-md-12 grid-margin">
+                    <div class="card rounded">
+                        <div class="card-header">
+                            <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+                                <div class="d-flex align-items-center justify-content-between">
+
+                                    <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
+                                    <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
+                                    <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
+                                    <select name="reviews" id="reviews" class="form-select me-2" required>
+                                        <option value="">Reviews For ....</option>
+                                        <option value="makeup">Makeup</option>
+                                        <option value="hair">Hair</option>
+                                        <option value="body">Body</option>
+                                        <option value="face">Face</option>
+                                    </select>
+                                    <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit" id="myBtn">
+                                        Post
+                                    </button>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Postin Area -->
+
+                <!-- Posting Card-->
+                <?php
+
+                if ($posts) {
+
+                    foreach ($posts as $ROW) {
+
+                        $user = new User();
+                        $ROW_USER = $user->get_user($ROW['userid']);
+
+                        include("profilePosting.php");
+                    }
+                }
+
+
+                ?>
+                <!-- Posting Card -->
+            </div>
+        </div>
+
+
+    </div>
+
+    </div>
     </div>
 
 

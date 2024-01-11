@@ -47,6 +47,16 @@ if (!empty($_SESSION["userid"])) {
 
     $result = mysqli_query($conn, "SELECT * FROM users WHERE userid ='$userid'");
     $row = mysqli_fetch_assoc($result);
+    $profileimage = $row['image'];
+    $userprofile = "img/".$profileimage;
+    $default = "img/profile.png";
+
+    if (!empty($profileimage) && file_exists($userprofile)) {
+        $profileimage = $userprofile;
+
+    }else{
+        $profileimage = $default;
+    }
 } else {
     header("Location: index.php");
 }
@@ -374,7 +384,7 @@ if (!empty($_SESSION["id"])) {
                     <!-- My profile -->
                     <a class="pt-1px d-none d-md-block" href="profile.php">
                     <p class="text-center">
-                        <img class="profile-pic" src="img/<?php echo $row['image']; ?>" alt="profile" width="100px" height="100px">
+                        <img class="profile-pic" src="<?php echo $profileimage; ?>" alt="profile" width="100px" height="100px">
                         
                     </p>
                         <p class="profile-name text-center my-3 fs-5" style="color:#000;font-weight:bold"><?php echo $row["username"];?></p>
