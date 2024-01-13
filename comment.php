@@ -77,6 +77,17 @@ $row1 = mysqli_fetch_assoc($result1);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        // Jquery code 
+        $(document).ready(function() {
+            $("button").click(function() {
+                $(".commentSection").load("load-comment.php", {
+
+                });
+            });
+        });
+        </script>
     <style type="text/css">
         body {
             background-color: #f9fafb;
@@ -275,13 +286,7 @@ $row1 = mysqli_fetch_assoc($result1);
                 </div>
                 <div class="card-footer">
                     <div class="d-block post-actions">
-
-
-
-
-
-                        <?php
-                        echo "<form method='post'> 
+                        <form method='post'> 
                             <input type='hidden' name='cid' value='Anonymous'>
                             <input type='hidden' name='userid' value='Anonymous'>
                             <input type='hidden' name='date' value='" . date('Y-m-d H:i') . "'>
@@ -290,19 +295,15 @@ $row1 = mysqli_fetch_assoc($result1);
                                 <label for='floatingTextarea'>Write your Comment...
                                 
                                 </label>
-                                <p class='text-end'><button type='submit' name='commentSubmit' class='btn btn-secondary mt-2'>Comment
+                                <p class='text-end'><button type='submit' name='commentSubmit' id='commentSubmit' class='btn btn-secondary mt-2'>Comment
                                 </button></p>
 
                         </div>
-                        </form>";
+                        </form>
+                        <?php
 
                         if ($SHOW_USER) {
-                            // echo "<div class='comment-section'><p>";
-                            // echo '<img class="profile-pic me-2" src="img/' . $row1["image"] . '" alt="profile" width="30px" height="30px">';
-                            // echo $row1['username'] . '<br><br>';
-                            //echo $row['date'] . '<br><br>';
-                            //  echo $ROW['message'] . '<br>';
-
+                           
                             foreach ($SHOW_USER as $ROW) 
                             {
 

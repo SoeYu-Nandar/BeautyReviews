@@ -81,7 +81,7 @@ $conn->close();
         
         .fa-eye {
             position: absolute;
-            top: 53%;
+            top: 45%;
             right: 8%;
             cursor: pointer;
             color: lightgray;
@@ -100,14 +100,14 @@ $conn->close();
 
         <form action="" method="post" autocomplete="off">
             <p class="title">LOGIN FORM</p>
-            <div class="mb-2">
+            <div class="mb-3">
 
-                <label><i class="fas fa-envelope me-2"></i>UserName or Email</label>
-                <input name="usernameemail" type="text" class="form-control" placeholder="hello@gmail.com">
+                <!-- <label><i class="fas fa-envelope me-2"></i>UserName or Email</label> -->
+                <input name="usernameemail" type="text" class="form-control" placeholder="UserName or Email">
             </div>
-            <div class="mb-2 pwd-container">
-                <label><i class="fas fa-key me-2"></i> Password</label>
-                <input name="password" type="password" class="form-control" id="passwordInput"><i class="far fa-eye" id="eye"></i>
+            <div class="mb-3 pwd-container">
+                <!-- <label><i class="fas fa-key me-2"></i> Password</label> -->
+                <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password"><i class="far fa-eye" id="eye"></i>
 
             </div>
 

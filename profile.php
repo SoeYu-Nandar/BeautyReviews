@@ -198,7 +198,7 @@ $posts = $post->get_posts($id);
             padding: 0;
         }
 
-        .profile-page .profile-header .header-links ul li a {
+        .profile-page .profile-header .header-links ul li a{
             color: #000;
             -webkit-transition: all .2s ease;
             transition: all .2s ease;
@@ -207,11 +207,11 @@ $posts = $post->get_posts($id);
 
         .profile-page .profile-header .header-links ul li:hover,
         .profile-page .profile-header .header-links ul li.active {
-            color: #727cf5;
+            color: red;
         }
 
         .profile-page .profile-header .header-links ul li:hover a,
-        .profile-page .profile-header .header-links ul li.active a {
+        .profile-page .profile-header .header-links ul li.active a{
             color: #727cf5;
         }
 
@@ -330,22 +330,23 @@ $posts = $post->get_posts($id);
                         <!-- Header Links -->
                         <div class="header-links">
                             <ul class="links d-flex align-items-center mt-3 mt-md-0">
-
-
                                 <li class="header-link-item  d-flex align-items-center">
+                                    <a class="d-flex" href="timeline.php">
                                     <img src="icons/columns.svg" alt="Colums" class="me-2">
-                                    <a class="pt-1px d-none d-md-block" href="timeline.php">Timeline</a>
+                                        <p class="d-none d-md-block mt-3">Timeline</p></a>
                                 </li>
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
+                                    <a class="d-flex" href="reportuser.php">
                                     <img src="icons/users.svg" alt="Users" class="ms-2">
-                                    <a class="pt-1px d-none d-md-block" href="reportuser.php">Users</a>
+                                    <p class="d-none d-md-block mt-3">Users</p></a>
                                 </li>
 
 
                                 <li class="header-link-item ms-3 ps-3 border-start d-flex align-items-center">
+                                    <a class="d-flex" href="editprofile.php">
                                     <img src="icons/edit.svg" alt="Image" class="me-2">
-                                    <a class="pt-1px d-none d-md-block" href="editprofile.php">Edit Profile</a>
+                                    <p class="d-none d-md-block mt-3">Edit Profile</p></a>
                                 </li>
 
 

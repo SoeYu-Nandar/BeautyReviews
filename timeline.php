@@ -21,25 +21,25 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $post = new Post();
     $userid = $_SESSION["userid"];
-     //Check if the user is suspended
+    //Check if the user is suspended
     if ($row["suspended"] == 1) {
         echo "<script> alert('Your account is suspended by admin.');</script>";
     } else {
         // User is not suspended, proceed with post creation
-        $result = $post->create_post($userid, $_POST,$_FILES);
+        $result = $post->create_post($userid, $_POST, $_FILES);
 
-if($result == "" && $reviewResult =="") {
-    header("Location: timeline.php");
-    die;
-}else {
-    echo "<div class='alert alert-danger d-inline' role='alert'>
+        if ($result == "" && $reviewResult == "") {
+            header("Location: timeline.php");
+            die;
+        } else {
+            echo "<div class='alert alert-danger d-inline' role='alert'>
             This is a danger alert—check it out!
         </div>";
-    // echo "<br>The following errors occured :<br><br>";
-    // echo $result;
-    // echo"</div>";
-}
-}
+            // echo "<br>The following errors occured :<br><br>";
+            // echo $result;
+            // echo"</div>";
+        }
+    }
 }
 
 if (!empty($_SESSION["userid"])) {
@@ -48,13 +48,12 @@ if (!empty($_SESSION["userid"])) {
     $result = mysqli_query($conn, "SELECT * FROM users WHERE userid ='$userid'");
     $row = mysqli_fetch_assoc($result);
     $profileimage = $row['image'];
-    $userprofile = "img/".$profileimage;
+    $userprofile = "img/" . $profileimage;
     $default = "img/profile.png";
 
     if (!empty($profileimage) && file_exists($userprofile)) {
         $profileimage = $userprofile;
-
-    }else{
+    } else {
         $profileimage = $default;
     }
 } else {
@@ -69,38 +68,34 @@ if (!empty($_SESSION["id"])) {
                                     LEFT JOIN posts ON users.userid = posts.userid
                                     ORDER BY posts.id DESC
                                     LIMIT 10");
-    
-     // Fetch all rows using a loop
-     $users = array();
-     while ($row_result = mysqli_fetch_assoc($result)) {
-         $user_id = $row_result['userid'];
-       
-    // Create an associative array for the user if it doesn't exist
-        if(!isset($users[$user_id])) {
+
+    // Fetch all rows using a loop
+    $users = array();
+    while ($row_result = mysqli_fetch_assoc($result)) {
+        $user_id = $row_result['userid'];
+
+        // Create an associative array for the user if it doesn't exist
+        if (!isset($users[$user_id])) {
             $users[$user_id] = array(
-                'users' =>array(
+                'users' => array(
                     'userid' => $row_result['userid'],
                     'username' => $row_result['username'],
-                    'image' =>$row_result['image'],
+                    'image' => $row_result['image'],
 
                 ),
-                'posts'=>array(),
+                'posts' => array(),
             );
         }
-// Add post information
-    $users[$user_id]['posts'][] = array(
-        'post' => $row_result['post'],
-        'date' => $row_result['date'],
-        'reviews_for'=>$row_result['reviews_for'],
-        'post_image' =>$row_result['post_image'],
-        'postid' =>$row_result['postid'],
-        'likes' =>$row_result['likes'],
-    );
-    
+        // Add post information
+        $users[$user_id]['posts'][] = array(
+            'post' => $row_result['post'],
+            'date' => $row_result['date'],
+            'reviews_for' => $row_result['reviews_for'],
+            'post_image' => $row_result['post_image'],
+            'postid' => $row_result['postid'],
+            'likes' => $row_result['likes'],
+        );
     }
-
-    
-  
 } else {
     header("Location: index.php");
 }
@@ -288,7 +283,7 @@ if (!empty($_SESSION["id"])) {
         img {
             vertical-align: middle;
             border-style: none;
-        
+
         }
 
         .card-header:first-child {
@@ -298,7 +293,7 @@ if (!empty($_SESSION["id"])) {
         .card-header {
             padding: 0.875rem 1.5rem;
             margin-bottom: 0;
-            background-color: rgba(0, 0, 0, 0); 
+            background-color: rgba(0, 0, 0, 0);
             border-bottom: 1px solid #f2f4f9;
         }
 
@@ -342,11 +337,13 @@ if (!empty($_SESSION["id"])) {
         .profile-pic {
             border-radius: 1000%;
         }
+
         a {
             text-decoration: none;
         }
+
         .likeIcon:hover,
-        .likeIcon:focus{
+        .likeIcon:focus {
             filter: invert(27%) sepia(91%) saturate(1898%) hue-rotate(330deg);
         }
     </style>
@@ -354,7 +351,8 @@ if (!empty($_SESSION["id"])) {
 
 <body>
     <div class="container">
-        
+
+
         <!-- Row Profile Body -->
 
         <div class="row profile-body">
@@ -370,47 +368,61 @@ if (!empty($_SESSION["id"])) {
                                     <img src="icons/more-horizontal.svg" alt="">
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    
+
                                     <a class="dropdown-item d-flex align-items-center" href="editprofile.php">
                                         <img src="icons/edit-2.svg" alt="Edit" class="me-2">
-                                        <span class>Edit</span></a>
+                                        <span>Edit</span></a>
 
                                     <a class="dropdown-item d-flex align-items-center" href="logout.php">
                                         <img src="icons/log-out.svg" alt="Logout" class="me-2">
-                                        <span class>Logout</span></a>
+                                        <span>Logout</span></a>
+
+
+                                    <form method="post" action="">
+                                        
+                                        <input type="hidden" name="user_id" value="USER_ID_TO_DELETE">
+                                        <a class="btn btn-md dropdown-item d-flex align-items-center" href="delete.php">
+                                            <img src="icons/deleting.png" alt="Edit" width="20px" height="20px">
+                                            <span class="ms-2">Delete</span>
+                                        </a>
+                                        
+                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
-                    <!-- My profile -->
-                    <a class="pt-1px d-none d-md-block" href="profile.php">
-                    <p class="text-center">
-                        <img class="profile-pic" src="<?php echo $profileimage; ?>" alt="profile" width="100px" height="100px">
-                        
-                    </p>
-                        <p class="profile-name text-center my-3 fs-5" style="color:#000;font-weight:bold"><?php echo $row["username"];?></p>
-                    </a>
+
+
+                        <!-- My profile -->
+                        <a class="pt-1px d-none d-md-block" href="profile.php">
+                            <p class="text-center">
+                                <img class="profile-pic" src="<?php echo $profileimage; ?>" alt="profile" width="100px" height="100px">
+
+                            </p>
+                            <p class="profile-name text-center my-3 fs-5" style="color:#000;font-weight:bold"><?php echo $row["username"]; ?></p>
+                        </a>
                     </div>
 
                     <h6 class="card-title mb-0 ms-4">Your Favoruriate</h6>
-                        <div class="mt-3 ms-5">
-                            <img src="icons/makeup.svg" alt="" style="width:24px;">
-                            <a href="makeup.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
-                        </div>
+                    <div class="mt-3 ms-5">
+                        <img src="icons/makeup.svg" alt="" style="width:24px;">
+                        <a href="makeup.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">MakeUp</a>
+                    </div>
 
-                        <div class="mt-3 ms-5">
-                            <img src="icons/hair.svg" alt="" style="width:24px;">
-                           <a href="hair.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
-                        </div>
+                    <div class="mt-3 ms-5">
+                        <img src="icons/hair.svg" alt="" style="width:24px;">
+                        <a href="hair.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Hair</a>
+                    </div>
 
-                        <div class="mt-3 ms-5">
-                            <img src="icons/body.svg" alt="" style="width:24px;">
-                            <a href="body.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
-                        </div>
+                    <div class="mt-3 ms-5">
+                        <img src="icons/body.svg" alt="" style="width:24px;">
+                        <a href="body.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Body</a>
+                    </div>
 
-                        <div class="mt-3 ms-5 mb-2">
-                            <img src="icons/face.svg" alt="" style="width:24px;">
-                            <a href="face.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
-                        </div>
+                    <div class="mt-3 ms-5 mb-2">
+                        <img src="icons/face.svg" alt="" style="width:24px;">
+                        <a href="face.php" class="tx-11 font-weight-bold mb-0 text-uppercase text-decoration-none">Face</a>
+                    </div>
                 </div>
             </div>
 
@@ -419,45 +431,43 @@ if (!empty($_SESSION["id"])) {
 
             <!-- Posting Card One -->
             <div class="col-md-8 col-xl-9 middle-wrapper">
-    <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="card rounded">
-                <div class="card-header">
-                <!-- Posting -->
-                <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
-                        <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
-                        <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
-                        <select  name = "reviews"  id = "reviews" class="form-select me-2" required>
-                            <option value= "">Reviews For ....</option>
-                            <option value = "makeup">Makeup</option>
-                            <option value = "hair">Hair</option>
-                            <option value = "body">Body</option>
-                            <option value = "face">Face</option>
-                        </select>        
-                        <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
-                            Post
-                        </button> 
+                <div class="row">
+                    <div class="col-md-12 grid-margin">
+                        <div class="card rounded">
+                            <div class="card-header">
+                                <!-- Posting -->
+                                <form action="" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <textarea class="form-control me-2" placeholder="Write Your Review..." name="post"></textarea>
+                                        <input type="file" name="file" id="postImage" style="display:none;visibility:hidden;">
+                                        <label for="postImage"><img src="icons/camera.svg" alt="photo" class="me-2 mb-1"></label>
+                                        <select name="reviews" id="reviews" class="form-select me-2" required>
+                                            <option value="">Reviews For ....</option>
+                                            <option value="makeup">Makeup</option>
+                                            <option value="hair">Hair</option>
+                                            <option value="body">Body</option>
+                                            <option value="face">Face</option>
+                                        </select>
+                                        <button class="btn btn-primary ps-2 pe-2 rounded" type="submit" value="post" name="submit">
+                                            Post
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </form>
-                </div>
-            </div>
-        </div>
-    <!-- Ending Posting Area -->
-            <?php  
-            
-            foreach($users as $userId=>$userData){
+                    <!-- Ending Posting Area -->
+                    <?php
 
-                foreach($userData['posts'] as $posts) {
+                    foreach ($users as $userId => $userData) {
 
-                    include("timelinePosting.php");
-                
-            
-        }  
-    }
-            ?>
-            
+                        foreach ($userData['posts'] as $posts) {
+
+                            include("timelinePosting.php");
+                        }
+                    }
+                    ?>
+
 
                 </div>
             </div>
@@ -466,11 +476,12 @@ if (!empty($_SESSION["id"])) {
         </div>
 
     </div>
-</div>
+    </div>
+
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript">
-         function validateForm() {
+        function validateForm() {
             var selectBox = document.getElementById("reviews");
             var selectedValue = selectBox.value;
 
@@ -479,7 +490,6 @@ if (!empty($_SESSION["id"])) {
                 return false; // Prevent form submission
             }
         }
-
     </script>
 
 

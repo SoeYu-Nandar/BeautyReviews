@@ -89,7 +89,7 @@ if(isset($_POST['submit'])){
                     <form method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Username" name="search">
-                                <button class="btn btn-outline-secondary" type="submit" name="submit"><img src="icons/search.png" alt="Colums" width="30px" height="30px"></button>
+                                <button class="btn btn-outline-secondary" type="submit" name="submit"><img src="icons/searching.jpg" alt="Colums" width="30px" height="30px"></button>
                             </div>
                         </form>
                         <!-- <li class="nav-item dropdown">

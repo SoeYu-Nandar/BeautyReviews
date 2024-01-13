@@ -178,21 +178,23 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
           <img class="img-fluid" src="../../../assets/images/sample2.jpg" alt>
         </div>
         <div class="card-footer">
-          <div class="d-flex post-actions">
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/heart.svg" alt="Like">
-              <p class="d-none d-md-block ms-2 ">Like</p>
-            </a>
+            <div class="d-flex post-actions justify-content-around">
+                <?php 
+                    $likes = "";
 
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/message-circle.svg" alt="Comment">
-              <p class="d-none d-md-block ms-2">Comment</p>
-            </a>
-            <a href="javascript:;" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
-              <img src="icons/share.svg" alt="Share">
-              <p class="d-none d-md-block ms-2 ">Share</p>
-            </a>
-          </div>
+                    $likes = ($ROW['likes'] > 0) ? "(" .$ROW['likes'] . ")": "";
+                
+                ?>
+                <a href="like.php?type=post&id=<?php echo $ROW['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+                    <img src="icons/heart-fill.svg" alt="Like" class="likeIcon" style="width:25px";>
+                    <p class="d-none d-md-block ms-2 ">Like<?php echo $likes?></p>
+                </a>
+
+                <a href="comment.php?type=post&id=<?php echo $ROW['postid']?>" class="d-flex align-items-center text-muted ms-4 text-decoration-none">
+                    <img src="icons/chat-heart.svg" alt="Comment" class="likeIcon" style="width:25px";>
+                    <p class="d-none d-md-block ms-2">Comment</p>
+                </a>
+            </div>
         </div>
         <!-- Card Footer -->
       </div>

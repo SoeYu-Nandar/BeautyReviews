@@ -21,7 +21,6 @@ if(isset($_SERVER['HTTP_REFERER'])) {
                 $post->like_post($_GET['id'],$_GET['type'],$_SESSION['userid']);
             }
         }
-       
     
     }
    
