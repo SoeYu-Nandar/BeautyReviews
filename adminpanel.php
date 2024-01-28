@@ -22,6 +22,7 @@ if(isset($_POST['submit'])){
     $result =mysqli_query($conn,"SELECT * FROM users where username='$search'");
 }
 
+
 ?>
 
 
@@ -132,6 +133,8 @@ if(isset($_POST['submit'])){
                                 echo "<td>" . $row["id"] . "</td>";
                                 echo "<td>" . $row["username"] . "</td>";
                                 echo "<td>" . $row["email"] . "</td>";
+                                
+
 
                                 echo '<td>';
                                 //suspended user
@@ -151,6 +154,8 @@ if(isset($_POST['submit'])){
                                     $blockuser++;
                                     echo '<a class="btn btn-sm btn-danger m-2" href="blockuser.php?id=' . $row['id'] . '&status=0">Block</a>';
                                 }
+                               
+                                
 
 
                                 echo '</td>';

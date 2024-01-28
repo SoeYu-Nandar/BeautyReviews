@@ -12,6 +12,7 @@ if (isset($_POST['sent'])) {
     $sql = "INSERT INTO reports (senter_userid,type,comments,username)
    VALUES ('$userid','$type','$comments','$username')";
 
+
     if ($conn->query($sql) === TRUE) {
         echo "<script>alert('Your Report sent successfully to admin');</script>";
         //header('Location: adminlogin.php');

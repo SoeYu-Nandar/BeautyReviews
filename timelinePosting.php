@@ -18,7 +18,7 @@
                         <img src="icons/more-horizontal.svg" alt="More Button">
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <a class="dropdown-item d-flex align-items-center" href="totalusers.php">
+                        <a class="dropdown-item d-flex align-items-center" href="reportuser.php">
                             <img src="icons/daily-report.png" alt="Edit" class="me-2" width="30px" height="30px">
                             <span class>Report User</span></a>
 

@@ -17,7 +17,6 @@ $sql = "SELECT * FROM reports";
 $result = $conn->query($sql);
 
 
-
 ?>
 
 
@@ -66,6 +65,7 @@ $result = $conn->query($sql);
                     echo "<td>". $row["type"] . "</td>";
                     echo  "<td>". $row["comments"] . "</td>";
                     echo "<td>". $row["username"] . "</td>";
+                   
                     echo "<td>";
                     echo '<a class="btn btn-sm btn-success m-2" href="adminpanel.php">Search User</a>';
                     echo "</td>";

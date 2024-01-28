@@ -6,8 +6,6 @@ include('post.php');
 include('user.php');
 //include('commentPosting.php');
 
-
-
 // //date for posting
 // date_default_timezone_set('Asia/Myanmar');
 
@@ -77,17 +75,34 @@ $row1 = mysqli_fetch_assoc($result1);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="jquery-3.7.1.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         // Jquery code 
-        $(document).ready(function() {
-            $("button").click(function() {
-                $(".commentSection").load("load-comment.php", {
-
-                });
-            });
-        });
-        </script>
+       //##### Add record when Add Record Button is click #########
+	$("#comment-form").submit(function (e) {
+			e.preventDefault();
+			if($("#floatingTextarea").val()==='')
+			{
+				alert("Please enter some text!");
+				return false;
+			}
+		 	var myData = 'floatingTextarea='+ $("#floatingTextarea").val(); //build a post data structure
+			jQuery.ajax({
+			type: "POST", // Post / Get method
+			url: "commentLoad.php", //Where form data is sent on submission
+			dataType:"text", // Data type, HTML, json etc.
+			data:myData, //Form variables
+			success:function(response){
+				$("#responds").append(response);
+				$('#contentText').val("")
+			},
+			error:function (xhr, ajaxOptions, thrownError){
+				alert(thrownError);
+			}
+			});
+	});
+ 
+        </script> -->
     <style type="text/css">
         body {
             background-color: #f9fafb;
@@ -286,22 +301,24 @@ $row1 = mysqli_fetch_assoc($result1);
                 </div>
                 <div class="card-footer">
                     <div class="d-block post-actions">
-                        <form method='post'> 
-                            <input type='hidden' name='cid' value='Anonymous'>
-                            <input type='hidden' name='userid' value='Anonymous'>
-                            <input type='hidden' name='date' value='" . date('Y-m-d H:i') . "'>
-                            <div class='form-floating'>
-                            <textarea class='form-control' placeholder='Write your Comment...' id='floatingTextarea' name='message' cols='200'></textarea>
+                        <?php 
+                        echo "<form method='post' id='comment-form'>
+                        <input type='hidden' name='cid' value='Anonymous'>
+                        <input type='hidden' name='userid' value='Anonymous'>
+                        <input type='hidden' name='date' value='" . date('Y-m-d H:i') . "'>
+                        <div class='form-floating'>
+                        <textarea class='form-control' placeholder='Write your Comment...' id='floatingTextarea' name='message' cols='200'></textarea>
                                 <label for='floatingTextarea'>Write your Comment...
-                                
                                 </label>
-                                <p class='text-end'><button type='submit' name='commentSubmit' id='commentSubmit' class='btn btn-secondary mt-2'>Comment
+                               <p class='text-end'><button type='submit' name='commentSubmit' id='commentSubmit' class='btn btn-secondary mt-2'>Comment
                                 </button></p>
 
                         </div>
-                        </form>
+                            </form>";
+                        ?>
+                        <div class="commentContainer">
                         <?php
-
+                    
                         if ($SHOW_USER) {
                            
                             foreach ($SHOW_USER as $ROW) 
@@ -310,10 +327,8 @@ $row1 = mysqli_fetch_assoc($result1);
                                 echo "<div class='comment-section'><p>";
                                 echo '<img class="profile-pic me-2" src="img/' . $ROW["image"] . '" alt="profile" width="30px" height="30px">';
                                 echo $ROW['username'] . '<br><br>';
-                                //echo $row['date'] . '<br><br>';
                                 echo $ROW['message'] . '<br>';
 
-                                // echo "</p>";
                                 if($_SESSION['userid']==$ROW['userid'])
                                 {
                                 echo "<form class='edit-btn' method='post' action='editcomment.php'>
@@ -352,8 +367,8 @@ $row1 = mysqli_fetch_assoc($result1);
 
 
 
-                        ?>
-
+                        ?> 
+                        </div> 
                     </div>
                 </div>
                 <!-- Card Footer -->
